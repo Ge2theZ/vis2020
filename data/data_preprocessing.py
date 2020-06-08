@@ -38,6 +38,13 @@ salesPerYear = df.groupby('Year')['Global_Sales'].sum()
 #calculating Market_Share column
 df['Market_Share'] = df.apply(lambda row: ((row.Global_Sales/float(salesPerYear[row.Year]))*100), axis=1)
 
+#calculate Market_Share per Year for Genre
+tmp = df.groupby(['Year', 'Genre']).agg({'Global_Sales':['sum']})
+tmp.columns = ['Sales']
+tmp = tmp.reset_index()
+tmp['Percentage_per_year'] = tmp.apply(lambda row: '{:0.2f}'.format((row.Sales/float(salesPerYear[row.Year]))*100), axis=1)
+tmp.to_csv("SalesPerYearGenre.csv", index=False)
+
 print("after preprocessing: " + str(len(df.index)) + " rows")
 print("writing to csv")
-df.to_csv("out.csv", index=False)
+df.to_csv("preprocessed_dataset.csv", index=False)
