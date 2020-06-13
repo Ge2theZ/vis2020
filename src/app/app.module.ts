@@ -7,6 +7,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MainViewComponent } from './main-view/main-view.component';
 import { FooterComponent } from './footer/footer.component';
 import { StackedLineGraphComponent } from './main-view/stacked-line-graph/stacked-line-graph.component';
+import { CoverCarouselComponent } from './main-view/cover-carousel/cover-carousel.component';
+import { CoverCardComponent } from './main-view/cover-carousel/cover-card/cover-card.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { StackedLineGraphComponent } from './main-view/stacked-line-graph/stacke
     NavbarComponent,
     MainViewComponent,
     FooterComponent,
-    StackedLineGraphComponent
+    StackedLineGraphComponent,
+    CoverCarouselComponent,
+    CoverCardComponent,
   ],
   imports: [
     BrowserModule,

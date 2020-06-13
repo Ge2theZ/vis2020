@@ -1,0 +1,30 @@
+.carousel-card-container {
+  width: 100%;
+  margin: 20px 0 20px 0;
+}
+
+
+.game-covers-body {
+  padding: 1.2em;
+}
+
+.separator {
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.separator::before, .separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #6c757d;
+}
+.separator::before {
+  margin-right: .25em;
+}
+.separator::after {
+  margin-left: .25em;
+}
+
+

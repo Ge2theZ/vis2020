@@ -1,0 +1,32 @@
+a, a:hover {
+  color: inherit;
+}
+
+.game-card {
+  width: 160px;
+}
+
+.game-card-body {
+  padding: 0.5rem;
+}
+
+.game-card-image {
+  max-height: 160px;
+  max-width: 160px;
+}
+
+.game-card-text {
+  font-size: 9px;
+  font-style: italic;
+}
+
+.card-game-name {
+  font-weight: 600;
+  font-size: 12px;
+  font-style: unset;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
