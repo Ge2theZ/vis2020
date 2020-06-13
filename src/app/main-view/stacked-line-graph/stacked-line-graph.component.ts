@@ -50,7 +50,7 @@ export class StackedLineGraphComponent implements OnInit {
 
   constructor() {
     // configure margins and width/height of the graph
-    this.margin = {top: 10, right: 30, bottom: 30, left: 50},
+    this.margin = {top: 30, right: 30, bottom: 30, left: 50},
     this.width = 1000 - this.margin.left - this.margin.right,
     this.height = 400 - this.margin.top - this.margin.bottom;
   }
@@ -116,12 +116,19 @@ export class StackedLineGraphComponent implements OnInit {
   private buildSvg() {
     // append the svg object to the body of the page
     this.svg = d3.select("#my_chart")
-    .append("svg")
+      .append("svg")
       .attr("width", this.width + this.margin.left + this.margin.right +150)
-      .attr("height", this.height + this.margin.top + this.margin.bottom)
+      .attr("height", this.height + this.margin.top + this.margin.bottom + 20)
       .append("g")
       .attr("transform",
             "translate(" + this.margin.left + "," + this.margin.top + ")");
+
+    this.svg.append("text")
+      .attr("x", (this.width / 2))             
+      .attr("y", 0 - (this.margin.top / 2))
+      .attr("text-anchor", "middle")  
+      .style("font-size", "16px") 
+      .text("Genre Market Share Per Year");
   }
   
   private addAxis() {
@@ -134,12 +141,28 @@ export class StackedLineGraphComponent implements OnInit {
       .attr("transform", "translate(0," + this.height + ")")
       .call(d3.axisBottom(this.x).ticks(5).tickFormat(d3.format("d")));
 
+    this.svg.append("text")             
+      .attr("transform",
+            "translate(" + (this.width/2) + " ," + 
+                           (this.height + this.margin.top + 20) + ")")
+      .style("text-anchor", "middle")
+      .text("Year");
+    
     // Add Y axis
     this.y = d3.scaleLinear()
       .domain([0, d3.max(this.data, function(d) { return +d.Percentage_per_year; })])
       .range([ this.height, 0 ]);
     this.svg.append("g")
       .call(d3.axisLeft(this.y));
+    // text label for the y axis
+    this.svg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - this.margin.left)
+      .attr("x",0 - (this.height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Market Share (%)");  
+    
   }
 
  private drawData() {
