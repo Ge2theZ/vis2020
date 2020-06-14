@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {CoverCarousel} from '../../models/CoverCarousel';
-
+import {DataService} from '../services/DataService';
 
 const mockedCoverCarouselData: CoverCarousel[] =
   [
     {
-      timespanYear: '1980-1986',
+      timespanString: '1980-1986',
+      fromYear: 2000,
+      toYear: 2000,
       game: {
         name: 'Wii Sports',
         plattform: 'Wii',
@@ -14,7 +16,9 @@ const mockedCoverCarouselData: CoverCarousel[] =
       }
     },
     {
-      timespanYear: '1980-1986',
+      timespanString: '1980-1986',
+      fromYear: 2000,
+      toYear: 2000,
       game: {
         name: 'Super Mario Bros.',
         plattform: 'NES',
@@ -23,7 +27,9 @@ const mockedCoverCarouselData: CoverCarousel[] =
       }
     },
     {
-      timespanYear: '1980-1986',
+      timespanString: '1980-1986',
+      fromYear: 2000,
+      toYear: 2000,
       game: {
         name: 'Mario Kart Wii',
         plattform: 'Wii\n',
@@ -32,7 +38,9 @@ const mockedCoverCarouselData: CoverCarousel[] =
       }
     },
     {
-      timespanYear: '1980-1986',
+      timespanString: '1980-1986',
+      fromYear: 2000,
+      toYear: 2000,
       game: {
         name: 'PlayerUnknown\'s Battlegrounds\n',
         plattform: 'PC\n',
@@ -41,7 +49,9 @@ const mockedCoverCarouselData: CoverCarousel[] =
       }
     },
     {
-      timespanYear: '1980-1986',
+      timespanString: '1980-1986',
+      fromYear: 2000,
+      toYear: 2000,
       game: {
         name: 'Wii Sports Resort\n',
         plattform: 'Wii',
@@ -50,7 +60,9 @@ const mockedCoverCarouselData: CoverCarousel[] =
       }
     },
     {
-      timespanYear: '1980-1986',
+      timespanString: '1980-1986',
+      fromYear: 2000,
+      toYear: 2000,
       game: {
         name: 'Pokemon Red / Green / Blue Version\n',
         plattform: 'GB\n',
@@ -63,12 +75,23 @@ const mockedCoverCarouselData: CoverCarousel[] =
 @Component({
   selector: 'app-main-view',
   templateUrl: './main-view.component.html',
-  styleUrls: ['./main-view.component.css']
+  styleUrls: ['./main-view.component.css'],
+  providers: [DataService]
 })
 export class MainViewComponent implements OnInit {
   data: CoverCarousel[] = mockedCoverCarouselData;
 
-  constructor() {
+  constructor( private dataService : DataService) {
+    dataService.liveCarousel$.subscribe(data => {
+      this.data = data;
+      console.log(data)
+    });
+    //gets called if dataservice is ready
+    dataService.onReady$.subscribe(ready => {
+      if(ready){
+        dataService.updateCoverCarousel("Racing", 1970, 2019);
+      }
+    })
   }
 
   ngOnInit(): void {
