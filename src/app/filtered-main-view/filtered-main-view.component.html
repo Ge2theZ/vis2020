@@ -5,7 +5,7 @@
 </div>
 <hr>
 <div class="genre-cover-wrapper">
-  <app-cover-carousel [data]="this.data"></app-cover-carousel>
+  <app-cover-carousel [data]="this.shuffleArray(this.data)"></app-cover-carousel>
   <app-cover-carousel [data]="this.data" [cardName]="'Shooter'"></app-cover-carousel>
   <app-cover-carousel [data]="this.data" [cardName]="'Plattformer'"></app-cover-carousel>
   <app-cover-carousel [data]="this.data" [cardName]="'Strategy'"></app-cover-carousel>

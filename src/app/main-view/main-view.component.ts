@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CoverCarousel} from '../../models/CoverCarousel';
 
 
-const mockedCoverCarouselData: CoverCarousel[] =
+export const mockedCoverCarouselData: CoverCarousel[] =
   [
     {
       timespanYear: '1980-1986',
@@ -72,6 +72,15 @@ export class MainViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  shuffleArray(array) {
+    const shuffledArr = [...array];
+    for (let i = shuffledArr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArr[i], shuffledArr[j]] = [shuffledArr[j], shuffledArr[i]];
+    }
+    return shuffledArr;
   }
 
 }
