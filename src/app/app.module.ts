@@ -12,6 +12,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FilteredMainViewComponent } from './filtered-main-view/filtered-main-view.component';
 import { GameDetailsComponent } from './game-details/game-details.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { TooltipDirectiveDirective } from './directives/tooltip-directive.directive';
+import { TooltipContainerComponent } from './directives/tooltip-container/tooltip-container.component';
+import { TooltipComponent } from './directives/tooltip/tooltip.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     FilteredMainViewComponent,
     GameDetailsComponent,
     BreadcrumbComponent,
+    TooltipDirectiveDirective,
+    TooltipContainerComponent,
+    TooltipComponent,
   ],
   imports: [
     BrowserModule,
