@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import * as Rx from 'rxjs';
 import { CoverCarousel } from 'src/models/CoverCarousel';
 import { CoverCarouselComponent } from '../main-view/cover-carousel/cover-carousel.component';
+import { SharePerYearPerPublisher } from 'src/models/SharePerYearPerPublisher';
+import { filter } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -60,7 +62,9 @@ export class DataService {
 
     getCoverCarouselData(fromTime:number, toTime:number, genre:String):Game{
         //filter for given Genre
-        var filteredGameData = this.gameDataSet.filter(game => game.genre === genre);
+        if(genre !== "all"){
+            var filteredGameData = this.gameDataSet.filter(game => game.genre === genre);
+        }
         // sort gameDataSet by globalSales
         filteredGameData.sort((a,b)=>{
             //a is less than b by some ordering criterion
@@ -79,5 +83,52 @@ export class DataService {
                 return game;
             }
         }
+    }
+
+    getCoverCarouselDataWithPublisher(fromTime:number, toTime:number, genre:String, publisher:String):Game{
+        //filter for given Genre
+        var filteredGameData = this.gameDataSet.filter(game => game.genre === genre && genre !== "all");
+        filteredGameData = filteredGameData.filter(game => game.publisher === publisher && publisher !== "all")
+        // sort gameDataSet by globalSales
+        filteredGameData.sort((a,b)=>{
+            //a is less than b by some ordering criterion
+            if (a.globalSales < b.globalSales) {
+                return 1;
+            }
+            //a is greater than b by the ordering criterion
+            if (a.globalSales > b.globalSales) {
+                return -1;
+            }
+            return 0;
+        });
+        for (const game of filteredGameData) {
+            //if game is between time range
+            if(game.year >= fromTime && game.year <= toTime){
+                return game;
+            }
+        }
+    }
+
+    getMarketShareForGenrePerYear(genre:String) : SharePerYearPerPublisher[]{
+        let filtered = this.gameDataSet.filter((game) => game.genre === genre);
+        var res = [];
+        var totalSalesPerYear = {}
+        
+        let uniqueYears = [...new Set(filtered.map(game => game.year))];
+        let uniquePublisher = [...new Set(filtered.map(game => game.publisher))];
+
+        for (const year of uniqueYears) {
+            let filteredByYear = filtered.filter((game) => game.year === year);
+            totalSalesPerYear[year] = filteredByYear.reduce((a,b) => { return a + b.globalSales; }, 0);
+        }
+
+        for (const year of uniqueYears) {
+            for (const publisher of uniquePublisher) {
+                let filteredByYearAndPublisher = filtered.filter((game) => game.year === year && game.publisher === publisher);
+                let sumSalesPublisherYear = filteredByYearAndPublisher.reduce((a,b) => { return a + b.globalSales; }, 0);
+                res.push(new SharePerYearPerPublisher(year, (sumSalesPublisherYear / totalSalesPerYear[year]) * 100 ,publisher));
+            }
+        }
+        return res;
     }
 }
