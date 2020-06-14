@@ -45,8 +45,8 @@ export class DataService {
         let carouselList = [];
 
         for (let i = 0; i < 6; i++) {
-            let from = fromYear + (timeBin * i);
-            let to = fromYear + (timeBin * (i+1));
+            let from = fromYear + (timeBin * i) + (i==0 ? 0 : 1);
+            let to = fromYear + (timeBin * (i + 1));
             var game = this.getCoverCarouselData(from, to , genre);
             if(!game){ 
                 game = new Game();
