@@ -9,6 +9,9 @@ import { FooterComponent } from './footer/footer.component';
 import { StackedLineGraphComponent } from './main-view/stacked-line-graph/stacked-line-graph.component';
 import { CoverCarouselComponent } from './main-view/cover-carousel/cover-carousel.component';
 import { CoverCardComponent } from './main-view/cover-carousel/cover-card/cover-card.component';
+import { FilteredMainViewComponent } from './filtered-main-view/filtered-main-view.component';
+import { GameDetailsComponent } from './game-details/game-details.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { CoverCardComponent } from './main-view/cover-carousel/cover-card/cover-
     StackedLineGraphComponent,
     CoverCarouselComponent,
     CoverCardComponent,
+    FilteredMainViewComponent,
+    GameDetailsComponent,
+    BreadcrumbComponent,
   ],
   imports: [
     BrowserModule,

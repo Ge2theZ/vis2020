@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import * as d3 from "d3";
+import {ActivatedRoute, Router} from '@angular/router';
 
 //import SalesPerYearGenre from ;
 
@@ -48,7 +49,8 @@ export class StackedLineGraphComponent implements OnInit {
 
   private genreList: any;
 
-  constructor() {
+  constructor(private router: Router,
+              private route: ActivatedRoute) {
     // configure margins and width/height of the graph
     this.margin = {top: 30, right: 30, bottom: 30, left: 50},
     this.width = 1000 - this.margin.left - this.margin.right,
@@ -183,6 +185,7 @@ export class StackedLineGraphComponent implements OnInit {
   private mouseclick(d,i) { 
    console.log("Genre Id: " + i);
    console.log("Genre Name: " + this.genreList[i]);
+   this.router.navigate(['home/genre', this.genreList[i]]);
   }
 
  private drawData() {
