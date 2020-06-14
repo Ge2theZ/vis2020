@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -10,6 +9,9 @@ import { StackedLineGraphComponent } from './main-view/stacked-line-graph/stacke
 import { CoverCarouselComponent } from './main-view/cover-carousel/cover-carousel.component';
 import { CoverCardComponent } from './main-view/cover-carousel/cover-card/cover-card.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FilteredMainViewComponent } from './filtered-main-view/filtered-main-view.component';
+import { GameDetailsComponent } from './game-details/game-details.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,9 @@ import { HttpClientModule } from '@angular/common/http';
     StackedLineGraphComponent,
     CoverCarouselComponent,
     CoverCardComponent,
+    FilteredMainViewComponent,
+    GameDetailsComponent,
+    BreadcrumbComponent,
   ],
   imports: [
     BrowserModule,

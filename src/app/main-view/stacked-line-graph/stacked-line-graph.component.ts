@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import * as d3 from "d3";
+import {ActivatedRoute, Router} from '@angular/router';
 
 //import SalesPerYearGenre from ;
 
@@ -48,7 +49,8 @@ export class StackedLineGraphComponent implements OnInit {
 
   private genreList: any;
 
-  constructor() {
+  constructor(private router: Router,
+              private route: ActivatedRoute) {
     // configure margins and width/height of the graph
     this.margin = {top: 30, right: 30, bottom: 30, left: 50},
     this.width = 1000 - this.margin.left - this.margin.right,
@@ -165,6 +167,27 @@ export class StackedLineGraphComponent implements OnInit {
     
   }
 
+  // Three function that change the tooltip when user hover / move / leave a cell
+  private mouseover(d,i) {
+    //Tooltip.style("opacity", 1)
+    d3.selectAll(".myArea").style("opacity", .2)
+    //d3.selectAll(".areas").style("opacity", .2)
+    d3.select(this)
+      .style("stroke", "black")
+      .style("opacity", 1)
+  }
+
+  private mouseleave(d) {
+    //Tooltip.style("opacity", 0)
+    d3.selectAll(".myArea").style("opacity", 1).style("stroke", "none")
+   }
+
+  private mouseclick(d,i) { 
+   console.log("Genre Id: " + i);
+   console.log("Genre Name: " + this.genreList[i]);
+   this.router.navigate(['home/genre', this.genreList[i]]);
+  }
+
  private drawData() {
    
   // create color pallet
@@ -179,12 +202,16 @@ export class StackedLineGraphComponent implements OnInit {
     .data(this.stackedData)
     .enter()
     .append("path")
+      .attr("class", "myArea")
       .style("fill", (d: any) =>  this.color(d.key) )
       .attr("d", d3.area()
       .curve(d3.curveBasis)
       .x( (d: any, i) => this.x(d.data.key) )
       .y0( (d: any) => this.y(d[0]) ) 
-      .y1( (d: any) => this.y(d[1]) ) );
+      .y1( (d: any) => this.y(d[1]) ) )
+      .on("mouseover", this.mouseover)  
+      .on("mouseleave", this.mouseleave)
+      .on("click", (d:any, i:any) => this.mouseclick(d,i));
 
   // Add one dot in the legend for each name.
   let size = 12;
@@ -203,6 +230,7 @@ export class StackedLineGraphComponent implements OnInit {
     .data(this.stackedData)
     .enter()
     .append("text")
+      .attr("class", "areas")
       .attr("x", this.width + size*1.2 +10)
       .attr("y", function(d,i){ return 10 + i*(size+5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
       .style("fill", (d: any) =>  this.color(this.genreList.length-1-d.key) ) // reverse legend to adjust for area order 
