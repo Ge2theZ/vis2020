@@ -82,6 +82,24 @@ export class DataService {
        return carouselList;
     }
 
+
+  getStaticCarouselDataForPublisher(genre: string, publisher: string, fromYear: number, toYear: number) {
+    let timeInterval = toYear - fromYear;
+    let timeBin = timeInterval / 6;
+    let carouselList = [];
+
+    for (let i = 0; i < 6; i++) {
+      let from = fromYear + (timeBin * i) + (i==0 ? 0 : 1);
+      let to = fromYear + (timeBin * (i+1));
+      var game = this.getCoverCarouselDataWithPublisher(from, to , genre, publisher);
+
+      if(game !== undefined) {
+        carouselList.push(new CoverCarousel(from, to, game));
+      }
+    }
+    return carouselList;
+  }
+
     getGenres(): string[] {
       let genres: string[] = [];
       this.gameDataSet.forEach(value =>{
@@ -90,6 +108,17 @@ export class DataService {
           }
       });
       return genres;
+    }
+
+
+    getPublisher(): string[] {
+      let publisher: string[] = [];
+      this.gameDataSet.forEach(value =>{
+        if(!publisher.includes(value.publisher)){
+          publisher.push(value.publisher);
+        }
+      });
+      return publisher;
     }
 
     getCoverCarouselData(fromTime:number, toTime:number, genre:String):Game{

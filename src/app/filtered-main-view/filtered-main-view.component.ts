@@ -10,7 +10,8 @@ import {DataService} from '../services/DataService';
 })
 export class FilteredMainViewComponent implements OnInit {
   data: CoverCarousel[];
-  genres: string[];
+  publisher: string[];
+  carouselCache: CoverCarousel[];
 
   constructor(public dataService: DataService,  private cdr: ChangeDetectorRef) { }
 
@@ -24,9 +25,19 @@ export class FilteredMainViewComponent implements OnInit {
     this.dataService.onReady$.subscribe(ready => {
       if(ready){
         this.dataService.updateCoverCarousel("Racing", 1970, 2019);
-        this.genres = this.dataService.getGenres();
+        this.publisher = this.dataService.getPublisher();
         this.cdr.detectChanges();
       }
     });
   }
+
+
+  public calculateCarouselData(publisher) {
+    this.carouselCache = this.dataService.getStaticCarouselDataForPublisher('Shooter', publisher, 1970, 2019)
+    console.log(this.carouselCache);
+    return this.carouselCache;
+  }
+
+
+
 }
