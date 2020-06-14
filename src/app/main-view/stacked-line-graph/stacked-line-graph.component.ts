@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import * as d3 from "d3";
 import {ActivatedRoute, Router} from '@angular/router';
+import { DataService } from 'src/app/services/DataService';
 
 //import SalesPerYearGenre from ;
 
@@ -50,7 +51,8 @@ export class StackedLineGraphComponent implements OnInit {
   private genreList: any;
 
   constructor(private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private dataService: DataService) {
     // configure margins and width/height of the graph
     this.margin = {top: 30, right: 30, bottom: 30, left: 50},
     this.width = 1000 - this.margin.left - this.margin.right,
@@ -77,7 +79,7 @@ export class StackedLineGraphComponent implements OnInit {
       });
     */
     
-    this.data = await d3.csv("https://raw.githubusercontent.com/Ge2theZ/vis2020/master/data/SalesPerYearGenre.csv");
+    this.data = await d3.json("https://raw.githubusercontent.com/Ge2theZ/vis2020/master/data/SalesPerYearGenre.json");
     this.prepareData();
     this.buildSvg();
     this.addAxis();
@@ -100,6 +102,7 @@ export class StackedLineGraphComponent implements OnInit {
 
     // create key list with entry for every genre
     let genreKeys = new Array(this.genreList.length); // create an empty array with length 45
+    
     for(var i = 0; i < genreKeys.length; i++)
     genreKeys[i] = i
     
@@ -185,7 +188,8 @@ export class StackedLineGraphComponent implements OnInit {
   private mouseclick(d,i) { 
    console.log("Genre Id: " + i);
    console.log("Genre Name: " + this.genreList[i]);
-   this.router.navigate(['home/genre', this.genreList[i]]);
+   this.dataService.updateCoverCarousel(this.genreList[i], 1970, 2019)
+   //this.router.navigate(['home/genre', this.genreList[i]]);
   }
 
  private drawData() {
