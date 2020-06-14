@@ -122,7 +122,7 @@ export class StackedLineGraphComponent implements OnInit {
     // append the svg object to the body of the page
     this.svg = d3.select("#my_chart")
       .append("svg")
-      .attr("width", this.width + this.margin.left + this.margin.right +150)
+      .attr("width", this.width + this.margin.left + this.margin.right + 150)
       .attr("height", this.height + this.margin.top + this.margin.bottom + 20)
       .append("g")
       .attr("transform",
@@ -155,7 +155,7 @@ export class StackedLineGraphComponent implements OnInit {
     
     // Add Y axis
     this.y = d3.scaleLinear()
-      .domain([0, d3.max(this.data, function(d) { return +d.Percentage_per_year; })])
+      .domain([0, d3.max(this.data, function(d) { return + d.Percentage_per_year; })])
       .range([ this.height, 0 ]);
     this.svg.append("g")
       .call(d3.axisLeft(this.y));
@@ -167,7 +167,6 @@ export class StackedLineGraphComponent implements OnInit {
       .attr("dy", "1em")
       .style("text-anchor", "middle")
       .text("Market Share (%)");  
-    
   }
 
   // Three function that change the tooltip when user hover / move / leave a cell
