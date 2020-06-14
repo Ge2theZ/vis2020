@@ -3,7 +3,7 @@ import numpy as np
 
 #only read in those columns
 cols = ["Genre","Name","ESRB_Rating","Platform","Publisher","Developer",
-        "VGChartz_Score","Critic_Score","User_Score","Total_Shipped",
+        "Critic_Score","User_Score","Total_Shipped",
         "Global_Sales","Year","img_url"]
 print("reading in csv")
 df = pandas.read_csv('orig_dataset.csv', usecols=cols)
@@ -43,8 +43,8 @@ tmp = df.groupby(['Year', 'Genre']).agg({'Global_Sales':['sum']})
 tmp.columns = ['Sales']
 tmp = tmp.reset_index()
 tmp['Percentage_per_year'] = tmp.apply(lambda row: '{:0.2f}'.format((row.Sales/float(salesPerYear[row.Year]))*100), axis=1)
-tmp.to_csv("SalesPerYearGenre.csv", index=False)
+tmp.to_json("SalesPerYearGenre.json", orient='records')
 
 print("after preprocessing: " + str(len(df.index)) + " rows")
 print("writing to csv")
-df.to_csv("preprocessed_dataset.csv", index=False)
+df.to_json("preprocessed_dataset.json", orient='records')

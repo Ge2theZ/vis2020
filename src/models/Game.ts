@@ -1,4 +1,19 @@
-export interface Game {
+export class Game {
+  constructor(obj?:any){
+    if(!obj) return
+    this.name = obj.Name;
+    this.plattform = obj.Platform;
+    this.publisher = obj.Publisher;
+    this.userScore = obj.User_Score;
+    this.year = obj.Year;
+    this.criticScore = obj.Critics_Score;
+    this.esrbRating = obj.ESRB_Rating;
+    this.genre = obj.Genre;
+    this.globalSales = obj.Global_Sales;
+    this.marketShare = obj.Market_Share;
+    this.imgUrl = obj.img_url;
+  }
+
   name?: string;
   genre?: string;
   esrbRating?: string;
