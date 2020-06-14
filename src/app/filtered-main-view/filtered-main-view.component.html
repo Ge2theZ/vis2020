@@ -1,13 +1,16 @@
 <div class="graph-wrapper">
-  <h2 class="site-heading">Evolution of Genre Popularity in Video Games</h2>
+  <h2 class="site-heading">Evolution of Shooter Popularity in Video Games for Publishers</h2>
   <!-- Place Graph Component here-->
-  <app-stacked-line-graph></app-stacked-line-graph>
+
+  <a routerLink="publisher/Rockstar Games">
+    <img src="../../assets/mocked_publisher_graph.png" style="width: 100%;">
+  </a>
+
 </div>
 <hr>
 <div class="genre-cover-wrapper">
-  <app-cover-carousel [data]="this.shuffleArray(this.data)"></app-cover-carousel>
-  <app-cover-carousel [data]="this.data" [cardName]="'Shooter'"></app-cover-carousel>
-  <app-cover-carousel [data]="this.data" [cardName]="'Plattformer'"></app-cover-carousel>
-  <app-cover-carousel [data]="this.data" [cardName]="'Strategy'"></app-cover-carousel>
-  <app-cover-carousel [data]="this.data" [cardName]="'RPG'"></app-cover-carousel>
+  <app-cover-carousel [data]="this.data"></app-cover-carousel>
+  <ng-container *ngFor="let genre of this.dataService.getGenres()">
+    <app-cover-carousel [data]="this.dataService.getStaticCarouselData(genre,1980,2019)" [cardName]="genre"></app-cover-carousel>
+  </ng-container>
 </div>

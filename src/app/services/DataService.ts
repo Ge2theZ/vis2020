@@ -4,34 +4,36 @@ import { GenreSalesPerYear } from '../../models/GenreSalesPerYear'
 import { HttpClient } from '@angular/common/http'; 
 import * as Rx from 'rxjs';
 import { CoverCarousel } from 'src/models/CoverCarousel';
-import { CoverCarouselComponent } from '../main-view/cover-carousel/cover-carousel.component';
 
 @Injectable({
     providedIn: 'root'
 })
-export class DataService {
+export class DataService implements OnInit{
     public gameDataSet: Game[] = [];
     public genreSalesPerYears: GenreSalesPerYear[];
     public liveCarousel$: Rx.BehaviorSubject<CoverCarousel[]>;
     public onReady$: Rx.BehaviorSubject<Boolean>;
 
     constructor(private http: HttpClient){
-        this.liveCarousel$ = new Rx.BehaviorSubject<CoverCarousel[]>([]);
-        this.onReady$ = new Rx.BehaviorSubject<Boolean>(false);
-        this.readInGameDataSet().subscribe(data => {
-            for (const game of data) {
-                this.gameDataSet.push(new Game(game));
-            }
-            console.log("GameDataset: ", this.gameDataSet)
-            this.readInGenreSalesPerYears().subscribe(data => {
-                this.genreSalesPerYears = data;
-                //console.log("GenreSales per Year: ", this.genreSalesPerYears)
-                this.onReady$.next(true);
-            })
-        });
+      this.liveCarousel$ = new Rx.BehaviorSubject<CoverCarousel[]>([]);
+      this.onReady$ = new Rx.BehaviorSubject<Boolean>(false);
+      this.readInGameDataSet().subscribe(data => {
+        for (const game of data) {
+          this.gameDataSet.push(new Game(game));
+        }
+        console.log("GameDataset: ", this.gameDataSet)
+        this.readInGenreSalesPerYears().subscribe(data => {
+          this.genreSalesPerYears = data;
+          //console.log("GenreSales per Year: ", this.genreSalesPerYears)
+          this.onReady$.next(true);
+        })
+      });
     }
 
-    readInGameDataSet(): Rx.Observable<any> { 
+    ngOnInit(): void {
+    }
+
+  readInGameDataSet(): Rx.Observable<any> {
         return this.http.get('../../assets/preprocessed_dataset.json');
     }
 
@@ -56,6 +58,38 @@ export class DataService {
             carouselList.push(new CoverCarousel(from, to, game));
         }
         this.liveCarousel$.next(carouselList);
+    }
+
+    getStaticCarouselData(genre: String, fromYear: number, toYear: number) {
+      let timeInterval = toYear - fromYear;
+      let timeBin = timeInterval / 6;
+      let carouselList = [];
+
+      for (let i = 0; i < 6; i++) {
+        let from = fromYear + (timeBin * i);
+        let to = fromYear + (timeBin * (i+1));
+        var game = this.getCoverCarouselData(from, to , genre);
+        /*
+        if(!game){
+          game = new Game();
+          game.name = "No Game found";
+          game.publisher = "";
+        }
+
+         */
+        carouselList.push(new CoverCarousel(from, to, game));
+      }
+       return carouselList;
+    }
+
+    getGenres(): string[] {
+      let genres: string[] = [];
+      this.gameDataSet.forEach(value =>{
+          if(!genres.includes(value.genre)){
+            genres.push(value.genre);
+          }
+      });
+      return genres;
     }
 
     getCoverCarouselData(fromTime:number, toTime:number, genre:String):Game{

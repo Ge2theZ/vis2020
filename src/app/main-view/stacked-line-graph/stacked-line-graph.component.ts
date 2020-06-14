@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 
-import * as d3 from "d3";
+import * as d3 from 'd3';
 import {ActivatedRoute, Router} from '@angular/router';
-import { DataService } from 'src/app/services/DataService';
+import {DataService} from 'src/app/services/DataService';
 
 //import SalesPerYearGenre from ;
 
 @Component({
   selector: 'app-stacked-line-graph',
   templateUrl: './stacked-line-graph.component.html',
-  styleUrls: ['./stacked-line-graph.component.css']
+  styleUrls: ['./stacked-line-graph.component.css'],
 })
 
 export class StackedLineGraphComponent implements OnInit {
@@ -177,7 +177,9 @@ export class StackedLineGraphComponent implements OnInit {
     //d3.selectAll(".areas").style("opacity", .2)
     d3.select(this)
       .style("stroke", "black")
-      .style("opacity", 1)
+      .style("opacity", 1);
+
+    //this.dataService.updateCoverCarousel(this.genreList[i], 1970, 2019)
   }
 
   private mouseleave(d) {
@@ -188,8 +190,8 @@ export class StackedLineGraphComponent implements OnInit {
   private mouseclick(d,i) { 
    console.log("Genre Id: " + i);
    console.log("Genre Name: " + this.genreList[i]);
-   this.dataService.updateCoverCarousel(this.genreList[i], 1970, 2019)
-   //this.router.navigate(['home/genre', this.genreList[i]]);
+   //this.dataService.updateCoverCarousel(this.genreList[i], 1970, 2019)
+   this.router.navigate(['home/genre', this.genreList[i]]);
   }
 
  private drawData() {
@@ -213,7 +215,7 @@ export class StackedLineGraphComponent implements OnInit {
       .x( (d: any, i) => this.x(d.data.key) )
       .y0( (d: any) => this.y(d[0]) ) 
       .y1( (d: any) => this.y(d[1]) ) )
-      .on("mouseover", this.mouseover)  
+      .on("mouseover", this.mouseover)
       .on("mouseleave", this.mouseleave)
       .on("click", (d:any, i:any) => this.mouseclick(d,i));
 

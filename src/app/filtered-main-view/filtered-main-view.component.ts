@@ -1,26 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {CoverCarousel} from '../../models/CoverCarousel';
-import {mockedCoverCarouselData} from '../main-view/main-view.component';
+import {DataService} from '../services/DataService';
 
 @Component({
   selector: 'app-filtered-main-view',
   templateUrl: './filtered-main-view.component.html',
-  styleUrls: ['./filtered-main-view.component.css']
+  styleUrls: ['./filtered-main-view.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FilteredMainViewComponent implements OnInit {
-  data: CoverCarousel[] = mockedCoverCarouselData;
-  constructor() { }
+  data: CoverCarousel[];
+  genres: string[];
+
+  constructor(public dataService: DataService,  private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-  }
+    this.dataService.liveCarousel$.subscribe(data => {
+      this.data = data;
+      this.cdr.detectChanges();
+    });
 
-  shuffleArray(array) {
-    const shuffledArr = [...array];
-    for (let i = shuffledArr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffledArr[i], shuffledArr[j]] = [shuffledArr[j], shuffledArr[i]];
-    }
-    return shuffledArr;
+    //gets called if dataservice is ready
+    this.dataService.onReady$.subscribe(ready => {
+      if(ready){
+        this.dataService.updateCoverCarousel("Racing", 1970, 2019);
+        this.genres = this.dataService.getGenres();
+        this.cdr.detectChanges();
+      }
+    });
   }
-
 }
