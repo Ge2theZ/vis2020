@@ -45,6 +45,23 @@ tmp = tmp.reset_index()
 tmp['Percentage_per_year'] = tmp.apply(lambda row: '{:0.2f}'.format((row.Sales/float(salesPerYear[row.Year]))*100), axis=1)
 tmp.to_json("SalesPerYearGenre.json", orient='records')
 
-print("after preprocessing: " + str(len(df.index)) + " rows")
+#read in dataset with ratings
+#only read in those columns
+cols = ["Name","Platform","Critic_Score","User_Score"]
+print("reading in rating dataset csv ")
+ratingsDf = pandas.read_csv('Video_Games_Sales_with_ratings.csv', usecols=cols)
+merged = pandas.merge(df,ratingsDf,on=['Name','Platform'], how='left')
+merged['User_Score'] = merged.apply(lambda row: row.User_Score_x if  row.User_Score_x != "" else row.User_Score_y , axis=1)
+merged['Critic_Score'] = merged.apply(lambda row: row.Critic_Score_x if  row.Critic_Score_x != "" else row.Critic_Score_y , axis=1)
+#drop merge columns
+merged = merged.drop('User_Score_x', 1)
+merged = merged.drop('User_Score_y', 1)
+merged = merged.drop('Critic_Score_x', 1)
+merged = merged.drop('Critic_Score_y', 1)
+print("merged both datasets")
+
+print("after preprocessing: " + str(len(merged.index)) + " rows")
 print("writing to csv")
-df.to_json("preprocessed_dataset.json", orient='records')
+merged.to_json("preprocessed_dataset.json", orient='records')
+
+
