@@ -24,7 +24,6 @@ export class DataService {
             for (const game of data) {
                 this.gameDataSet.push(new Game(game));
             }
-            console.log("GameDataset: ", this.gameDataSet)
             this.readInGenreSalesPerYears().subscribe(data => {
                 this.genreSalesPerYears = data;
                 //console.log("GenreSales per Year: ", this.genreSalesPerYears)
@@ -42,6 +41,7 @@ export class DataService {
     }
 
     updateCoverCarousel(genre: String, fromYear: number, toYear: number) {
+        console.time("updateCoverCarousel")
         let timeInterval = toYear - fromYear;
         let timeBin = timeInterval / 6;
         let carouselList = [];
@@ -50,14 +50,10 @@ export class DataService {
             let from = fromYear + (timeBin * i) + (i==0 ? 0 : 1);
             let to = fromYear + (timeBin * (i + 1));
             var game = this.getCoverCarouselData(from, to , genre);
-            if(!game){ 
-                game = new Game();
-                game.name = "No Game found";
-                game.publisher = ""; 
-            }
             carouselList.push(new CoverCarousel(from, to, game));
         }
         this.liveCarousel$.next(carouselList);
+        console.timeEnd("updateCoverCarousel")
     }
 
     getStaticCarouselData(genre: String, fromYear: number, toYear: number) {
@@ -69,36 +65,27 @@ export class DataService {
         let from = fromYear + (timeBin * i) + (i==0 ? 0 : 1);
         let to = fromYear + (timeBin * (i+1));
         var game = this.getCoverCarouselData(from, to , genre);
-        /*
-        if(!game){
-          game = new Game();
-          game.name = "No Game found";
-          game.publisher = "";
-        }
-
-         */
         carouselList.push(new CoverCarousel(from, to, game));
       }
        return carouselList;
     }
 
+    getStaticCarouselDataForPublisher(genre: string, publisher: string, fromYear: number, toYear: number) {
+        let timeInterval = toYear - fromYear;
+        let timeBin = timeInterval / 6;
+        let carouselList = [];
 
-  getStaticCarouselDataForPublisher(genre: string, publisher: string, fromYear: number, toYear: number) {
-    let timeInterval = toYear - fromYear;
-    let timeBin = timeInterval / 6;
-    let carouselList = [];
+        for (let i = 0; i < 6; i++) {
+            let from = fromYear + (timeBin * i) + (i==0 ? 0 : 1);
+            let to = fromYear + (timeBin * (i+1));
+            var game = this.getCoverCarouselDataWithPublisher(from, to , genre, publisher);
 
-    for (let i = 0; i < 6; i++) {
-      let from = fromYear + (timeBin * i) + (i==0 ? 0 : 1);
-      let to = fromYear + (timeBin * (i+1));
-      var game = this.getCoverCarouselDataWithPublisher(from, to , genre, publisher);
-
-      if(game !== undefined) {
-        carouselList.push(new CoverCarousel(from, to, game));
-      }
+            if(game !== undefined) {
+                carouselList.push(new CoverCarousel(from, to, game));
+            }
+        }
+        return carouselList;
     }
-    return carouselList;
-  }
 
     getGenres(): string[] {
       let genres: string[] = [];
@@ -109,7 +96,6 @@ export class DataService {
       });
       return genres;
     }
-
 
     getPublisher(): string[] {
       let publisher: string[] = [];
@@ -122,9 +108,12 @@ export class DataService {
     }
 
     getCoverCarouselData(fromTime:number, toTime:number, genre:String):Game{
+        var filteredGameData;
         //filter for given Genre
         if(genre !== "all"){
-            var filteredGameData = this.gameDataSet.filter(game => game.genre === genre);
+            filteredGameData = this.gameDataSet.filter(game => game.genre === genre);
+        }else{
+            filteredGameData = this.gameDataSet;
         }
         // sort gameDataSet by globalSales
         filteredGameData.sort((a,b)=>{

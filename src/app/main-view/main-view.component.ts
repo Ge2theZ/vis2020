@@ -18,13 +18,12 @@ export class MainViewComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.liveCarousel$.subscribe(data => {
       this.data = data;
-      console.log(data)
       this.cdr.detectChanges();
     });
     //gets called if dataservice is ready
     this.dataService.onReady$.subscribe(ready => {
       if(ready){
-        this.dataService.updateCoverCarousel("Racing", 1970, 2019);
+        this.dataService.updateCoverCarousel("all", 1970, 2019);
         this.genres = this.dataService.getGenres();
         console.log("Genres", this.genres);
         this.cdr.detectChanges();
