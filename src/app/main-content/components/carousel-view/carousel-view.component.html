@@ -1,0 +1,4 @@
+<app-cover-carousel [data]="this.data"></app-cover-carousel>
+<ng-container *ngFor="let card of cards">
+  <app-cover-carousel [data]="this.dataService.getStaticCarouselData(card,1980,2019)" [cardName]="card"></app-cover-carousel>
+</ng-container>

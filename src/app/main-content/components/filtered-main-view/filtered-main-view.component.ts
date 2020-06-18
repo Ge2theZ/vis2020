@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {CoverCarousel} from '../../models/CoverCarousel';
-import {DataService} from '../services/DataService';
+import {CoverCarousel} from '../../../../models/CoverCarousel';
+import {DataService} from '../../../services/DataService';
 
 @Component({
   selector: 'app-filtered-main-view',
@@ -33,8 +33,7 @@ export class FilteredMainViewComponent implements OnInit {
 
 
   public calculateCarouselData(publisher) {
-    this.carouselCache = this.dataService.getStaticCarouselDataForPublisher('Shooter', publisher, 1970, 2019)
-    console.log(this.carouselCache);
+    this.carouselCache = this.dataService.getStaticCarouselDataForPublisher('Puzzle', publisher, 1970, 2019)
     return this.carouselCache;
   }
 
