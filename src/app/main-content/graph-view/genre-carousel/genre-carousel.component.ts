@@ -4,12 +4,12 @@ import {NavigationService} from '../../../services/navigate.service';
 import {CoverCarousel} from '../../../../models/CoverCarousel';
 
 @Component({
-  selector: 'app-carousel-view',
-  templateUrl: './carousel-view.component.html',
-  styleUrls: ['./carousel-view.component.css'],
+  selector: 'app-genre-carousel',
+  templateUrl: './genre-carousel.component.html',
+  styleUrls: ['./genre-carousel.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CarouselViewComponent implements OnInit {
+export class GenreCarouselComponent implements OnInit {
   data: CoverCarousel[];
   cards: string[];
 

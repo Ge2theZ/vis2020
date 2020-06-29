@@ -3,12 +3,12 @@ import {CoverCarousel} from '../../../../models/CoverCarousel';
 import {DataService} from '../../../services/DataService';
 
 @Component({
-  selector: 'app-filtered-main-view',
-  templateUrl: './filtered-main-view.component.html',
-  styleUrls: ['./filtered-main-view.component.css'],
+  selector: 'app-publisher-carousel',
+  templateUrl: './publisher-carousel.component.html',
+  styleUrls: ['./publisher-carousel.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FilteredMainViewComponent implements OnInit {
+export class PublisherCarouselComponent implements OnInit {
   data: CoverCarousel[];
   publisher: string[];
   carouselCache: CoverCarousel[];
@@ -36,7 +36,4 @@ export class FilteredMainViewComponent implements OnInit {
     this.carouselCache = this.dataService.getStaticCarouselDataForPublisher('Puzzle', publisher, 1970, 2019)
     return this.carouselCache;
   }
-
-
-
 }
