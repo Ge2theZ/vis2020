@@ -14,5 +14,4 @@ export class CoverCarouselComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

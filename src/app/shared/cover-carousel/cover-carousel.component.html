@@ -1,0 +1,26 @@
+<ng-container *ngIf="data">
+  <div *ngIf="cardName" class="card carousel-card-container">
+    <div class="card-header">
+      {{cardName}}
+    </div>
+    <div class="card-body game-covers-body">
+      <div class="row">
+        <ng-container *ngFor="let game of data">
+          <div *ngIf="game.game !== undefined" class="col" align="center"> <!-- TODO Center this content! -->
+            <app-cover-card [game]="game"></app-cover-card>
+            <div class="separator">{{game.timespanString}}</div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!cardName" class="row">
+    <ng-container *ngFor="let game of data">
+      <div *ngIf="game.game !== undefined" class="col" align="center"> <!-- TODO Center this content! -->
+        <app-cover-card [game]="game"></app-cover-card>
+        <div class="separator">{{game.timespanString}}</div>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>

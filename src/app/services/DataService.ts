@@ -4,9 +4,7 @@ import { GenreSalesPerYear } from '../../models/GenreSalesPerYear'
 import { HttpClient } from '@angular/common/http'; 
 import * as Rx from 'rxjs';
 import { CoverCarousel } from 'src/models/CoverCarousel';
-import { CoverCarouselComponent } from '../main-view/cover-carousel/cover-carousel.component';
 import { SharePerYearPerPublisher } from 'src/models/SharePerYearPerPublisher';
-import { filter } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'

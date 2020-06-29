@@ -1,33 +1,39 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { MainViewComponent } from './main-view/main-view.component';
-import { FooterComponent } from './footer/footer.component';
-import { StackedLineGraphComponent } from './main-view/stacked-line-graph/stacked-line-graph.component';
-import { CoverCarouselComponent } from './main-view/cover-carousel/cover-carousel.component';
-import { CoverCardComponent } from './main-view/cover-carousel/cover-card/cover-card.component';
-import { HttpClientModule } from '@angular/common/http';
-import { FilteredMainViewComponent } from './filtered-main-view/filtered-main-view.component';
-import { GameDetailsComponent } from './game-details/game-details.component';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {NavbarComponent} from './navbar/navbar.component';
+import {GraphViewComponent} from './main-content/graph-view/graph-view.component';
+import {FooterComponent} from './footer/footer.component';
+import {StackedLineGraphComponent} from './main-content/graph-view/stacked-line-graph/stacked-line-graph.component';
+import {CoverCarouselComponent} from './shared/cover-carousel/cover-carousel.component';
+import {CoverCardComponent} from './shared/cover-carousel/cover-card/cover-card.component';
+import {HttpClientModule} from '@angular/common/http';
+import {GameDetailsComponent} from './main-content/game-details/game-details.component';
+import {BreadcrumbComponent} from './shared/breadcrumb/breadcrumb.component';
 import {DataService} from './services/DataService';
-import { PublisherMainViewComponent } from './publisher-main-view/publisher-main-view.component';
+import {MainContentComponent} from './main-content/main-content.component';
+import {GenreCarouselComponent} from './main-content/graph-view/genre-carousel/genre-carousel.component';
+import { PublisherCarouselComponent } from './main-content/graph-view/publisher-carousel/publisher-carousel.component';
+import { GenrePublisherViewComponent } from './main-content/graph-view/genre-publisher-view/genre-publisher-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    MainViewComponent,
     FooterComponent,
+    MainContentComponent,
+    GraphViewComponent,
     StackedLineGraphComponent,
     CoverCarouselComponent,
     CoverCardComponent,
-    FilteredMainViewComponent,
-    GameDetailsComponent,
     BreadcrumbComponent,
-    PublisherMainViewComponent,
+    GameDetailsComponent,
+    GenreCarouselComponent,
+    GenreCarouselComponent,
+    PublisherCarouselComponent,
+    GenrePublisherViewComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -37,4 +43,5 @@ import { PublisherMainViewComponent } from './publisher-main-view/publisher-main
   providers: [DataService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
