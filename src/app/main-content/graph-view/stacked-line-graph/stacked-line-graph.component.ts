@@ -170,21 +170,19 @@ export class StackedLineGraphComponent implements OnInit {
   }
 
   // Three function that change the tooltip when user hover / move / leave a cell
-  private mouseover(d,i) {
+  public mouseover(d, i) {
     //Tooltip.style("opacity", 1)
     d3.selectAll(".myArea").style("opacity", .2)
-    //d3.selectAll(".areas").style("opacity", .2)
+    d3.selectAll(".areas").style("opacity", .2)
     d3.select(this)
       .style("stroke", "black")
       .style("opacity", 1);
-
-    //this.dataService.updateCoverCarousel(this.genreList[i], 1970, 2019)
   }
 
   private mouseleave(d) {
     //Tooltip.style("opacity", 0)
     d3.selectAll(".myArea").style("opacity", 1).style("stroke", "none")
-   }
+  }
 
   private mouseclick(d,i) { 
    console.log("Genre Id: " + i);
@@ -194,7 +192,6 @@ export class StackedLineGraphComponent implements OnInit {
   }
 
  private drawData() {
-   
   // create color pallet
   this.color = d3.scaleOrdinal()
     .domain(this.genreList)
@@ -210,13 +207,18 @@ export class StackedLineGraphComponent implements OnInit {
       .attr("class", "myArea")
       .style("fill", (d: any) =>  this.color(d.key) )
       .attr("d", d3.area()
-      .curve(d3.curveBasis)
-      .x( (d: any, i) => this.x(d.data.key) )
-      .y0( (d: any) => this.y(d[0]) ) 
-      .y1( (d: any) => this.y(d[1]) ) )
-      .on("mouseover", this.mouseover)
+        .curve(d3.curveBasis)
+        .x( (d: any, i) => this.x(d.data.key) )
+        .y0( (d: any) => this.y(d[0]) ) 
+        .y1( (d: any) => this.y(d[1]) ) 
+      )
+      .on("mouseover.a", this.mouseover)
+      .on("mouseover.b", (d,i) => {
+        this.dataService.updateCoverCarousel(this.genreList[i], 1970, 2019)
+      })
       .on("mouseleave", this.mouseleave)
       .on("click", (d:any, i:any) => this.mouseclick(d,i));
+
 
   // Add one dot in the legend for each name.
   let size = 12;
@@ -243,6 +245,4 @@ export class StackedLineGraphComponent implements OnInit {
       .attr("text-anchor", "left")
       .style("alignment-baseline", "middle")
   }
-
-
 }

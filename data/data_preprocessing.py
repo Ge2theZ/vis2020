@@ -53,6 +53,7 @@ ratingsDf = pandas.read_csv('Video_Games_Sales_with_ratings.csv', usecols=cols)
 merged = pandas.merge(df,ratingsDf,on=['Name','Platform'], how='left')
 merged['User_Score'] = merged.apply(lambda row: row.User_Score_x if  row.User_Score_x != "" else row.User_Score_y , axis=1)
 merged['Critic_Score'] = merged.apply(lambda row: row.Critic_Score_x if  row.Critic_Score_x != "" else row.Critic_Score_y , axis=1)
+
 #drop merge columns
 merged = merged.drop('User_Score_x', 1)
 merged = merged.drop('User_Score_y', 1)
@@ -63,5 +64,3 @@ print("merged both datasets")
 print("after preprocessing: " + str(len(merged.index)) + " rows")
 print("writing to csv")
 merged.to_json("preprocessed_dataset.json", orient='records')
-
-
