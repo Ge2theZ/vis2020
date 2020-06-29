@@ -16,6 +16,8 @@ import {MainContentComponent} from './main-content/main-content.component';
 import {GenreCarouselComponent} from './main-content/graph-view/genre-carousel/genre-carousel.component';
 import { PublisherCarouselComponent } from './main-content/graph-view/publisher-carousel/publisher-carousel.component';
 import { GenrePublisherViewComponent } from './main-content/graph-view/genre-publisher-view/genre-publisher-view.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { GenrePublisherViewComponent } from './main-content/graph-view/genre-pub
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+    FormsModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
