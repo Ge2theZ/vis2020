@@ -1,39 +1,46 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {CoverCarousel} from '../../../../models/CoverCarousel';
 import {DataService} from '../../../services/DataService';
+import {StaticCarousel} from '../genre-carousel/genre-carousel.component';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-publisher-carousel',
   templateUrl: './publisher-carousel.component.html',
-  styleUrls: ['./publisher-carousel.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./publisher-carousel.component.css']
 })
 export class PublisherCarouselComponent implements OnInit {
   data: CoverCarousel[];
-  publisher: string[];
-  carouselCache: CoverCarousel[];
+  staticCarousels: StaticCarousel[] = [];
+  genre: string;
 
-  constructor(public dataService: DataService,  private cdr: ChangeDetectorRef) { }
+  constructor(public dataService: DataService,
+              public router: Router,
+              public route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.genre = this.route.snapshot.params.genreId;
+
     this.dataService.liveCarousel$.subscribe(data => {
       this.data = data;
-      this.cdr.detectChanges();
     });
 
     //gets called if dataservice is ready
     this.dataService.onReady$.subscribe(ready => {
       if(ready){
         this.dataService.updateCoverCarousel("Racing", 1970, 2019);
-        this.publisher = this.dataService.getPublisher();
-        this.cdr.detectChanges();
+        this.calculateStaticCarouselData(this.dataService.getPublisher());
       }
     });
   }
 
+  trackByFn(index) {
+    return index;
+  }
 
-  public calculateCarouselData(publisher) {
-    this.carouselCache = this.dataService.getStaticCarouselDataForPublisher('Puzzle', publisher, 1970, 2019)
-    return this.carouselCache;
+  calculateStaticCarouselData(publishers: string[]) {
+    for (let publisher of publishers) {
+      this.staticCarousels.push({title: publisher, data: this.dataService.getStaticCarouselDataForPublisher(this.genre, publisher,1980,2019)});
+    }
   }
 }
