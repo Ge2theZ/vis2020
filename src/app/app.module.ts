@@ -18,6 +18,8 @@ import { PublisherCarouselComponent } from './main-content/graph-view/publisher-
 import { GenrePublisherViewComponent } from './main-content/graph-view/genre-publisher-view/genre-publisher-view.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
+import { BarGraphComponent } from './shared/bargraph/bargraph.component';
+import { ChartsModule } from 'ng2-charts';
 import { FaqViewComponent } from './main-content/faq-view/faq-view.component';
 
 @NgModule({
@@ -36,15 +38,16 @@ import { FaqViewComponent } from './main-content/faq-view/faq-view.component';
     GenreCarouselComponent,
     PublisherCarouselComponent,
     GenrePublisherViewComponent,
+    BarGraphComponent
     FaqViewComponent,
-
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

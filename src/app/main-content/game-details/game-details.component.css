@@ -3,6 +3,10 @@
   font-size: 18px;
 }
 
+.graph {
+  margin-top: 200px;
+  padding-top: 200px ;
+}
 
 .label {
   font-weight: 600;

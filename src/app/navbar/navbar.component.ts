@@ -33,6 +33,7 @@ export class NavbarComponent implements OnInit {
       : this.gameNameList.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
   );
 
+
   execSearch() {
     let searchParams = this.searchquery.split(" | ");
     let game: Game = this.dataService.gameDataSet.filter(item => item.name === searchParams[0] && item.plattform === searchParams[1])[0];

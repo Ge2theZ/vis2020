@@ -26,7 +26,6 @@ const routes: Routes = [
         {
           path: 'faq', component: FaqViewComponent
         }
-
       ]
     }
   ]
