@@ -11,7 +11,7 @@ declare var Chart: any;
     templateUrl: 'bargraph.component.html',
     styleUrls: ['./bargraph.component.css']
 })
-export class BarGraphComponent implements OnInit {
+export class BarGraphComponent implements OnInit, OnChanges {
   constructor(private router:Router, private navigationService: NavigationService) { }
   
   @Input() public data: Game[];
@@ -40,6 +40,10 @@ export class BarGraphComponent implements OnInit {
    this.initBarGraph();
   }
 
+  ngOnChanges(){
+    this.initBarGraph();
+  }
+  
   initBarGraph(){
     let salesArr = []; 
     let colorArr = [];
@@ -68,7 +72,7 @@ export class BarGraphComponent implements OnInit {
       let idx = event.active[0]._index;
       let game = this.data[idx];
       this.navigationService.updateGame(game);
-      this.router.navigate([`/home/details/${game.name}`]);
+      this.router.navigate([`/home/details`]);
     }
   }
 }
