@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Game } from 'src/models/Game';
 import { DataService } from 'src/app/services/DataService';
-import * as d3 from 'd3';
-import { Console } from 'console';
 
 @Component({
   selector: 'app-game-details',

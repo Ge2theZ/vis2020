@@ -24,7 +24,6 @@ export class BarGraphComponent implements OnInit, OnChanges, AfterViewInit {
     constructor() { }
 
     ngOnInit() {
-
     }
     
     ngAfterViewInit(){
