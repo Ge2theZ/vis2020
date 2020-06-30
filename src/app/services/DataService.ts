@@ -18,7 +18,7 @@ interface MarketShareForGenrePerYearStore {
 export class DataService {
   public gameDataSet: Game[] = [];
   public genreSalesPerYears: GenreSalesPerYear[];
-  public
+  public;
   public marketShareForGenrePerYearStore: MarketShareForGenrePerYearStore[] = [];
   public liveCarousel$: Rx.BehaviorSubject<CoverCarousel[]>;
   public onReady$: Rx.BehaviorSubject<Boolean>;
@@ -200,7 +200,6 @@ export class DataService {
         res.push(new SharePerYearPerPublisher(year, (sumSalesPublisherYear / totalSalesPerYear[year]) * 100, publisher));
       }
     }
-
 
     // Store calculated data into store
     if (this.marketShareForGenrePerYearStore.filter(data => data.genre === genre).length === 0) {

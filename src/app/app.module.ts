@@ -18,6 +18,8 @@ import { PublisherCarouselComponent } from './main-content/graph-view/publisher-
 import { GenrePublisherViewComponent } from './main-content/graph-view/genre-publisher-view/genre-publisher-view.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
+import { BarGraphComponent } from './shared/bargraph/bargraph.component';
+import { ChartsModule } from 'ng2-charts';
 import { FaqViewComponent } from './main-content/faq-view/faq-view.component';
 import { RadarChartComponent } from './shared/radar-chart/radar-chart.component';
 
@@ -37,6 +39,7 @@ import { RadarChartComponent } from './shared/radar-chart/radar-chart.component'
     GenreCarouselComponent,
     PublisherCarouselComponent,
     GenrePublisherViewComponent,
+    BarGraphComponent,
     FaqViewComponent,
     RadarChartComponent,
 
@@ -46,7 +49,8 @@ import { RadarChartComponent } from './shared/radar-chart/radar-chart.component'
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
