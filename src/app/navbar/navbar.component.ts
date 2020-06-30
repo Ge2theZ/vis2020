@@ -4,6 +4,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import {Observable} from 'rxjs';
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 import { Game } from 'src/models/Game'
+import {NavigationService} from '../services/navigate.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,11 +15,13 @@ export class NavbarComponent implements OnInit {
   public searchquery: string;
   public gameNameList: string[];
 
-  constructor(private dataService: DataService, private router: Router) { }
+  constructor(private dataService: DataService,
+              private router: Router,
+              private navigationService: NavigationService) { }
 
   ngOnInit(): void {
     this.dataService.onReady$.subscribe(() => {
-      this.gameNameList = this.dataService.gameDataSet.map(i => i.name);
+      this.gameNameList = this.dataService.gameDataSet.map(i => i.name + " | " + i.plattform);
     })
   }
 
@@ -28,16 +31,13 @@ export class NavbarComponent implements OnInit {
     distinctUntilChanged(),
     map(term => term.length < 2 ? []
       : this.gameNameList.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
-  )
+  );
 
-  execSearch(){
-    let game: Game = this.dataService.gameDataSet.filter(item => item.name === this.searchquery)[0];
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-          game: JSON.stringify(game)
-      }
-    } 
-    this.router.navigate([`/home/details/${game.name}`], navigationExtras);
+
+  execSearch() {
+    let searchParams = this.searchquery.split(" | ");
+    let game: Game = this.dataService.gameDataSet.filter(item => item.name === searchParams[0] && item.plattform === searchParams[1])[0];
+    this.navigationService.updateGame(game);
+    this.router.navigate([`/home/details/${game.name}`]);
   }
-
 }

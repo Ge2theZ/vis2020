@@ -3,6 +3,7 @@ import {CoverCarousel} from '../../../../models/CoverCarousel';
 import {DataService} from '../../../services/DataService';
 import {StaticCarousel} from '../genre-carousel/genre-carousel.component';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NavigationService} from '../../../services/navigate.service';
 
 @Component({
   selector: 'app-publisher-carousel',
@@ -16,10 +17,13 @@ export class PublisherCarouselComponent implements OnInit {
 
   constructor(public dataService: DataService,
               public router: Router,
-              public route: ActivatedRoute) { }
+              public route: ActivatedRoute,
+              public navigationService: NavigationService) { }
 
   ngOnInit(): void {
     this.genre = this.route.snapshot.params.genreId;
+    this.navigationService.updateGenre(this.genre);
+
 
     this.dataService.liveCarousel$.subscribe(data => {
       this.data = data;

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {DataService} from '../../../services/DataService';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NavigationService} from '../../../services/navigate.service';
 
 @Component({
   selector: 'app-genre-publisher-view',
@@ -6,10 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./genre-publisher-view.component.css']
 })
 export class GenrePublisherViewComponent implements OnInit {
+  publisher: string;
 
-  constructor() { }
+  constructor(public dataService: DataService,
+              public router: Router,
+              public route: ActivatedRoute,
+              public navigationService: NavigationService) {
+  }
 
   ngOnInit(): void {
+    this.publisher = this.route.snapshot.params.publisherId;
+    this.navigationService.updatePublisher(this.publisher);
   }
 
 }

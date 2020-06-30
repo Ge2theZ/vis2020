@@ -11,3 +11,14 @@
 .label {
   font-weight: 600;
 }
+
+.image-col {
+  margin: auto;
+  text-align: center;
+  height: 300px;
+}
+
+.image {
+  height: 100%;
+  max-width: 100%;
+}
