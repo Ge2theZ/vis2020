@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CoverCarousel} from '../../../../models/CoverCarousel';
 import { Router, NavigationExtras } from '@angular/router';
+import {NavigationService} from '../../../services/navigate.service';
 
 @Component({
   selector: 'app-cover-card',
@@ -10,18 +11,14 @@ import { Router, NavigationExtras } from '@angular/router';
 export class CoverCardComponent implements OnInit {
   @Input() game: CoverCarousel;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private navigationService: NavigationService) { }
 
   ngOnInit(): void {
   }
 
   navigate(){
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-          game: JSON.stringify(this.game.game)
-      }
-    } 
-    console.log(this.game)
-    this.router.navigate([`/home/details/${this.game.game.name}`], navigationExtras);
+    this.router.navigate([`/home/details/${this.game.game.name}`]);
+    this.navigationService.updateGame(this.game.game);
   }
 }

@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, ReplaySubject} from 'rxjs';
+import {Game} from '../../models/Game';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NavigationService {
-  public mainViewDepth$ = new BehaviorSubject<number>(1);
   public genre$ = new BehaviorSubject<string>(null);
   public publisher$ = new BehaviorSubject<string>(null);
+  public game$ = new ReplaySubject<Game>(null);
 
   constructor() {
   }
@@ -21,8 +22,7 @@ export class NavigationService {
     this.publisher$.next(publisher);
   }
 
-  public updateMainViewDepth(depth: number) {
-    this.mainViewDepth$.next(depth);
+  public updateGame(game: Game) {
+    this.game$.next(game);
   }
-
 }

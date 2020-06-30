@@ -18,6 +18,7 @@ import { PublisherCarouselComponent } from './main-content/graph-view/publisher-
 import { GenrePublisherViewComponent } from './main-content/graph-view/genre-publisher-view/genre-publisher-view.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
+import { FaqViewComponent } from './main-content/faq-view/faq-view.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {FormsModule} from '@angular/forms';
     GenreCarouselComponent,
     PublisherCarouselComponent,
     GenrePublisherViewComponent,
+    FaqViewComponent,
 
   ],
   imports: [

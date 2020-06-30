@@ -1,7 +1,7 @@
-<h1>{{game.name}}</h1>
+<h1>{{game?.name}}</h1>
 <div class="row">
-  <div class="col-5">
-    <img [src]="'https://www.vgchartz.com/' + this.game.imgUrl" style="width: 350px">
+  <div class="col-5 image-col">
+    <img [src]="'https://www.vgchartz.com/' + this.game?.imgUrl" style="height: 100%;">
   </div>
   <div class="col-7">
     <h3>Game Details</h3>
@@ -12,7 +12,7 @@
           <span class="label">Name</span>
         </div>
         <div class="col">
-          <span>{{this.game.name}}</span>
+          <span>{{this.game?.name}}</span>
         </div>
       </div>
 
@@ -21,7 +21,7 @@
           <span class="label">Platform</span>
         </div>
         <div class="col">
-          <span>{{this.game.plattform}}</span>
+          <span>{{this.game?.plattform}}</span>
         </div>
       </div>
 
@@ -30,7 +30,7 @@
           <span class="label">Genre</span>
         </div>
         <div class="col">
-          <span>{{this.game.genre}}</span>
+          <span>{{this.game?.genre}}</span>
         </div>
       </div>
 
@@ -39,7 +39,7 @@
           <span class="label">Publisher</span>
         </div>
         <div class="col">
-          <span>{{this.game.publisher}}</span>
+          <span>{{this.game?.publisher}}</span>
         </div>
       </div>
 
@@ -48,43 +48,43 @@
           <span class="label">Release Year</span>
         </div>
         <div class="col">
-          <span>{{this.game.year}}</span>
+          <span>{{this.game?.year}}</span>
         </div>
       </div>
 
-      <div class="row" *ngIf="this.game.globalSales">
+      <div class="row" *ngIf="this.game?.globalSales">
         <div class="col">
           <span class="label">Sales</span>
         </div>
         <div class="col">
-          <span>{{this.game.globalSales}} Millions</span>
+          <span>{{this.game?.globalSales}} Millions</span>
         </div>
       </div>
 
-      <div class="row" *ngIf="this.game.userScore">
+      <div class="row" *ngIf="this.game?.userScore">
         <div class="col">
           <span class="label">User Score</span>
         </div>
         <div class="col">
-          <span>{{this.game.userScore}}</span>
+          <span>{{this.game?.userScore}}</span>
         </div>
       </div>
 
-      <div class="row" *ngIf="this.game.criticScore">
+      <div class="row" *ngIf="this.game?.criticScore">
         <div class="col">
           <span class="label">Critics Score</span>
         </div>
         <div class="col">
-          <span>{{this.game.criticScore}}</span>
+          <span>{{this.game?.criticScore}}</span>
         </div>
       </div>
 
-      <div class="row" *ngIf="this.game.esrbRating">
+      <div class="row" *ngIf="this.game?.esrbRating">
         <div class="col">
           <span class="label">Rating</span>
         </div>
         <div class="col">
-          <span>{{this.game.esrbRating}}</span>
+          <span>{{this.game?.esrbRating}}</span>
         </div>
       </div>
     </div>
