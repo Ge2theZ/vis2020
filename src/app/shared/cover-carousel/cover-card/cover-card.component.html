@@ -1,5 +1,5 @@
 <a (click)="navigate()" style="cursor: pointer;">
-  <div class="card game-card">
+  <div class="card game-card" (mouseenter)="onHover()">
     <!--<img [src]="'https://www.vgchartz.com/' + game.game.imgUrl" class="card-img-top game-card-image" alt="...">-->
     <div class="placeholder">
       <div class="card-img-top game-card-image" [style]="'background-image: url('+ 'https://www.vgchartz.com/' + game.game.imgUrl  +')'"><img /></div>

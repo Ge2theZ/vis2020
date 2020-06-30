@@ -19,6 +19,7 @@ import { GenrePublisherViewComponent } from './main-content/graph-view/genre-pub
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
 import { FaqViewComponent } from './main-content/faq-view/faq-view.component';
+import { RadarChartComponent } from './shared/radar-chart/radar-chart.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { FaqViewComponent } from './main-content/faq-view/faq-view.component';
     PublisherCarouselComponent,
     GenrePublisherViewComponent,
     FaqViewComponent,
+    RadarChartComponent,
 
   ],
   imports: [

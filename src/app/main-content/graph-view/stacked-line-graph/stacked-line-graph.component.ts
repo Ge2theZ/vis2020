@@ -187,7 +187,14 @@ export class StackedLineGraphComponent implements OnInit {
   private mouseclick(d,i) { 
    console.log("Genre Id: " + i);
    console.log("Genre Name: " + this.genreList[i]);
-   //this.dataService.updateCoverCarousel(this.genreList[i], 1970, 2019)
+
+   // Check if data is already calculated
+   if (this.dataService.isMarketShareForGenrePerYearCached(this.genreList[i])) {
+     let yourData = this.dataService.getCachedMarketShareForGenrePerYear(this.genreList[i])// here is your data
+   } else { // calculate data
+     this.dataService.getMarketShareForGenrePerYear(this.genreList[i]);
+   }
+
    this.router.navigate(['home/genre', this.genreList[i]]);
   }
 
@@ -214,7 +221,7 @@ export class StackedLineGraphComponent implements OnInit {
       )
       .on("mouseover.a", this.mouseover)
       .on("mouseover.b", (d,i) => {
-        this.dataService.updateCoverCarousel(this.genreList[i], 1970, 2019)
+        this.dataService.updateCoverCarousel(this.genreList[i], null, 1970, 2019)
       })
       .on("mouseleave", this.mouseleave)
       .on("click", (d:any, i:any) => this.mouseclick(d,i));

@@ -4,8 +4,16 @@
     <img src="../../../../assets/mock_graph.png" style="width: 100%;">
   </div>
   <div class="col">
-    <h4 class="w-100">Graph Title</h4>
-    <img src="../../../../assets/mock_graph_2.png" style="width: 100%;">
+    <h4 class="w-100">Publisher Games by Popularity</h4>
+    <ng-container *ngIf="radarData.labels.length > 0">
+      <app-radar-chart [data]="radarData.data" [labels]="radarData.labels"></app-radar-chart>
+    </ng-container>
+    <ng-container *ngIf="radarData.labels.length === 0">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </ng-container>
+
   </div>
 </div>
 <div class="row p-5">

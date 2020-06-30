@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {CoverCarousel} from '../../../../models/CoverCarousel';
 import { Router, NavigationExtras } from '@angular/router';
 import {NavigationService} from '../../../services/navigate.service';
+import {InteractionService} from '../../../services/interaction.service';
 
 @Component({
   selector: 'app-cover-card',
@@ -12,7 +13,8 @@ export class CoverCardComponent implements OnInit {
   @Input() game: CoverCarousel;
 
   constructor(private router: Router,
-              private navigationService: NavigationService) { }
+              private navigationService: NavigationService,
+              private interactionService: InteractionService) { }
 
   ngOnInit(): void {
   }
@@ -20,5 +22,9 @@ export class CoverCardComponent implements OnInit {
   navigate(){
     this.router.navigate([`/home/details`]);
     this.navigationService.updateGame(this.game.game);
+  }
+
+  onHover() {
+    this.interactionService.onGameCardHover(this.game.game);
   }
 }

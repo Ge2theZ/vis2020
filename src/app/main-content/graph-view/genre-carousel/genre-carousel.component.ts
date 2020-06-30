@@ -27,7 +27,7 @@ export class GenreCarouselComponent implements OnInit {
     //gets called if dataservice is ready
     this.dataService.onReady$.subscribe(ready => {
       if (ready) {
-        this.dataService.updateCoverCarousel('Racing', 1970, 2019);
+        this.dataService.updateCoverCarousel('Racing', null, 1970, 2019);
         this.calculateStaticCarouselData(this.dataService.getGenres());
       }
     });
