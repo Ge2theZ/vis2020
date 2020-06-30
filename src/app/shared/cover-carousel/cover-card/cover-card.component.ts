@@ -18,7 +18,7 @@ export class CoverCardComponent implements OnInit {
   }
 
   navigate(){
-    this.router.navigate([`/home/details/${this.game.game.name}`]);
+    this.router.navigate([`/home/details`]);
     this.navigationService.updateGame(this.game.game);
   }
 }

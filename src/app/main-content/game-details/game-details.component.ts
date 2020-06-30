@@ -18,11 +18,5 @@ export class GameDetailsComponent implements OnInit {
     this.navigationService.game$.subscribe(value => {
       this.game = value;
     });
-    /*
-    this.route.queryParams.subscribe(params => {
-      this.game = JSON.parse(params["game"]);
-    });
-
-     */
   }
 }

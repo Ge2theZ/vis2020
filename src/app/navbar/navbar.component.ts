@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataService.onReady$.subscribe(() => {
-      this.gameNameList = this.dataService.gameDataSet.map(i => i.name);
+      this.gameNameList = this.dataService.gameDataSet.map(i => i.name + " | " + i.plattform);
     })
   }
 
@@ -33,10 +33,10 @@ export class NavbarComponent implements OnInit {
       : this.gameNameList.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
   );
 
-  execSearch(){
-    let game: Game = this.dataService.gameDataSet.filter(item => item.name === this.searchquery)[0];
+  execSearch() {
+    let searchParams = this.searchquery.split(" | ");
+    let game: Game = this.dataService.gameDataSet.filter(item => item.name === searchParams[0] && item.plattform === searchParams[1])[0];
     this.navigationService.updateGame(game);
     this.router.navigate([`/home/details/${game.name}`]);
   }
-
 }
