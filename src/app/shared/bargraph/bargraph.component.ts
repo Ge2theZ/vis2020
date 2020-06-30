@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges,  Input, ViewChild, ElementRef } from '@angular/core';
 import { Game } from 'src/models/Game';
 import { Router, NavigationExtras } from '@angular/router';
+import { NavigationService } from 'src/app/services/navigate.service';
 declare var Chart: any;
 
 
@@ -11,7 +12,7 @@ declare var Chart: any;
     styleUrls: ['./bargraph.component.css']
 })
 export class BarGraphComponent implements OnInit {
-  constructor(private router:Router) { }
+  constructor(private router:Router, private navigationService: NavigationService) { }
   
   @Input() public data: Game[];
   @Input() private game: Game;
@@ -65,12 +66,9 @@ export class BarGraphComponent implements OnInit {
   onBarClick(event){
     if(event.active.length > 0){
       let idx = event.active[0]._index;
-      let navigationExtras: NavigationExtras = {
-        queryParams: {
-            game: JSON.stringify(this.data[idx])
-        }
-      } 
-      this.router.navigate(["/home/details"], navigationExtras);
+      let game = this.data[idx];
+      this.navigationService.updateGame(game);
+      this.router.navigate([`/home/details/${game.name}`]);
     }
   }
 }

@@ -38,8 +38,8 @@ import { FaqViewComponent } from './main-content/faq-view/faq-view.component';
     GenreCarouselComponent,
     PublisherCarouselComponent,
     GenrePublisherViewComponent,
-    BarGraphComponent
-    FaqViewComponent,
+    BarGraphComponent,
+    FaqViewComponent
   ],
   imports: [
     BrowserModule,

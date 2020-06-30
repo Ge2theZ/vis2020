@@ -37,4 +37,6 @@ export class GameDetailsComponent implements OnInit {
         });
         this.gamesOfThisPublisher = arr;
     });
+    })
+  }
 }
