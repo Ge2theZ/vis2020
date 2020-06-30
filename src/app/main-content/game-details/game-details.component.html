@@ -93,8 +93,8 @@
   <div class="container" style="margin-top: 50px ;">
     <div class="row">
       <div class="col">
-        <h4 class="w-100">Graph Title</h4>
-        <bar-graph [data]="generateData()"></bar-graph>
+        <h4 class="w-100" style="margin-bottom: 25px;">Comparison to most successful {{game.plattform}} {{game.genre}} games  </h4>
+        <bar-graph class="graph" *ngIf="this.gamesOfThisPublisher" [data]="this.gamesOfThisPublisher" [game]="this.game"></bar-graph>
       </div>
       <div class="col">
         <h4 class="w-100">Graph Title</h4>

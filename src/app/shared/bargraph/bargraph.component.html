@@ -1,1 +1,10 @@
-<div class="d3-chart" #chart></div>
+<div>
+    <div style="display: block">
+      <canvas baseChart (chartClick)="onBarClick($event)"
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [chartType]="barChartType">
+      </canvas>
+    </div>
+  </div>

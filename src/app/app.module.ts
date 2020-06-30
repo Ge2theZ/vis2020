@@ -19,6 +19,7 @@ import { GenrePublisherViewComponent } from './main-content/graph-view/genre-pub
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
 import { BarGraphComponent } from './shared/bargraph/bargraph.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { BarGraphComponent } from './shared/bargraph/bargraph.component';
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

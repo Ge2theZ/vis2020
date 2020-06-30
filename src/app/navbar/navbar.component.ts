@@ -37,7 +37,6 @@ export class NavbarComponent implements OnInit {
           game: JSON.stringify(game)
       }
     } 
-    console.log("test")
     this.router.navigate([`/home/details/${game.name}`], navigationExtras);
   }
 
