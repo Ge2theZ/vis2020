@@ -21,7 +21,6 @@ export class CoverCardComponent implements OnInit {
           game: JSON.stringify(this.game.game)
       }
     } 
-    console.log(this.game)
-    this.router.navigate([`/home/details/${this.game.game.name}`], navigationExtras);
+    this.router.navigate([`/home/details`], navigationExtras);
   }
 }
