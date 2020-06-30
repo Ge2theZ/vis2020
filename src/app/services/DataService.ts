@@ -18,7 +18,6 @@ interface MarketShareForGenrePerYearStore {
 export class DataService {
   public gameDataSet: Game[] = [];
   public genreSalesPerYears: GenreSalesPerYear[];
-  public;
   public marketShareForGenrePerYearStore: MarketShareForGenrePerYearStore[] = [];
   public liveCarousel$: Rx.BehaviorSubject<CoverCarousel[]>;
   public onReady$: Rx.BehaviorSubject<Boolean>;

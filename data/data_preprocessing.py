@@ -4,7 +4,7 @@ import numpy as np
 #only read in those columns
 cols = ["Genre","Name","ESRB_Rating","Platform","Publisher","Developer",
         "Critic_Score","User_Score","Total_Shipped",
-        "Global_Sales","Year","img_url"]
+        "Global_Sales","Year","img_url","NA_Sales","PAL_Sales","JP_Sales","Other_Sales"]
 print("reading in csv")
 df = pandas.read_csv('orig_dataset.csv', usecols=cols)
 print("before preprocessing: " + str(len(df.index)) + " rows")
@@ -47,18 +47,29 @@ tmp.to_json("SalesPerYearGenre.json", orient='records')
 
 #read in dataset with ratings
 #only read in those columns
-cols = ["Name","Platform","Critic_Score","User_Score"]
+cols = ["Name","Platform","Critic_Score","User_Score","NA_Sales","EU_Sales","JP_Sales","Other_Sales"]
 print("reading in rating dataset csv ")
 ratingsDf = pandas.read_csv('Video_Games_Sales_with_ratings.csv', usecols=cols)
 merged = pandas.merge(df,ratingsDf,on=['Name','Platform'], how='left')
 merged['User_Score'] = merged.apply(lambda row: row.User_Score_x if  row.User_Score_x != "" else row.User_Score_y , axis=1)
 merged['Critic_Score'] = merged.apply(lambda row: row.Critic_Score_x if  row.Critic_Score_x != "" else row.Critic_Score_y , axis=1)
+merged['NA_Sales'] = merged.apply(lambda row: row.NA_Sales_x if row.NA_Sales_x != "" else row.NA_Sales_y, axis=1)
+merged['EU_Sales'] = merged.apply(lambda row: row.EU_Sales if row.EU_Sales != "" else row.PAL_Sales, axis=1)
+merged['JP_Sales'] = merged.apply(lambda row: row.JP_Sales_x if row.JP_Sales_x != "" else row.JP_Sales_y, axis=1)
+merged['Other_Sales']= merged.apply(lambda row: row.Other_Sales_x if row.Other_Sales_x != "" else row.Other_Sales_y, axis=1)
 
 #drop merge columns
 merged = merged.drop('User_Score_x', 1)
 merged = merged.drop('User_Score_y', 1)
 merged = merged.drop('Critic_Score_x', 1)
 merged = merged.drop('Critic_Score_y', 1)
+merged = merged.drop('NA_Sales_x', 1)
+merged = merged.drop('NA_Sales_y', 1)
+merged = merged.drop('JP_Sales_x', 1)
+merged = merged.drop('JP_Sales_y', 1)
+merged = merged.drop('Other_Sales_x', 1)
+merged = merged.drop('Other_Sales_y', 1)
+merged = merged.drop('PAL_Sales', 1)
 print("merged both datasets")
 
 print("after preprocessing: " + str(len(merged.index)) + " rows")
