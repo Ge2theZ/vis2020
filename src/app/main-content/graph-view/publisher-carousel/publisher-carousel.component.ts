@@ -33,7 +33,7 @@ export class PublisherCarouselComponent implements OnInit, AfterViewInit {
     //gets called if dataservice is ready
     this.dataService.onReady$.subscribe(ready => {
       if(ready){
-        this.dataService.updateCoverCarousel("Racing", null, 1970, 2019);
+        this.dataService.updateCoverCarousel("Racing", null, 1970, 2019, 7);
         this.calculateStaticCarouselData(this.dataService.getPublisher());
       }
     });
@@ -45,7 +45,7 @@ export class PublisherCarouselComponent implements OnInit, AfterViewInit {
 
   calculateStaticCarouselData(publishers: string[]) {
     for (let publisher of publishers) {
-      this.staticCarousels.push({title: publisher, data: this.dataService.getStaticCarouselDataForPublisher(this.genre, publisher,1980,2019)});
+      this.staticCarousels.push({title: publisher, data: this.dataService.getStaticCarouselDataForPublisher(this.genre, publisher,1980,2019, 7)});
 
     }
   }

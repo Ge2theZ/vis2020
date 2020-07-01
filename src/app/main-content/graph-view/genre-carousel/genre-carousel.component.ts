@@ -27,7 +27,7 @@ export class GenreCarouselComponent implements OnInit {
     //gets called if dataservice is ready
     this.dataService.onReady$.subscribe(ready => {
       if (ready) {
-        this.dataService.updateCoverCarousel('Racing', null, 1970, 2019);
+        this.dataService.updateCoverCarousel('Racing', null, 1970, 2019, 7);
         this.calculateStaticCarouselData(this.dataService.getGenres());
       }
     });
@@ -39,7 +39,7 @@ export class GenreCarouselComponent implements OnInit {
 
   calculateStaticCarouselData(cards: string[]) {
     for (let card of cards) {
-      this.staticCarousels.push({title: card, data: this.dataService.getStaticCarouselData(card,1980,2019)});
+      this.staticCarousels.push({title: card, data: this.dataService.getStaticCarouselData(card,1980,2019, 7)});
     }
   }
 }

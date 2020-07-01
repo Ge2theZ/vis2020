@@ -45,13 +45,13 @@ export class DataService {
     return this.http.get('../../assets/SalesPerYearGenre.json');
   }
 
-  updateCoverCarousel(genre: string, publisher: string, fromYear: number, toYear: number) {
+  updateCoverCarousel(genre: string, publisher: string, fromYear: number, toYear: number, cardAmount: number) {
     console.time('updateCoverCarousel');
     let timeInterval = toYear - fromYear;
-    let timeBin = timeInterval / 6;
+    let timeBin = timeInterval / cardAmount;
     let carouselList = [];
 
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < cardAmount; i++) {
       let from = fromYear + (timeBin * i) + (i == 0 ? 0 : 1);
       let to = fromYear + (timeBin * (i + 1));
 
@@ -69,13 +69,13 @@ export class DataService {
     console.timeEnd('updateCoverCarousel');
   }
 
-  getStaticCarouselData(genre: String, fromYear: number, toYear: number) {
+  getStaticCarouselData(genre: String, fromYear: number, toYear: number, cardAmount: number) {
     console.time('getStaticCarouselData');
     let timeInterval = toYear - fromYear;
-    let timeBin = timeInterval / 6;
+    let timeBin = timeInterval / cardAmount;
     let carouselList = [];
 
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < cardAmount; i++) {
       let from = fromYear + (timeBin * i) + (i == 0 ? 0 : 1);
       let to = fromYear + (timeBin * (i + 1));
       var game = this.getCoverCarouselData(from, to, genre);
@@ -85,12 +85,12 @@ export class DataService {
     return carouselList;
   }
 
-  getStaticCarouselDataForPublisher(genre: string, publisher: string, fromYear: number, toYear: number) {
+  getStaticCarouselDataForPublisher(genre: string, publisher: string, fromYear: number, toYear: number, cardAmount: number) {
     let timeInterval = toYear - fromYear;
-    let timeBin = timeInterval / 6;
+    let timeBin = timeInterval / cardAmount;
     let carouselList = [];
 
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < cardAmount; i++) {
       let from = fromYear + (timeBin * i) + (i == 0 ? 0 : 1);
       let to = fromYear + (timeBin * (i + 1));
       var game = this.getCoverCarouselDataWithPublisher(from, to, genre, publisher);

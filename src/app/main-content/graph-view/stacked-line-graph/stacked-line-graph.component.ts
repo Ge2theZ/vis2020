@@ -55,7 +55,7 @@ export class StackedLineGraphComponent implements OnInit {
               private dataService: DataService) {
     // configure margins and width/height of the graph
     this.margin = {top: 30, right: 30, bottom: 30, left: 50},
-    this.width = 1000 - this.margin.left - this.margin.right,
+    this.width = 1400 - this.margin.left - this.margin.right,
     this.height = 400 - this.margin.top - this.margin.bottom;
   }
 
@@ -221,7 +221,7 @@ export class StackedLineGraphComponent implements OnInit {
       )
       .on("mouseover.a", this.mouseover)
       .on("mouseover.b", (d,i) => {
-        this.dataService.updateCoverCarousel(this.genreList[i], null, 1970, 2019)
+        this.dataService.updateCoverCarousel(this.genreList[i], null, 1970, 2019, 7)
       })
       .on("mouseleave", this.mouseleave)
       .on("click", (d:any, i:any) => this.mouseclick(d,i));
