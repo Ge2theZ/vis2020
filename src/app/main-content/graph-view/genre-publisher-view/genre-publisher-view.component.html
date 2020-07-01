@@ -1,12 +1,16 @@
 <div class="row p-5">
   <div class="col">
-    <h4 class="w-100">Graph Title</h4>
-    <img src="../../../../assets/mock_graph.png" style="width: 100%;">
+    <h4 class="w-100">Lowest 10 games by user and critic score</h4>
+    <hr>
+    <app-radar-chart *ngIf="this.games" [rawData]="this.games" [useCase]="RadarUseCase.crit_user_score_lowest"></app-radar-chart>
+    <div *ngIf="!this.games" class="spinner-border loading-spinner" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
   </div>
   <div class="col">
-    <h4 class="w-100">Publisher Games by Popularity</h4>
-
-    <app-radar-chart *ngIf="this.games" [rawData]="this.games" [useCase]="RadarUseCase.crit_user_score"></app-radar-chart>
+    <h4 class="w-100">Top 10 games by user and critic score</h4>
+    <hr>
+    <app-radar-chart *ngIf="this.games" [rawData]="this.games" [useCase]="RadarUseCase.crit_user_score_highest"></app-radar-chart>
     <div *ngIf="!this.games" class="spinner-border loading-spinner" role="status">
       <span class="sr-only">Loading...</span>
     </div>
@@ -14,13 +18,9 @@
   </div>
 </div>
 <div class="row p-5">
-  <div class="col-12">
+  <div class="col-6">
     <h4 class="w-100">Global Sales of Top 50 {{genre}} Games from {{publisher}}</h4>
     <hr>
     <bar-graph *ngIf="this.games" [data]="this.games" [prop]="'PublisherGenre-Sales'"></bar-graph>
-  </div>
-  <div class="col">
-    <h4 class="w-100">Graph Title</h4>
-    <img src="../../../../assets/mock_graph_2.png" style="width: 100%;">
   </div>
 </div>

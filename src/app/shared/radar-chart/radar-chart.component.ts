@@ -3,7 +3,8 @@ import {Chart} from 'chart.js';
 import {Game} from '../../../models/Game';
 
 export enum RadarUseCase {
-  crit_user_score,
+  crit_user_score_highest,
+  crit_user_score_lowest,
   crit_user_score_details
 }
 
@@ -19,49 +20,58 @@ enum SortOrder {
   styleUrls: ['./radar-chart.component.css']
 })
 export class RadarChartComponent implements OnInit, AfterViewInit {
-  @ViewChild('canvas') radarChartCanvas: ElementRef;
+  //@ViewChild('canvas') radarChartCanvas: ElementRef;
 
   @Input() rawData: Game[];
   @Input() useCase: RadarUseCase;
 
   radarChart: Chart;
 
+  randomId: string;
+
   constructor() {
   }
 
   ngOnInit(): void {
+    this.randomId = Math.abs(Math.random()).toString();
   }
 
   ngAfterViewInit(): void {
     switch (this.useCase) {
-      case RadarUseCase.crit_user_score:
+      case RadarUseCase.crit_user_score_highest:
         console.log('crit_user_Score use case selected for radar chart');
         this.createUserCriticScoreRadar(SortOrder.highest, 10);
+        break;
+      case RadarUseCase.crit_user_score_lowest:
+        console.log('crit_user_Score use case selected for radar chart');
+        this.createUserCriticScoreRadar(SortOrder.lowest, 10);
+        break;
       default:
         console.error('No use case selected for radar score. Radar is not displayed');
     }
   }
 
-  createUserCriticScoreRadar(sortOrder: SortOrder, amount: number) {
+  public createUserCriticScoreRadar(sortOrder: SortOrder, amount: number) {
     let userScorePerGame = {};
     let criticScorePerGame = {};
 
     for (let game of this.rawData) {
       if (!userScorePerGame[game.name]) {
         userScorePerGame[game.name] = [];
-      } else {
-        if (game.userScore) {
-          userScorePerGame[game.name].push(game.userScore);
-        }
+      }
+
+      if (game.userScore) {
+        userScorePerGame[game.name].push(game.userScore);
       }
 
       if (!criticScorePerGame[game.name]) {
         criticScorePerGame[game.name] = [];
-      } else {
-        if (game.criticScore) {
-          criticScorePerGame[game.name].push(game.criticScore);
-        }
       }
+
+      if (game.criticScore) {
+        criticScorePerGame[game.name].push(game.criticScore);
+      }
+
     }
 
     let scoreKeys = Object.keys(userScorePerGame);
@@ -144,18 +154,11 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
       }
     };
 
-    this.radarChart = new Chart('canvas', {
+    console.log("random id", this.randomId);
+    this.radarChart = new Chart(this.randomId, {
       type: 'radar',
       data: radarData,
       options: radarOptions,
     });
-  }
-
-  covertToDatasets(data) {
-    let datasets = [];
-    for (let dataset of data) {
-      datasets.push({data: dataset});
-    }
-    return datasets;
   }
 }

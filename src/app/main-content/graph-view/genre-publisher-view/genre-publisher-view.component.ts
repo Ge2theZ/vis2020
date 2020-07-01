@@ -24,9 +24,8 @@ export class GenrePublisherViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.publisher = this.route.snapshot.params.publisherId;
-    this.genre = this.navigationService.genre$.getValue();
-    this.genre = "Action"; // Todo make more generic
-    this.navigationService.updatePublisher(this.publisher);
+    this.genre = this.route.snapshot.params.genreId;
+    //this.navigationService.updatePublisher(this.publisher);
 
     this.dataService.onReady$.subscribe(ready => {
       if (ready) {
