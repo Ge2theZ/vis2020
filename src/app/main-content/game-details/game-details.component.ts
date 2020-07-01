@@ -22,7 +22,7 @@ export class GameDetailsComponent implements OnInit {
       this.game = value;
       this.dataService.onReady$.subscribe((state)=>{
         if(!state) return;
-        let arr = this.dataService.gameDataSet.filter(item => item.plattform === this.game.plattform && item.genre === this.game.genre && item.name !== this.game.name);
+        let arr = this.dataService.gameDataSet.filter(item => item.genre === this.game.genre && item.name !== this.game.name);
         arr.sort((a,b) => {
           if(a.globalSales > b.globalSales) return -1
           if(a.globalSales < b.globalSales) return 1

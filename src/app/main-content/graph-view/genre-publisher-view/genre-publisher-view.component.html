@@ -17,9 +17,10 @@
   </div>
 </div>
 <div class="row p-5">
-  <div class="col">
-    <h4 class="w-100">Graph Title</h4>
-    <img src="../../../../assets/mock_graph.png" style="width: 100%;">
+  <div class="col-12">
+    <h4 class="w-100">Global Sales of Top 50 {{genre}} Games from {{publisher}}</h4>
+    <hr>
+    <bar-graph *ngIf="this.games" [data]="this.games" [prop]="'PublisherGenre-Sales'"></bar-graph>
   </div>
   <div class="col">
     <h4 class="w-100">Graph Title</h4>

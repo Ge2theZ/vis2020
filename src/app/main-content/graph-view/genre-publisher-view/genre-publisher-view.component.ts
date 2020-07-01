@@ -31,9 +31,8 @@ export class GenrePublisherViewComponent implements OnInit {
       if (ready) {
         this.games = this.dataService.getGamesOfPublisherInGenre(this.publisher, this.genre);
         this.calculateRadar();
-
       }
-    });
+    });    
   }
 
   calculateRadar() {

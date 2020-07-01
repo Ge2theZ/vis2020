@@ -41,8 +41,7 @@ import { RadarChartComponent } from './shared/radar-chart/radar-chart.component'
     GenrePublisherViewComponent,
     BarGraphComponent,
     FaqViewComponent,
-    RadarChartComponent,
-
+    RadarChartComponent
   ],
   imports: [
     BrowserModule,

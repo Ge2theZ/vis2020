@@ -17,9 +17,10 @@ export class BarGraphComponent implements OnInit, OnChanges {
   @Input() private prop: string; 
 
   public barChartOptions = {
+    maintainAspectRatio: true,
     scaleShowVerticalLines: true,
     legend: {
-      display: true,
+      display: true
     },
     scales: {
       yAxes: [{
@@ -28,8 +29,7 @@ export class BarGraphComponent implements OnInit, OnChanges {
           labelString: 'Sales in Million'
         },
         stacked: true
-      }],
-      xAxes: [{ stacked: true }]
+      }]
     }
   };
   public barChartType = 'bar';
@@ -48,26 +48,27 @@ export class BarGraphComponent implements OnInit, OnChanges {
   initBarGraph(){
     this.barChartData = [];
     let colorArr = [];
-    this.data.forEach(game => {
-      if(game.name === this.game.name)
-        colorArr.push("rgba(255,133,16,1)");
-      else
-        colorArr.push("rgba(21,140,186,1)");
-    });
-    this.barChartLabels = this.data.map(x => x.name)
-    let euSalesArr = this.data.map(x => x.euSales);
-    let naSalesArr = this.data.map(x => x.naSales);
-    let jpSalesArr = this.data.map(x => x.jpSales);
-    let otherSalesArr = this.data.map(x => x.otherSales);
-    let globalSalesArr = this.data.map(x => x.globalSales)
 
     switch(this.prop){
       case 'sales':
+        //this.data.forEach(game => {
+        //  if(game.name === this.game.name)
+        //    colorArr.push("red");
+        //  else
+        //    colorArr.push("rgba(21, 140, 186, 1)");
+        //});
+        this.barChartLabels = this.data.map(x => x.name)
+        let euSalesArr = this.data.map(x => x.euSales);
+        let naSalesArr = this.data.map(x => x.naSales);
+        let jpSalesArr = this.data.map(x => x.jpSales);
+        let otherSalesArr = this.data.map(x => x.otherSales);
+        let globalSalesArr = this.data.map(x => x.globalSales)
         this.barChartData.push({
           label: "Global",
-          data: globalSalesArr, 
+          data: globalSalesArr,
           maxBarThickness: 40,
-          stack: 1
+          stack: 1,
+          borderWidth: "2px"
         })
         this.barChartData.push({
           label: "EU",
@@ -93,7 +94,15 @@ export class BarGraphComponent implements OnInit, OnChanges {
           maxBarThickness: 40, 
           stack: 2
         })
-        console.log(this.data)
+      break;
+      case 'PublisherGenre-Sales':
+        this.barChartOptions.legend.display = false;
+        this.barChartLabels = this.data.map(x => x.name).slice(0,50)
+        var arr = this.data.map(x => x.globalSales);
+        arr = arr.slice(0,50)
+        this.barChartData.push({
+          data: arr
+        })
       break;
     }
   }
