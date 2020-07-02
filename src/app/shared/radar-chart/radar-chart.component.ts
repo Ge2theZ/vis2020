@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild, OnChanges} from '@angular/core';
 import {Chart} from 'chart.js';
 import {Game} from '../../../models/Game';
 import { NavigationService } from 'src/app/services/navigate.service';
@@ -20,8 +20,9 @@ enum SortOrder {
   templateUrl: './radar-chart.component.html',
   styleUrls: ['./radar-chart.component.css']
 })
-export class RadarChartComponent implements OnInit, AfterViewInit {
+export class RadarChartComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() rawData: Game[];
+  @Input() highlight: Game;
   @Input() useCase: RadarUseCase;
 
   radarChart: Chart;
@@ -31,6 +32,10 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.randomId = Math.abs(Math.random()).toString();
+  }
+
+  ngOnChanges(){
+    this.ngAfterViewInit();
   }
 
   ngAfterViewInit(): void {
@@ -52,13 +57,12 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
   }
 
   public onClick(evt){
-    var point = this.radarChart.getElementAtEvent(evt);
+    var point: any = this.radarChart.getElementAtEvent(evt);
     if(point.length > 0){
       let idx = point[0]._index;
       let game = this.rawData[idx];
       this.navigationService.updateGame(game);
       this.router.navigate([`/home/details`]);
-    
     }
   }
 
@@ -66,6 +70,15 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
     let labelArr = this.rawData.map(x => x.name);
     let userScoreArr = this.rawData.map(x => x.userScore);
     let criticScoreArr = this.rawData.map(x => x.criticScore);
+
+    let colorArr = [];
+    this.rawData.forEach(game => {
+      if(game === this.highlight){
+        colorArr.push("red")
+      }else{
+        colorArr.push("black")
+      }
+    });
 
     let radarData = {
       labels: labelArr,
@@ -82,11 +95,18 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
         }
       ]
     }
-
+    if(this.radarChart) this.radarChart.destroy();
     this.radarChart = new Chart(this.randomId, {
       type: 'radar',
       data: radarData,
-      options: { spanGaps: true }
+      options: { 
+        spanGaps: true,
+        scale: { 
+          pointLabels:{
+            fontColor: colorArr
+          },
+        }
+      }
     });
   }
 
@@ -174,10 +194,6 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
       scale: {
         angleLines: {
           display: false
-        },
-        ticks: {
-          suggestedMin: 0,
-          suggestedMax: 10
         }
       }
     };
@@ -186,7 +202,7 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
     this.radarChart = new Chart(this.randomId, {
       type: 'radar',
       data: radarData,
-      options: radarOptions,
+      options: radarOptions
     });
   }
 }

@@ -22,6 +22,7 @@ import { BarGraphComponent } from './shared/bargraph/bargraph.component';
 import { ChartsModule } from 'ng2-charts';
 import { FaqViewComponent } from './main-content/faq-view/faq-view.component';
 import { RadarChartComponent } from './shared/radar-chart/radar-chart.component';
+import { PieChartComponent } from './shared/pie-chart/pie-chart.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { RadarChartComponent } from './shared/radar-chart/radar-chart.component'
     GenrePublisherViewComponent,
     BarGraphComponent,
     FaqViewComponent,
-    RadarChartComponent
+    RadarChartComponent,
+    PieChartComponent
   ],
   imports: [
     BrowserModule,
