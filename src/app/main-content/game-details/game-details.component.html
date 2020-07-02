@@ -93,13 +93,14 @@
   <div style="margin-top: 50px; width: 100%">
     <div class="row">
       <div class="col-md-6 col-sm-12">
-        <h4 class="w-100">Comparison to most successful {{game.genre}} games  </h4>
+        <h4 class="w-100">Comparison to most successful {{game.genre}} games</h4>
         <hr>
         <bar-graph class="graph" *ngIf="this.gamesOfThisPublisher" [data]="this.gamesOfThisPublisher" [game]="this.game" [prop]="'sales'"></bar-graph>
       </div>
       <div class="col-md-6 col-sm-12">
-        <h4 class="w-100">Graph Title</h4>
+        <h4 class="w-100">Critic and User score of most successful {{game.genre}} games</h4>
         <hr>
+        <app-radar-chart *ngIf="this.gamesOfThisPublisher" [rawData]="this.gamesOfThisPublisher" [useCase]="this.radarUseCase"></app-radar-chart>
       </div>
     </div>
   </div>

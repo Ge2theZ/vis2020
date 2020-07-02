@@ -1,5 +1,5 @@
 <div class="canvas-wrapper">
-  <canvas [id]="randomId">{{ radarChart }}</canvas>
+  <canvas (click)="onClick($event)" [id]="randomId">{{ radarChart }}</canvas>
 </div>
 
 

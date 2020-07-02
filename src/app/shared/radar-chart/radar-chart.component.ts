@@ -1,6 +1,8 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {Chart} from 'chart.js';
 import {Game} from '../../../models/Game';
+import { NavigationService } from 'src/app/services/navigate.service';
+import { Router } from '@angular/router';
 
 export enum RadarUseCase {
   crit_user_score_highest,
@@ -13,24 +15,19 @@ enum SortOrder {
   lowest
 }
 
-
 @Component({
   selector: 'app-radar-chart',
   templateUrl: './radar-chart.component.html',
   styleUrls: ['./radar-chart.component.css']
 })
 export class RadarChartComponent implements OnInit, AfterViewInit {
-  //@ViewChild('canvas') radarChartCanvas: ElementRef;
-
   @Input() rawData: Game[];
   @Input() useCase: RadarUseCase;
 
   radarChart: Chart;
-
   randomId: string;
 
-  constructor() {
-  }
+  constructor(private navigationService: NavigationService, private router: Router) {}
 
   ngOnInit(): void {
     this.randomId = Math.abs(Math.random()).toString();
@@ -46,9 +43,51 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
         console.log('crit_user_Score use case selected for radar chart');
         this.createUserCriticScoreRadar(SortOrder.lowest, 10);
         break;
+      case RadarUseCase.crit_user_score_details:
+        this.initDetailRadarChart();
+        break;
       default:
         console.error('No use case selected for radar score. Radar is not displayed');
     }
+  }
+
+  public onClick(evt){
+    var point = this.radarChart.getElementAtEvent(evt);
+    if(point.length > 0){
+      let idx = point[0]._index;
+      let game = this.rawData[idx];
+      this.navigationService.updateGame(game);
+      this.router.navigate([`/home/details`]);
+    
+    }
+  }
+
+  public initDetailRadarChart(){
+    let labelArr = this.rawData.map(x => x.name);
+    let userScoreArr = this.rawData.map(x => x.userScore);
+    let criticScoreArr = this.rawData.map(x => x.criticScore);
+
+    let radarData = {
+      labels: labelArr,
+      datasets: [
+        {
+          label: 'Critic Score',
+          data: criticScoreArr,
+          borderColor: "rgba(17,255,0,0.5)"
+        },
+        {
+          label: 'User Score',
+          data: userScoreArr,
+          borderColor: "rgba(0,164,255,0.5)"
+        }
+      ]
+    }
+
+    this.radarChart = new Chart(this.randomId, {
+      type: 'radar',
+      data: radarData,
+      options: { spanGaps: true }
+    });
   }
 
   public createUserCriticScoreRadar(sortOrder: SortOrder, amount: number) {
@@ -59,19 +98,15 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
       if (!userScorePerGame[game.name]) {
         userScorePerGame[game.name] = [];
       }
-
       if (game.userScore) {
         userScorePerGame[game.name].push(game.userScore);
       }
-
       if (!criticScorePerGame[game.name]) {
         criticScorePerGame[game.name] = [];
       }
-
       if (game.criticScore) {
         criticScorePerGame[game.name].push(game.criticScore);
       }
-
     }
 
     let scoreKeys = Object.keys(userScorePerGame);
@@ -96,20 +131,14 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
       }
     }
 
-    console.log(avgAvailableScores);
-
     let sortableAvgAvailableScores = [];
-
     for (let game of Object.keys(avgAvailableScores)) {
       sortableAvgAvailableScores.push([game, avgAvailableScores[game].avgTotalScore, avgAvailableScores[game].userScore, avgAvailableScores[game].criticScore]);
     }
 
-
     const sortedByLowestAvailScores = [...sortableAvgAvailableScores.sort(function(a, b) {
       return a[1] - b[1];
     })];
-
-    console.log('Sorted avgAvailableScores', sortedByLowestAvailScores);
 
     let sortedSlicedScores = [];
     if (sortOrder === SortOrder.highest) {
@@ -117,7 +146,6 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
     } else {
       sortedSlicedScores = sortedByLowestAvailScores.slice(0, amount);
     }
-    console.log('Sorted highest sliced scores', sortedSlicedScores);
 
     let labels = sortedSlicedScores.map(scoreArr => scoreArr[0]);
     let userScoreData = sortedSlicedScores.map(scoreArr => scoreArr[2]);
