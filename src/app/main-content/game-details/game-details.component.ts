@@ -27,16 +27,12 @@ export class GameDetailsComponent implements OnInit {
         if(!state) return;
         let arr = this.dataService.gameDataSet.filter(item => item.genre === this.game.genre && item.name !== this.game.name);
         arr.sort((a,b) => {
-          if(a.globalSales > b.globalSales) return -1
-          if(a.globalSales < b.globalSales) return 1
-          else return 0
+          return b.globalSales - a.globalSales
         });
         arr = arr.slice(0,9);
         arr.push(this.game);
         arr.sort((a,b) => {
-          if(a.globalSales > b.globalSales) return -1
-          if(a.globalSales < b.globalSales) return 1
-          else return 0
+         return b.globalSales - a.globalSales
         });
         this.gamesOfThisPublisher = arr;
     });

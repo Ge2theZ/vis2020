@@ -3,7 +3,6 @@ import { Game } from 'src/models/Game';
 import { Router } from '@angular/router';
 import { NavigationService } from 'src/app/services/navigate.service';
 
-
 @Component({
     selector: 'bar-graph',
     templateUrl: 'bargraph.component.html',
@@ -20,20 +19,19 @@ export class BarGraphComponent implements OnInit, OnChanges {
     maintainAspectRatio: true,
     scaleShowVerticalLines: true,
     legend: {
-      display: true
+      display: false
     },
     scales: {
       yAxes: [{
         scaleLabel: {
           display: true,
           labelString: 'Sales in Million'
-        },
-        stacked: true
+        }
       }]
     }
   };
   public barChartType = 'bar';
-  public barChartLegend = true;
+  public barChartLegend = false;
   public barChartData;
   public barChartLabels;
 
@@ -44,59 +42,33 @@ export class BarGraphComponent implements OnInit, OnChanges {
   ngOnChanges(){
     this.initBarGraph();
   }
-  
+
   initBarGraph(){
     this.barChartData = [];
     let colorArr = [];
 
     switch(this.prop){
       case 'sales':
-        //this.data.forEach(game => {
-        //  if(game.name === this.game.name)
-        //    colorArr.push("red");
-        //  else
-        //    colorArr.push("rgba(21, 140, 186, 1)");
-        //});
         this.barChartLabels = this.data.map(x => x.name)
-        let euSalesArr = this.data.map(x => x.euSales);
-        let naSalesArr = this.data.map(x => x.naSales);
-        let jpSalesArr = this.data.map(x => x.jpSales);
-        let otherSalesArr = this.data.map(x => x.otherSales);
         let globalSalesArr = this.data.map(x => x.globalSales)
+        let colorArr = [];
+
+        this.data.forEach(game => {
+          if(game === this.game){
+            colorArr.push("rgba(247,70,74,0.2)")
+          }else{
+            colorArr.push("rgba(51, 102, 255, 0.3)")
+          }
+        });
+
         this.barChartData.push({
           label: "Global",
           data: globalSalesArr,
           maxBarThickness: 40,
-          stack: 1,
-          borderWidth: "2px"
-        })
-        this.barChartData.push({
-          label: "EU",
-          data: euSalesArr, 
-          maxBarThickness: 40,
-          stack: 2
-        })
-        this.barChartData.push({
-          label: "NA",
-          data: naSalesArr, 
-          maxBarThickness: 40,
-          stack: 2
-        })
-        this.barChartData.push({
-          label: "JP",
-          data: jpSalesArr, 
-          maxBarThickness: 40, 
-          stack: 2
-        })
-        this.barChartData.push({
-          label: "Other",
-          data: otherSalesArr, 
-          maxBarThickness: 40, 
-          stack: 2
+          backgroundColor: colorArr
         })
       break;
       case 'PublisherGenre-Sales':
-        this.barChartOptions.legend.display = false;
         this.barChartLabels = this.data.map(x => x.name).slice(0,50)
         var arr = this.data.map(x => x.globalSales);
         arr = arr.slice(0,50)
