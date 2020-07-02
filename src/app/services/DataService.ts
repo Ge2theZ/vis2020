@@ -5,11 +5,22 @@ import {HttpClient} from '@angular/common/http';
 import * as Rx from 'rxjs';
 import {CoverCarousel} from 'src/models/CoverCarousel';
 import {SharePerYearPerPublisher} from 'src/models/SharePerYearPerPublisher';
+import {observable, Observable} from 'rxjs';
+import {element} from 'protractor';
 
 
 interface MarketShareForGenrePerYearStore {
   genre: string;
   data: SharePerYearPerPublisher[];
+}
+
+interface CoverCarouselStore {
+  genre: string,
+  publisher: string,
+  fromYear: number,
+  toYear: number,
+  cardAmmout: number,
+  data: CoverCarousel[]
 }
 
 @Injectable({
@@ -19,6 +30,7 @@ export class DataService {
   public gameDataSet: Game[] = [];
   public genreSalesPerYears: GenreSalesPerYear[];
   public marketShareForGenrePerYearStore: MarketShareForGenrePerYearStore[] = [];
+  public coverCarouselStore: CoverCarouselStore[] = [];
   public liveCarousel$: Rx.BehaviorSubject<CoverCarousel[]>;
   public onReady$: Rx.BehaviorSubject<Boolean>;
 
@@ -47,59 +59,78 @@ export class DataService {
 
   updateCoverCarousel(genre: string, publisher: string, fromYear: number, toYear: number, cardAmount: number) {
     console.time('updateCoverCarousel');
-    let timeInterval = toYear - fromYear;
-    let timeBin = timeInterval / cardAmount;
-    let carouselList = [];
-
-    for (let i = 0; i < cardAmount; i++) {
-      let from = fromYear + (timeBin * i) + (i == 0 ? 0 : 1);
-      let to = fromYear + (timeBin * (i + 1));
-
-      var game;
-
-      if (genre && publisher) {
-        game = this.getCoverCarouselDataWithPublisher(from, to, genre, publisher,);
-      } else {
-        game = this.getCoverCarouselData(from, to, genre);
-      }
-
-      carouselList.push(new CoverCarousel(from, to, game));
-    }
-    this.liveCarousel$.next(carouselList);
-    console.timeEnd('updateCoverCarousel');
+    this.getCoverCarousel(genre, publisher, fromYear, toYear, cardAmount).then(carouselList => {
+      this.liveCarousel$.next(carouselList);
+      console.timeEnd('updateCoverCarousel');
+    });
   }
 
-  getStaticCarouselData(genre: String, fromYear: number, toYear: number, cardAmount: number) {
-    console.time('getStaticCarouselData');
-    let timeInterval = toYear - fromYear;
-    let timeBin = timeInterval / cardAmount;
-    let carouselList = [];
+  getCoverCarousel(genre: string, publisher: string, fromYear: number, toYear: number, cardAmount: number): Promise<CoverCarousel[]> {
+    return new Promise<CoverCarousel[]>((resolve, reject) => {
+      try {
+        // Check if result was already cached
+        const cachedResult: CoverCarouselStore = this.coverCarouselStore.filter((cachedResult: CoverCarouselStore) =>
+          cachedResult.genre === genre &&
+          cachedResult.publisher === publisher &&
+          cachedResult.fromYear === fromYear &&
+          cachedResult.toYear === toYear &&
+          cachedResult.cardAmmout === cardAmount)[0];
 
-    for (let i = 0; i < cardAmount; i++) {
-      let from = fromYear + (timeBin * i) + (i == 0 ? 0 : 1);
-      let to = fromYear + (timeBin * (i + 1));
-      var game = this.getCoverCarouselData(from, to, genre);
-      carouselList.push(new CoverCarousel(from, to, game));
-    }
-    console.timeEnd('getStaticCarouselData');
-    return carouselList;
-  }
+        if(cachedResult) {
+          resolve(cachedResult.data);
+        } else {
+          let timeInterval = toYear - fromYear;
+          let timeBin = timeInterval / cardAmount;
+          let carouselList = [];
 
-  getStaticCarouselDataForPublisher(genre: string, publisher: string, fromYear: number, toYear: number, cardAmount: number) {
-    let timeInterval = toYear - fromYear;
-    let timeBin = timeInterval / cardAmount;
-    let carouselList = [];
+          let carouselNonEmptyCardAmount = 0;
+          for (let i = 0; i < cardAmount; i++) {
+            let from = fromYear + (timeBin * i) + (i == 0 ? 0 : 1);
+            let to = fromYear + (timeBin * (i + 1));
 
-    for (let i = 0; i < cardAmount; i++) {
-      let from = fromYear + (timeBin * i) + (i == 0 ? 0 : 1);
-      let to = fromYear + (timeBin * (i + 1));
-      var game = this.getCoverCarouselDataWithPublisher(from, to, genre, publisher);
+            var game;
 
-      if (game !== undefined) {
-        carouselList.push(new CoverCarousel(from, to, game));
+            if (genre && publisher) {
+              game = this.getCoverCarouselDataWithPublisher(from, to, genre, publisher,);
+            } else {
+              game = this.getCoverCarouselData(from, to, genre);
+            }
+
+            if (game !== undefined) {
+              carouselNonEmptyCardAmount++;
+              carouselList.push(new CoverCarousel(from, to, game));
+            } else {
+              const placeholderGameCarousel = new CoverCarousel(from, to, new Game({
+                  Name: "No Game",
+                  Publisher:"-",
+              }))
+              carouselList.push(placeholderGameCarousel);
+            }
+          }
+
+          if(carouselNonEmptyCardAmount === 0) {
+            carouselList = [];
+          } else {
+            // Save data to store
+            this.coverCarouselStore.push(
+              {
+                genre: genre,
+                publisher: publisher,
+                fromYear: fromYear,
+                toYear: toYear,
+                cardAmmout: cardAmount,
+                data: carouselList
+
+              }
+            );
+          }
+          resolve(carouselList);
+        }
+      } catch (e) {
+        reject(e);
       }
-    }
-    return carouselList;
+    })
+
   }
 
   getGenres(): string[] {

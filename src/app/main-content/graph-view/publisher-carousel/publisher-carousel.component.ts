@@ -27,16 +27,18 @@ export class PublisherCarouselComponent implements OnInit, AfterViewInit {
     this.dataService.liveCarousel$.subscribe(data => {
       this.data = data;
     });
-  }
 
-  ngAfterViewInit(): void {
     //gets called if dataservice is ready
     this.dataService.onReady$.subscribe(ready => {
       if(ready){
-        this.dataService.updateCoverCarousel("Racing", null, 1970, 2019, 7);
+        this.dataService.updateCoverCarousel(this.genre, null, 1970, 2019, 7);
         this.calculateStaticCarouselData(this.dataService.getPublisher());
       }
     });
+  }
+
+  ngAfterViewInit(): void {
+
   }
 
   trackByFn(index) {
@@ -44,9 +46,12 @@ export class PublisherCarouselComponent implements OnInit, AfterViewInit {
   }
 
   calculateStaticCarouselData(publishers: string[]) {
-    for (let publisher of publishers) {
-      this.staticCarousels.push({title: publisher, data: this.dataService.getStaticCarouselDataForPublisher(this.genre, publisher,1980,2019, 7)});
-
-    }
+    console.time("Start calculateStaticCarouselData");
+    publishers.forEach(publisher => {
+      this.dataService.getCoverCarousel(this.genre, publisher, 1980, 2019, 7).then(data => {
+        this.staticCarousels.push({title: publisher, data: data});
+      });
+    });
+    console.timeEnd("Start calculateStaticCarouselData");
   }
 }

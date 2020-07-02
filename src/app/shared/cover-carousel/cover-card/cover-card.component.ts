@@ -20,11 +20,20 @@ export class CoverCardComponent implements OnInit {
   }
 
   navigate(){
-    this.router.navigate([`/home/details`]);
-    this.navigationService.updateGame(this.game.game);
+    if(!this.isGameCardEmpty()) {
+      this.router.navigate([`/home/details`]);
+      this.navigationService.updateGame(this.game.game);
+    }
   }
 
   onHover() {
-    this.interactionService.onGameCardHover(this.game.game);
+    if(!this.isGameCardEmpty()) {
+      this.interactionService.onGameCardHover(this.game.game);
+    }
+
+  }
+
+  isGameCardEmpty() {
+    return this.game.game.name === "No Game"
   }
 }

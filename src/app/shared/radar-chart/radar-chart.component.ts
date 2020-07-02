@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {Chart} from 'chart.js';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {Chart, ChartElementsOptions} from 'chart.js';
 import {Game} from '../../../models/Game';
 import { NavigationService } from 'src/app/services/navigate.service';
 import { Router } from '@angular/router';
@@ -52,13 +52,15 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
   }
 
   public onClick(evt){
-    var point = this.radarChart.getElementAtEvent(evt);
-    if(point.length > 0){
-      let idx = point[0]._index;
-      let game = this.rawData[idx];
-      this.navigationService.updateGame(game);
-      this.router.navigate([`/home/details`]);
-    
+    let point = [<any>{}];
+    point = this.radarChart.getElementAtEvent(evt);
+    if(this.useCase === RadarUseCase.crit_user_score_details) {
+      if(point.length > 0){
+        let idx = point[0]._index;
+        let game = this.rawData[idx];
+        this.navigationService.updateGame(game);
+        this.router.navigate([`/home/details`]);
+      }
     }
   }
 
@@ -158,12 +160,14 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
         {
           label: 'User Scores',
           data: userScoreData,
-          backgroundColor: "rgba(0,164,255,0.5)"
+          backgroundColor: "rgba(0,164,255,0.1)",
+          borderColor: "rgba(0,164,255,0.5)"
         },
         {
           label: 'Cirtic Scores',
           data: criticScore,
-          backgroundColor: "rgba(17,255,0,0.5)"
+          backgroundColor: "rgba(17,255,0,0.1)",
+          borderColor: "rgba(17,255,0,0.5)"
         },
 
       ]
@@ -174,10 +178,6 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
       scale: {
         angleLines: {
           display: false
-        },
-        ticks: {
-          suggestedMin: 0,
-          suggestedMax: 10
         }
       }
     };

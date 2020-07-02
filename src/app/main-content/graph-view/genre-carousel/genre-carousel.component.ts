@@ -39,7 +39,10 @@ export class GenreCarouselComponent implements OnInit {
 
   calculateStaticCarouselData(cards: string[]) {
     for (let card of cards) {
-      this.staticCarousels.push({title: card, data: this.dataService.getStaticCarouselData(card,1980,2019, 7)});
+      this.dataService.getCoverCarousel(card,null,1980,2019, 7).then(data => {
+        this.staticCarousels.push({title: card, data: data});
+      })
+
     }
   }
 }
