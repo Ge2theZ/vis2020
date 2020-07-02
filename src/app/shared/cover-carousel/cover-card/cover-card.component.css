@@ -37,5 +37,5 @@ a, a:hover {
   height: 160px;
   background-repeat: no-repeat;
   background-size: contain;
-  background-image: url('/assets/no_image.png');
+  background-image: url('../../../../assets/no_image.png');
 }

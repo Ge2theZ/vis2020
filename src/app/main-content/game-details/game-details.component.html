@@ -1,9 +1,9 @@
 <h1>{{game?.name}}</h1>
 <div class="row">
-  <div class="col-5 image-col">
+  <div class="col-md-6 image-col col-sm-12">
     <img class="image" [src]="'https://www.vgchartz.com/' + this.game?.imgUrl">
   </div>
-  <div class="col-7">
+  <div class="col-md-6 col-sm-12">
     <h3>Game Details</h3>
     <hr>
     <div class="container game-details-container">
@@ -90,26 +90,16 @@
     </div>
   </div>
   <hr>
-  <div class="container" style="margin-top: 50px ;">
+  <div style="margin-top: 50px; width: 100%">
     <div class="row">
-      <div class="col">
+      <div class="col-md-6 col-sm-12">
         <h4 class="w-100">Comparison to most successful {{game.genre}} games  </h4>
         <hr>
         <bar-graph class="graph" *ngIf="this.gamesOfThisPublisher" [data]="this.gamesOfThisPublisher" [game]="this.game" [prop]="'sales'"></bar-graph>
       </div>
-      <div class="col">
+      <div class="col-md-6 col-sm-12">
         <h4 class="w-100">Graph Title</h4>
         <hr>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <h4 class="w-100">Graph Title</h4>
-        <img src="/assets/mock_graph.png" style="width: 100%;">
-      </div>
-      <div class="col">
-        <h4 class="w-100">Graph Title</h4>
-        <img src="/assets/mock_graph_2.png" style="width: 100%;">
       </div>
     </div>
   </div>

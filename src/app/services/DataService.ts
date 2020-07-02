@@ -38,11 +38,11 @@ export class DataService {
   }
 
   readInGameDataSet(): Rx.Observable<any> {
-    return this.http.get('/assets/preprocessed_dataset.json');
+    return this.http.get('./assets/preprocessed_dataset.json');
   }
 
   readInGenreSalesPerYears(): Rx.Observable<any> {
-    return this.http.get('/assets/SalesPerYearGenre.json');
+    return this.http.get('./assets/SalesPerYearGenre.json');
   }
 
   updateCoverCarousel(genre: string, publisher: string, fromYear: number, toYear: number, cardAmount: number) {
