@@ -1,5 +1,6 @@
 <app-cover-carousel [data]="this.data"></app-cover-carousel>
 <app-cover-carousel *ngFor="let staticCoverCarousel of staticCarousels; trackBy: trackByFn" [data]="staticCoverCarousel.data" [cardName]="staticCoverCarousel.title"></app-cover-carousel>
 
-
-
+<div *ngIf="carouselFullyLoaded" class="text-center">
+  <a class="btt text-secondary" (click)="backToTop()"><strong>Back to top</strong></a>
+</div>

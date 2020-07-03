@@ -134,23 +134,14 @@ export class DataService {
   }
 
   getGenres(): string[] {
-    let genres: string[] = [];
-    this.gameDataSet.forEach(value => {
-      if (!genres.includes(value.genre)) {
-        genres.push(value.genre);
-      }
-    });
-    return genres;
+    let uniqueGenres = [...new Set(this.gameDataSet.map(game => game.genre))]
+    return uniqueGenres;
   }
 
-  getPublisher(): string[] {
-    let publisher: string[] = [];
-    this.gameDataSet.forEach(value => {
-      if (!publisher.includes(value.publisher)) {
-        publisher.push(value.publisher);
-      }
-    });
-    return publisher;
+  getPublishersForGenre(genre: string): string[] {
+    const filteredList = this.gameDataSet.filter(game => game.genre === genre);
+    const uniquePublishers =  [...new Set(filteredList.map(game => game.publisher))];
+    return uniquePublishers;
   }
 
   getCoverCarouselData(fromTime: number, toTime: number, genre: String): Game {
