@@ -1,6 +1,5 @@
-<a (click)="navigate()" style="cursor: pointer;">
+<a (click)="navigate()" style="cursor: pointer;" [options]="tooltipOptions" [tooltip]="HtmlContent">
   <div class="card game-card" (mouseenter)="onHover()">
-    <!--<img [src]="'https://www.vgchartz.com/' + game.game.imgUrl" class="card-img-top game-card-image" alt="...">-->
     <div class="placeholder">
       <div *ngIf="game.game.imgUrl" class="card-img-top game-card-image" [style]="'background-image: url('+ 'https://www.vgchartz.com/' + game.game.imgUrl  +')'"><img /></div>
       <div *ngIf="!game.game.imgUrl" class="card-img-top game-card-image" [style]="'background-image: url(/assets/no_data.png)'"><img /></div>
@@ -11,6 +10,43 @@
     </div>
   </div>
 </a>
+
+<ng-template #HtmlContent>
+  <div class="tooltip-container">
+    <span class="tooltip-title text-dark">{{this.game?.game.name}}</span>
+    <hr class="tooltip-hr">
+    <div class="row">
+      <div class="col-5">
+        <span class="label">Name</span>
+      </div>
+      <div class="col-7">
+        <span>{{this.game?.game.name}}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-5">
+        <span class="label">Platform</span>
+      </div>
+      <div class="col-7">
+        <span>{{this.game?.game.plattform}}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-5">
+        <span class="label">Genre</span>
+      </div>
+      <div class="col-7">
+        <span>{{this.game?.game.genre}}</span>
+      </div>
+    </div>
+  </div>
+
+</ng-template>
+
+
+
 
 
 

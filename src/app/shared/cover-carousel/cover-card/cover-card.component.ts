@@ -11,6 +11,14 @@ import {InteractionService} from '../../../services/interaction.service';
 })
 export class CoverCardComponent implements OnInit {
   @Input() game: CoverCarousel;
+  tooltipOptions = {
+    'placement': 'left',
+    'contentType' : 'template',
+    'theme': 'light',
+    'width': 200,
+    'max-width': 300,
+    'hide-delay': 50
+  };
 
   constructor(private router: Router,
               private navigationService: NavigationService,
@@ -21,7 +29,7 @@ export class CoverCardComponent implements OnInit {
 
   navigate(){
     if(!this.isGameCardEmpty()) {
-      this.router.navigate([`/home/details`]);
+      this.router.navigate([`/home/details`, this.navigationService.encodeURLElement(this.game.game.name)]);
       this.navigationService.updateGame(this.game.game);
     }
   }

@@ -39,3 +39,21 @@ a, a:hover {
   background-size: contain;
   background-image: url('../../../../assets/no_image.png');
 }
+
+.tooltip-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.tooltip-hr {
+  padding: 0;
+  margin: 0;
+}
+
+.tooltip-container {
+  text-align: left;
+}
+
+.label {
+  font-weight: bold;
+}
