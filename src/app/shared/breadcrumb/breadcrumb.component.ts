@@ -53,7 +53,7 @@ export class BreadcrumbComponent implements OnInit {
         if (slicedRoute[3] === "publisher") {
           this.publisherBreadCrumb.url = route; // since it is the last url
           this.publisherBreadCrumb.name = slicedRoute[4];
-          this.breadcrumbs[2] = {name: slicedRoute[4], url: route};
+          this.breadcrumbs[2] = {name: slicedRoute[4].replace('%20', ' '), url: route};
         }
       }
     });

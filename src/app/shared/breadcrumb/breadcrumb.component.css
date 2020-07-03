@@ -4,6 +4,8 @@
   -moz-border-radius: unset;
   border-radius: unset;
   padding: unset;
+  border: unset;
+  border-color: unset;
   margin-top: 1.5rem;
 }
 

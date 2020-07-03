@@ -49,7 +49,7 @@ export class BarGraphComponent implements OnInit, OnChanges {
 
     switch(this.prop){
       case 'sales':
-        this.barChartLabels = this.data.map(x => x.name)
+        this.barChartLabels = this.data.map(x => (x.name + ' | ' + x.plattform))
         let globalSalesArr = this.data.map(x => x.globalSales)
         let colorArr = [];
 
@@ -57,7 +57,7 @@ export class BarGraphComponent implements OnInit, OnChanges {
           if(game === this.game){
             colorArr.push("rgba(247,70,74,0.2)")
           }else{
-            colorArr.push("rgba(51, 102, 255, 0.3)")
+            colorArr.push("rgba(0,164,255,0.2)")
           }
         });
 
@@ -69,7 +69,7 @@ export class BarGraphComponent implements OnInit, OnChanges {
         })
       break;
       case 'PublisherGenre-Sales':
-        this.barChartLabels = this.data.map(x => x.name).slice(0,50)
+        this.barChartLabels = this.data.map(x => (x.name + ' | ' + x.plattform)).slice(0,50)
         var arr = this.data.map(x => x.globalSales);
         arr = arr.slice(0,50)
         this.barChartData.push({
@@ -84,7 +84,7 @@ export class BarGraphComponent implements OnInit, OnChanges {
       let idx = event.active[0]._index;
       let game = this.data[idx];
       this.navigationService.updateGame(game);
-      this.router.navigate([`/home/details`]);
+      this.router.navigate([`/home/details`, this.navigationService.encodeURLElement(game.name)]);
     }
   }
 }
