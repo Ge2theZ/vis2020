@@ -60,11 +60,11 @@ export class RadarChartComponent implements OnInit, AfterViewInit, OnChanges {
 
   public onClick(evt){
     var point: any = this.radarChart.getElementAtEvent(evt);
-    if(point.length > 0){
+    if(point.length > 0 && this.useCase === RadarUseCase.crit_user_score_details){
       let idx = point[0]._index;
       let game = this.rawData[idx];
       this.navigationService.updateGame(game);
-      this.router.navigate([`/home/details`]);
+      this.router.navigate([`/home/details`, this.navigationService.encodeURLElement(game.name)]);
     }
   }
 
@@ -88,11 +88,13 @@ export class RadarChartComponent implements OnInit, AfterViewInit, OnChanges {
         {
           label: 'Critic Score',
           data: criticScoreArr,
+          backgroundColor: "rgba(17,255,0,0.1)",
           borderColor: "rgba(17,255,0,0.5)"
         },
         {
           label: 'User Score',
           data: userScoreArr,
+          backgroundColor: "rgba(0,164,255,0.1)",
           borderColor: "rgba(0,164,255,0.5)"
         }
       ]
