@@ -25,4 +25,17 @@ export class NavigationService {
   public updateGame(game: Game) {
     this.game$.next(game);
   }
+
+
+  /**
+   * Removes White Spaces and /\ from an url and replaces them with _
+   * @param url
+   */
+  public encodeURLElement(url: string) {
+    return url.replace(' ', '___').replace('/', '__').replace('\\', '_');
+  }
+
+  public decodeEncodedUrl(encodedUrl: string) {
+    return encodedUrl.replace('___', ' ').replace('__', '/').replace('_', '\\');
+  }
 }

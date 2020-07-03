@@ -21,21 +21,29 @@ export class GameDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.radarUseCase = RadarUseCase.crit_user_score_details;
+
     this.navigationService.game$.subscribe(value => {
       this.game = value;
-      this.dataService.onReady$.subscribe((state)=>{
-        if(!state) return;
-        let arr = this.dataService.gameDataSet.filter(item => item.genre === this.game.genre && item.name !== this.game.name);
-        arr.sort((a,b) => {
-          return b.globalSales - a.globalSales
-        });
-        arr = arr.slice(0,9);
-        arr.push(this.game);
-        arr.sort((a,b) => {
-         return b.globalSales - a.globalSales
-        });
-        this.gamesOfThisPublisher = arr;
     });
-    })
+
+    this.dataService.onReady$.subscribe((state)=>{
+      if(!state) return;
+
+      if (!this.game) {
+        const gameName = this.navigationService.decodeEncodedUrl(this.route.snapshot.params['gameName']);
+        this.game = this.dataService.gameDataSet.filter(item => item.name === gameName)[0];
+      }
+
+      let arr = this.dataService.gameDataSet.filter(item => item.genre === this.game.genre && item.name !== this.game.name);
+      arr.sort((a,b) => {
+        return b.globalSales - a.globalSales
+      });
+      arr = arr.slice(0,9);
+      arr.push(this.game);
+      arr.sort((a,b) => {
+        return b.globalSales - a.globalSales
+      });
+      this.gamesOfThisPublisher = arr;
+    });
   }
 }
