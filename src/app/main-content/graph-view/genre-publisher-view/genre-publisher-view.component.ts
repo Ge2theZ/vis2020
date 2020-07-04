@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NavigationService} from '../../../services/navigate.service';
 import {Game} from '../../../../models/Game';
 import {RadarUseCase} from '../../../shared/radar-chart/radar-chart.component';
+import {PieUseCase} from '../../../shared/pie-chart/pie-chart.component';
 
 @Component({
   selector: 'app-genre-publisher-view',
@@ -11,6 +12,7 @@ import {RadarUseCase} from '../../../shared/radar-chart/radar-chart.component';
   styleUrls: ['./genre-publisher-view.component.css']
 })
 export class GenrePublisherViewComponent implements OnInit {
+  PieUseCase = PieUseCase;
   RadarUseCase = RadarUseCase;
   publisher: string;
   genre: string;
@@ -25,12 +27,10 @@ export class GenrePublisherViewComponent implements OnInit {
   ngOnInit(): void {
     this.publisher = this.route.snapshot.params.publisherId;
     this.genre = this.route.snapshot.params.genreId;
-    //this.navigationService.updatePublisher(this.publisher);
 
     this.dataService.onReady$.subscribe(ready => {
       if (ready) {
         this.games = this.dataService.getGamesOfPublisherInGenre(this.publisher, this.genre);
-        //this.calculateRadar();
       }
     });
   }

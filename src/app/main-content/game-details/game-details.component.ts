@@ -4,6 +4,7 @@ import { Game } from 'src/models/Game';
 import { DataService } from 'src/app/services/DataService';
 import {NavigationService} from '../../services/navigate.service';
 import {RadarUseCase} from 'src/app/shared/radar-chart/radar-chart.component';
+import {PieUseCase} from '../../shared/pie-chart/pie-chart.component';
 
 @Component({
   selector: 'app-game-details',
@@ -11,6 +12,7 @@ import {RadarUseCase} from 'src/app/shared/radar-chart/radar-chart.component';
   styleUrls: ['./game-details.component.css']
 })
 export class GameDetailsComponent implements OnInit {
+  public PieUseCase = PieUseCase;
   public game: Game;
   public gamesOfThisPublisher: Game[];
   public radarUseCase: RadarUseCase;
