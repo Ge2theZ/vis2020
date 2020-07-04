@@ -2,7 +2,6 @@ import { Component, OnInit, OnChanges,  Input, ViewChild, ElementRef } from '@an
 import { Game } from 'src/models/Game';
 import { Router } from '@angular/router';
 import { NavigationService } from 'src/app/services/navigate.service';
-import { Tooltip } from 'chart.js';
 
 @Component({
     selector: 'bar-graph',
@@ -67,13 +66,28 @@ export class BarGraphComponent implements OnInit, OnChanges {
     let colorArr = [];
 
     switch(this.prop){
+      case 'thisYear':
+        this.data.forEach(game => {
+          if(game.equals(this.game)){
+            colorArr.push("rgba(247,70,74,0.5)")
+          }else{
+            colorArr.push("rgba(0,164,255,0.5)")
+          }
+        });
+        this.barChartLabels = this.data.map(x => x.name);
+
+        this.barChartData.push({
+          data: this.data.map(x => x.globalSales),
+          backgroundColor: colorArr,
+          maxBarThickness: 40
+        })
+      break;
       case 'sales':
         this.barChartLabels = this.data.map(x => x.name)
         let globalSalesArr = this.data.map(x => x.globalSales)
-        let colorArr = [];
 
         this.data.forEach(game => {
-          if(game === this.game){
+          if(game.equals(this.game)){
             colorArr.push("rgba(247,70,74,0.5)")
           }else{
             colorArr.push("rgba(0,164,255,0.5)")
@@ -104,6 +118,7 @@ export class BarGraphComponent implements OnInit, OnChanges {
       let game = this.data[idx];
       this.navigationService.updateGame(game);
       this.router.navigate([`/home/details`, this.navigationService.encodeURLElement(game.name)]);
+
     }
   }
 }
