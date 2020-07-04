@@ -96,18 +96,23 @@
       <div class="col-md-6 col-sm-12">
         <h4 class="w-100">Comparison to most successful {{game.genre}} games</h4>
         <hr>
-        <bar-graph class="graph" *ngIf="this.gamesOfThisPublisher" [data]="this.gamesOfThisPublisher" [game]="this.game" [prop]="'sales'"></bar-graph>
+        <bar-graph *ngIf="this.gamesOfThisPublisher" [data]="this.gamesOfThisPublisher" [game]="this.game" [prop]="'sales'"></bar-graph>
       </div>
       <div class="col-md-6 col-sm-12">
         <h4 class="w-100">Critic and User score of most successful {{game.genre}} games</h4>
         <hr>
         <app-radar-chart *ngIf="this.gamesOfThisPublisher" [highlight]="this.game" [rawData]="this.gamesOfThisPublisher" [useCase]="this.radarUseCase"></app-radar-chart>
       </div>
-      <div class="col-md-6 col-sm-12">
+      <div *ngIf="!(this.game.jpSales == '' && this.game.euSales == '' && this.game.naSales == '' && this.game.otherSales == '')" class="col-md-6 col-sm-12">
         <h4 class="w-100">International Sale Distribution in Millions</h4>
         <hr>
         <app-pie-chart *ngIf="this.game" [game]="this.game" [useCase]="PieUseCase.details_view_sale_distribution"></app-pie-chart>
-        </div>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <h4 class="w-100">Top 10 sold Games in {{this.game.year}}</h4>
+        <hr>
+        <bar-graph *ngIf="this.gamesInThisYear" [data]="this.gamesInThisYear" [game]="this.game" [prop]="'thisYear'"></bar-graph>
+      </div>
     </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 <div>
     <div style="display: block; height:500px;">
-      <canvas baseChart (chartClick)="onBarClick($event)"
+      <canvas #barchart baseChart (chartClick)="onBarClick($event)"
               [datasets]="barChartData"
               [labels]="barChartLabels"
               [options]="barChartOptions"
