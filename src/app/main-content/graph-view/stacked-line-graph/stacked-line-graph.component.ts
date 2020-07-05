@@ -14,29 +14,7 @@ import {DataService} from 'src/app/services/DataService';
 
 export class StackedLineGraphComponent implements OnInit {
   data: any;
-
-  // mock data
-  mockData = [
-    {Year: 10, Genre: "genre1", Percentage_per_year: 5},
-    {Year: 10, Genre: "genre2", Percentage_per_year: 15},
-    {Year: 10, Genre: "genre3", Percentage_per_year: 80},
-
-    {Year: 20, Genre: "genre1", Percentage_per_year: 25},
-    {Year: 20, Genre: "genre2", Percentage_per_year: 30},
-    {Year: 20, Genre: "genre3", Percentage_per_year: 45},
-
-    {Year: 30, Genre: "genre1", Percentage_per_year: 65},
-    {Year: 30, Genre: "genre2", Percentage_per_year: 25},
-    {Year: 30, Genre: "genre3", Percentage_per_year: 10},
-
-    {Year: 40, Genre: "genre1", Percentage_per_year: 60},
-    {Year: 40, Genre: "genre2", Percentage_per_year: 15},
-    {Year: 40, Genre: "genre3", Percentage_per_year: 25},
-
-    {Year: 50, Genre: "genre1", Percentage_per_year: 65},
-    {Year: 50, Genre: "genre2", Percentage_per_year: 25},
-    {Year: 50, Genre: "genre3", Percentage_per_year: 10}
-  ];
+  data2: any;
 
   private margin: any;
   private width: number;
@@ -49,6 +27,8 @@ export class StackedLineGraphComponent implements OnInit {
   private stackedData: any;
 
   private genreList: any;
+  private publisherList: any;
+  private groupData: any;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -59,37 +39,31 @@ export class StackedLineGraphComponent implements OnInit {
     this.height = 400 - this.margin.top - this.margin.bottom;
   }
 
-  async ngOnInit() {  
-    // save context in variable to make it accessible inside callback function
-    //let context = this;
-
-    //console.log(test);
-
-    // load data from csv and handle data in callback
-    /*
-    d3.csv("https://raw.githubusercontent.com/Ge2theZ/vis2020/master/data/SalesPerYearGenre.csv")
-      .then( function(data) { // callback when csv finished loading
-        context.data = data;
-        //context.data = context.mockData;
-        context.prepareData();
-        context.buildSvg();
-        context.addAxis();
-        context.drawData();
-        return data
-      });
-    */
-    
-    this.data = await d3.json("https://raw.githubusercontent.com/Ge2theZ/vis2020/master/data/SalesPerYearGenre.json");
-    this.prepareData();
-    this.buildSvg();
-    this.addAxis();
-    this.drawData();
-
+  ngOnInit() {  
+    this.svg = null;
+    this.buildGenreGraph()
   }
 
-  private prepareData() {
+  private buildGenreGraph() {
+    this.dataService.readInGenreSalesPerYears().subscribe(data => {
+      this.data = data;
+      this.prepareGenrePerYearData();
+
+      if (this.svg == null) {
+        this.buildSvg()
+      } else {
+        this.svg.selectAll("*").remove();
+      }
+
+      this.addAxis();
+      this.drawData();
+
+    });
+  }
+
+  private prepareGenrePerYearData() {
     // group the data: one array for each value of the X axis.
-    let groupData = d3.nest()
+    this.groupData = d3.nest()
       .key(function(d) { return d.Year;})
       .entries(this.data);
 
@@ -100,6 +74,13 @@ export class StackedLineGraphComponent implements OnInit {
     });
     this.genreList = Array.from(set);
 
+    if (this.genreList.length > 1)
+    // create color pallet
+    this.color = d3.scaleOrdinal()
+      .domain(this.genreList)
+      .range(['#51574a', '#447c69', '#74c493', '#8e8c6d', '#e4bf80', '#e9d78e', '#e2975d', '#f19670', '#e16552', '#c94a53', '#be5168', '#a34974', '#993767', '#65387d', '#4e2472', '#9163b6', '#e279a3', '#e0598b', '#7c9fb0', '#5698c4', '#9abf88'
+    ])
+
     // create key list with entry for every genre
     let genreKeys = new Array(this.genreList.length); // create an empty array with length 45
     
@@ -108,10 +89,71 @@ export class StackedLineGraphComponent implements OnInit {
     
     // Stack the data: each group will be represented on top of each other
     this.stackedData = d3.stack()
+      .offset(d3.stackOffsetSilhouette) // stream chart
       .keys(genreKeys)
       .value(function(d, key){
         if ((typeof d.values[key] != "undefined")) {
           return d.values[key].Percentage_per_year }
+        else
+          return 0
+      })
+      (this.groupData)
+  }
+
+  private preparePublisherPerYearData(factors:any) {
+      
+    this.data.sort(function(a, b) {
+      return a.year - b.year;
+    });
+    // group the data: one array for each value of the X axis.
+    let groupData = d3.nest()
+      .key(function(d) { return d.year;})
+      .entries(this.data);
+    let min = groupData[0].key
+    let max = parseInt(groupData[groupData.length-1].key)+1
+
+    let minArr = []
+    for(var i = 1970; i < min; i++) minArr.push({key:i.toString(), values:[]})
+
+    let maxArr = []
+    for(var i = max; i <= 2020; i++) maxArr.push({key:i.toString(), values:[]})
+
+    groupData = minArr.concat(groupData).concat(maxArr)
+
+    for(var i = 0; i < groupData.length; i++) {
+      for(var j = 0; j < groupData[i].values.length; j++) {
+        groupData[i].values[j].share *= (factors[groupData[i].key]*0.01)
+      }
+    }
+
+
+    // create set of all genres
+    let set = new Set();
+    this.data.forEach(data => {
+      set.add(data.publisher);
+    });
+    this.genreList = Array.from(set);
+
+    if (this.genreList.length > 1)
+    // create color pallet
+    this.color = d3.scaleOrdinal()
+      .domain(this.genreList)
+      .range(['#51574a', '#447c69', '#74c493', '#8e8c6d', '#e4bf80', '#e9d78e', '#e2975d', '#f19670', '#e16552', '#c94a53', '#be5168', '#a34974', '#993767', '#65387d', '#4e2472', '#9163b6', '#e279a3', '#e0598b', '#7c9fb0', '#5698c4', '#9abf88'
+    ])
+
+    // create key list with entry for every genre
+    let publisherKeys = new Array(this.genreList.length); // create an empty array with length 45
+    
+    for(var i = 0; i < publisherKeys.length; i++)
+    publisherKeys[i] = i
+    
+    // Stack the data: each group will be represented on top of each other
+    this.stackedData = d3.stack()
+      .offset(d3.stackOffsetSilhouette) // stream chart
+      .keys(publisherKeys)
+      .value(function(d, key){
+        if ((typeof d.values[key] != "undefined")) {
+          return d.values[key].share }
         else
           return 0
       })
@@ -135,6 +177,42 @@ export class StackedLineGraphComponent implements OnInit {
       .style("font-size", "16px") 
       .text("Genre Market Share Per Year");
   }
+
+  private addAxisPublisher() {
+    // Add X axis
+    this.x = d3.scaleLinear()
+      .domain([1970, 2020])
+      //.domain(d3.extent(this.data, function(d) { return d.year; }))
+      .range([ 0, this.width ]);
+      
+      this.svg.append("g")
+      .attr("transform", "translate(0," + this.height + ")")
+      .call(d3.axisBottom(this.x).ticks(5).tickFormat(d3.format("d")));
+
+    this.svg.append("text")             
+      .attr("transform",
+            "translate(" + (this.width/2) + " ," + 
+                           (this.height + this.margin.top + 20) + ")")
+      .style("text-anchor", "middle")
+      .text("Year");
+    
+    // Add Y axis
+    this.y = d3.scaleLinear()
+      .domain([-50, 50]) //stream chart
+      //.domain([0, d3.max(this.data, function(d) { return + d.Percentage_per_year; })])
+      .range([ this.height, 0 ]);
+    //this.svg.append("g") // stream chart
+    //  .call(d3.axisLeft(this.y));
+    // text label for the y axis
+    this.svg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - this.margin.left)
+      .attr("x",0 - (this.height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Market Share");  
+  }
+  
   
   private addAxis() {
     // Add X axis
@@ -155,10 +233,11 @@ export class StackedLineGraphComponent implements OnInit {
     
     // Add Y axis
     this.y = d3.scaleLinear()
-      .domain([0, d3.max(this.data, function(d) { return + d.Percentage_per_year; })])
+      .domain([-50, 50]) //stream chart
+      //.domain([0, d3.max(this.data, function(d) { return + d.Percentage_per_year; })])
       .range([ this.height, 0 ]);
-    this.svg.append("g")
-      .call(d3.axisLeft(this.y));
+    //this.svg.append("g") // stream chart
+    //  .call(d3.axisLeft(this.y));
     // text label for the y axis
     this.svg.append("text")
       .attr("transform", "rotate(-90)")
@@ -166,28 +245,19 @@ export class StackedLineGraphComponent implements OnInit {
       .attr("x",0 - (this.height / 2))
       .attr("dy", "1em")
       .style("text-anchor", "middle")
-      .text("Market Share (%)");  
-  }
-
-  // Three function that change the tooltip when user hover / move / leave a cell
-  public mouseover(d, i) {
-    //Tooltip.style("opacity", 1)
-    d3.selectAll(".myArea").style("opacity", .2)
-    d3.selectAll(".areas").style("opacity", .2)
-    d3.select(this)
-      .style("stroke", "black")
-      .style("opacity", 1);
+      .text("Market Share");  
   }
 
   private mouseleave(d) {
     //Tooltip.style("opacity", 0)
     d3.selectAll(".myArea").style("opacity", 1).style("stroke", "none")
+    d3.selectAll(".areas").style("opacity",1.0)
   }
 
   private mouseclick(d,i) { 
-   console.log("Genre Id: " + i);
-   console.log("Genre Name: " + this.genreList[i]);
-
+    console.log("Genre Id: " + i);
+    console.log("Genre Name: " + this.genreList[i]);
+    
    // Check if data is already calculated
    if (this.dataService.isMarketShareForGenrePerYearCached(this.genreList[i])) {
      let yourData = this.dataService.getCachedMarketShareForGenrePerYear(this.genreList[i])// here is your data
@@ -196,14 +266,32 @@ export class StackedLineGraphComponent implements OnInit {
    }
 
    this.router.navigate(['home/genre', this.genreList[i]]);
+   this.transitionToStreamChart(i);
   }
 
+ private transitionToStreamChart(genreID:any) {
+  let genreName=this.genreList[genreID];
+
+  // calculate genre percentage per year
+  let factors = {}
+  for(var i = 1970; i <= 2020; i++) factors[i.toString()] = 0
+  for(var i = 0; i < this.groupData.length; i++) {
+    for(var j = 0; j < this.groupData[i].values.length; j++) {
+      if (this.groupData[i].values[j].Genre == genreName) factors[this.groupData[i].key] = this.groupData[i].values[j].Percentage_per_year
+    }
+  }
+
+
+  this.data = this.dataService.getMarketShareForGenrePerYear(this.genreList[genreID]);
+
+  this.preparePublisherPerYearData(factors);
+  this.svg.selectAll("*").remove(); 
+  this.addAxisPublisher();
+  this.drawData();
+ }
+
+
  private drawData() {
-  // create color pallet
-  this.color = d3.scaleOrdinal()
-    .domain(this.genreList)
-    .range(['#51574a', '#447c69', '#74c493', '#8e8c6d', '#e4bf80', '#e9d78e', '#e2975d', '#f19670', '#e16552', '#c94a53', '#be5168', '#a34974', '#993767', '#65387d', '#4e2472', '#9163b6', '#e279a3', '#e0598b', '#7c9fb0', '#5698c4', '#9abf88'
-  ])
 
   // Add the areas
   this.svg
@@ -212,20 +300,26 @@ export class StackedLineGraphComponent implements OnInit {
     .enter()
     .append("path")
       .attr("class", "myArea")
-      .style("fill", (d: any) =>  this.color(d.key) )
+      .style("fill", (d: any) => { 
+        return this.color(d.key)
+      })
+        
       .attr("d", d3.area()
         .curve(d3.curveBasis)
         .x( (d: any, i) => this.x(d.data.key) )
-        .y0( (d: any) => this.y(d[0]) ) 
-        .y1( (d: any) => this.y(d[1]) ) 
+        .y0( (d: any) => this.y(d[1]) ) 
+        .y1( (d: any) => this.y(d[0]) ) 
       )
-      .on("mouseover.a", this.mouseover)
+      .on("mouseover.a", (d,i) => {
+        d3.selectAll(".myArea").style("opacity", (d:any, g:any) => {if (g==i) {return 1.0} else return 0.2})
+        d3.selectAll(".areas").style("opacity", (d:any, g:any) =>   {if (this.genreList.length-1-g==i) {return 1.0} else return 0.2})
+
+      })
       .on("mouseover.b", (d,i) => {
         this.dataService.updateCoverCarousel(this.genreList[i], null, 1970, 2019, 7)
       })
       .on("mouseleave", this.mouseleave)
       .on("click", (d:any, i:any) => this.mouseclick(d,i));
-
 
   // Add one dot in the legend for each name.
   let size = 12;
