@@ -30,6 +30,7 @@ export class StackedLineGraphComponent implements OnInit {
   private genreList: any;
   private publisherList: any;
   private groupData: any;
+  private mockGenreName:any;
 
   private Tooltip: any;
   public mockedDataSet =  [
@@ -258,11 +259,7 @@ export class StackedLineGraphComponent implements OnInit {
       .text("Market Share");  
   }
 
-  private mouseleave(d) {
-    //Tooltip.style("opacity", 0)
-    d3.selectAll(".myArea").style("opacity", 1).style("stroke", "none")
-    d3.selectAll(".areas").style("opacity",1.0)
-  }
+
 
   private mouseclick(d,i) { 
     console.log("Genre Id: " + i);
@@ -276,11 +273,11 @@ export class StackedLineGraphComponent implements OnInit {
    }
 
    this.router.navigate(['home/genre', this.genreList[i]]);
-   this.transitionToStreamChart(i);
+   this.mockGenreName=this.genreList[i];
+   this.transitionToStreamChart(this.mockGenreName);
   }
 
  private transitionToStreamChart(genreID:any) {
-  let genreName=this.genreList[genreID];
 
   let maxFactor = 0;
   // calculate genre percentage per year
@@ -288,20 +285,19 @@ export class StackedLineGraphComponent implements OnInit {
   for(var i = 1970; i <= 2020; i++) factors[i.toString()] = 0
   for(var i = 0; i < this.groupData.length; i++) {
     for(var j = 0; j < this.groupData[i].values.length; j++) {
-      if (this.groupData[i].values[j].Genre == genreName) {
+      if (this.groupData[i].values[j].Genre == genreID) {
         factors[this.groupData[i].key] = this.groupData[i].values[j].Percentage_per_year
         maxFactor = Math.max(maxFactor, this.groupData[i].values[j].Percentage_per_year);
       }
     }
   }
-
-
   //this.data = this.dataService.getMarketShareForGenrePerYear(this.genreList[genreID]);
-
-  let clusters = this.dataService.getClusteredMarketShareForGenrePerYear(this.genreList[genreID],5);
+  console.log(genreID)
+  let clusters = this.dataService.getClusteredMarketShareForGenrePerYear(genreID);
+  console.log(clusters)
   let temp = []
-  for (let i = 0; i < clusters[0].data.length; i++) {
-    temp = temp.concat(clusters[0].data[i])
+  for (let i = 0; i < clusters[this.mockedCurrentDatasetIndex].data.length; i++) {
+    temp = temp.concat(clusters[this.mockedCurrentDatasetIndex].data[i])
   }
   this.data = temp
 
@@ -349,7 +345,12 @@ export class StackedLineGraphComponent implements OnInit {
           .style("left", (d3.mouse(document.body)[0]-20) + "px")
           .style("top", (d3.mouse(document.body)[1]-70) + "px")
       })
-      .on("mouseleave", this.mouseleave)
+      .on("mouseleave", (d) => {
+        d3.selectAll(".myArea").style("opacity", 1).style("stroke", "none");
+        d3.selectAll(".areas").style("opacity",1.0);
+        this.Tooltip
+            .style("opacity", 0)
+      })
       .on("click", (d:any, i:any) => this.mouseclick(d,i));
 
   // Add one dot in the legend for each name.
@@ -392,6 +393,7 @@ export class StackedLineGraphComponent implements OnInit {
     if(!(this.mockedCurrentDatasetIndex+1 === this.mockedDataSet.length)) {
       this.mockedCurrentDatasetIndex++
     }
+    this.transitionToStreamChart(this.mockGenreName);
     console.log("Next Dataset Clicked");
   }
 
@@ -399,6 +401,7 @@ export class StackedLineGraphComponent implements OnInit {
     if(!(this.mockedCurrentDatasetIndex === 0)) {
       this.mockedCurrentDatasetIndex--
     }
+    this.transitionToStreamChart(this.mockGenreName);
     console.log("Previous Dataset Clicked")
   }
 }
