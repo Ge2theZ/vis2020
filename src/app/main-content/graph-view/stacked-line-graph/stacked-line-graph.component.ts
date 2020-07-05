@@ -296,7 +296,14 @@ export class StackedLineGraphComponent implements OnInit {
   }
 
 
-  this.data = this.dataService.getMarketShareForGenrePerYear(this.genreList[genreID]);
+  //this.data = this.dataService.getMarketShareForGenrePerYear(this.genreList[genreID]);
+
+  let clusters = this.dataService.getClusteredMarketShareForGenrePerYear(this.genreList[genreID],5);
+  let temp = []
+  for (let i = 0; i < clusters[0].data.length; i++) {
+    temp = temp.concat(clusters[0].data[i])
+  }
+  this.data = temp
 
   this.preparePublisherPerYearData(factors, maxFactor);
   this.svg.selectAll("*").remove(); 
