@@ -15,30 +15,58 @@
   <div class="tooltip-container">
     <span class="tooltip-title text-dark">{{this.game?.game.name}}</span>
     <hr class="tooltip-hr">
+
     <div class="row">
-      <div class="col-5">
-        <span class="label">Name</span>
+      <div class="col-6">
+        <span class="label">Genre</span>
       </div>
-      <div class="col-7">
-        <span>{{this.game?.game.name}}</span>
+      <div class="col-6">
+        <span>{{this.game?.game.genre}}</span>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-5">
+      <div class="col-6">
+        <span class="label">Publisher</span>
+      </div>
+      <div class="col-6">
+        <span>{{this.game?.game.publisher}}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
         <span class="label">Platform</span>
       </div>
-      <div class="col-7">
+      <div class="col-6">
         <span>{{this.game?.game.plattform}}</span>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-5">
-        <span class="label">Genre</span>
+      <div class="col-6">
+        <span class="label">Release Year</span>
       </div>
-      <div class="col-7">
-        <span>{{this.game?.game.genre}}</span>
+      <div class="col-6">
+        <span>{{this.game?.game.year}}</span>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="this.game?.game.userScore">
+      <div class="col-6">
+        <span class="label">User Score</span>
+      </div>
+      <div class="col-6">
+        <span>{{this.game?.game.userScore}}</span>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="this.game?.game.globalSales">
+      <div class="col-6">
+        <span class="label">Global Sales</span>
+      </div>
+      <div class="col-6">
+        <span>{{this.game?.game.globalSales}} Millions</span>
       </div>
     </div>
   </div>

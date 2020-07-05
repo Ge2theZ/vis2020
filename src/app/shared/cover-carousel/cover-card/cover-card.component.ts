@@ -15,7 +15,7 @@ export class CoverCardComponent implements OnInit {
     'placement': 'left',
     'contentType' : 'template',
     'theme': 'light',
-    'width': 200,
+    'width': 250,
     'max-width': 300,
     'hide-delay': 50
   };

@@ -1,1 +1,87 @@
-<h2>Frequently asked questions (FAQ)</h2>
+<div>
+  <h2>Frequently asked questions (FAQ)</h2>
+  <hr>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h5><strong>Which data set was used?</strong></h5>
+  </div>
+  <div class="card-body">
+    <p class="card-text" align="justify">For the vizualizations shown on this website, the
+      <a href="https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings">Video Game Sales with Ratings</a>
+      dataset was enriched with the
+      <a href="https://www.kaggle.com/ashaheedq/video-games-sales-2019">Video Game Sales</a> dataset.</p>
+  </div>
+</div>
+
+<br>
+<div class="card">
+  <div class="card-header">
+    <h5><strong>What does the dataset contain?</strong></h5>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Problem</h5>
+    <p class="card-text" align="justify">The dataset <a href="https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings">Video
+      Game Sales with Ratings</a> was selected for the analysis. While analyzing the CSV file, it was noticed that the
+      dataset  in the <em>Publisher</em> and <em>Year</em> columns are incomplete. Therefore, the
+      <a href="https://www.kaggle.com/ashaheedq/video-games-sales-2019">Video Game Sales</a> dataset was used.
+      By merging the two datasets, the incompleteness was reduced.</p>
+  </div>
+
+  <div class="card-body">
+    <h5 class="card-title">Data collection</h5>
+    <p class="card-text" align="justify">The data was collected through a script from the GameDB database of vgchartz.com.
+      They were collected in the period from 1980 to 2020 and contain ~60000 entries.</p>
+  </div>
+
+  <div class="card-body">
+    <h5 class="card-title">Data processing and transformations</h5>
+    <p class="card-text" align="justify">The main preprocessing of the data set is done with Python and the Pandas library,
+      which allows the efficient and fast import of a CSV file and the further processing of the imported
+      data. In this way, it can be ensured that the visualizations and interactions take place in "real time".</p>
+
+    <p class="card-text" align="justify">After the implementation of the data processing functions, the interactive generation of the carousel view
+      was tested. The only delay that was noticed was when selecting a genre and calculating all publishers in
+      the second depth view. This delay is still less than 1-2 seconds and occurs only when rendering the new
+      website, so it looks like a load time. Should performance problems be encountered in the future (which
+      should not happen), the implemented data processing functions can still be optimized.</p>
+  </div>
+</div>
+
+<br>
+<div class="card">
+  <div class="card-header">
+    <h5><strong>Why do some games appear more than once?</strong></h5>
+  </div>
+  <div class="card-body">
+    <p class="card-text" align="justify">Many games are published for different platforms. Therefore,
+      it is possible that games appear several times.</p>
+  </div>
+</div>
+
+<br>
+<div class="card">
+  <div class="card-header">
+    <h5><strong>Some albums are missing cover art!</strong></h5>
+  </div>
+  <div class="card-body">
+    <p class="card-text" align="justify">That's true, not for all games there is a cover to show.</p>
+  </div>
+</div>
+
+<br>
+<div class="card">
+  <div class="card-header">
+    <h5><strong>What did you use to build this?</strong></h5>
+  </div>
+  <div class="card-body">
+    <p class="card-text" align="justify">Python and JavaScript. Python used for the data analysis and dataset preparation.</p>
+    <img src="/assets/programming_languages.png" alt="Used programming languages illustrated on the visualization pipeline">
+  </div>
+</div>
+
+
+
+
+
