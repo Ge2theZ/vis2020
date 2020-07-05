@@ -100,7 +100,7 @@ export class StackedLineGraphComponent implements OnInit {
       (this.groupData)
   }
 
-  private preparePublisherPerYearData(factors:any) {
+  private preparePublisherPerYearData(factors:any, maxFactor:any) {
       
     this.data.sort(function(a, b) {
       return a.year - b.year;
@@ -122,7 +122,7 @@ export class StackedLineGraphComponent implements OnInit {
 
     for(var i = 0; i < groupData.length; i++) {
       for(var j = 0; j < groupData[i].values.length; j++) {
-        groupData[i].values[j].share *= (factors[groupData[i].key]*0.01)
+        groupData[i].values[j].share *= (factors[groupData[i].key]*0.01)*(100/maxFactor)
       }
     }
 
@@ -272,19 +272,23 @@ export class StackedLineGraphComponent implements OnInit {
  private transitionToStreamChart(genreID:any) {
   let genreName=this.genreList[genreID];
 
+  let maxFactor = 0;
   // calculate genre percentage per year
   let factors = {}
   for(var i = 1970; i <= 2020; i++) factors[i.toString()] = 0
   for(var i = 0; i < this.groupData.length; i++) {
     for(var j = 0; j < this.groupData[i].values.length; j++) {
-      if (this.groupData[i].values[j].Genre == genreName) factors[this.groupData[i].key] = this.groupData[i].values[j].Percentage_per_year
+      if (this.groupData[i].values[j].Genre == genreName) {
+        factors[this.groupData[i].key] = this.groupData[i].values[j].Percentage_per_year
+        maxFactor = Math.max(maxFactor, this.groupData[i].values[j].Percentage_per_year);
+      }
     }
   }
 
 
   this.data = this.dataService.getMarketShareForGenrePerYear(this.genreList[genreID]);
 
-  this.preparePublisherPerYearData(factors);
+  this.preparePublisherPerYearData(factors, maxFactor);
   this.svg.selectAll("*").remove(); 
   this.addAxisPublisher();
   this.drawData();
