@@ -1,9 +1,12 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 
 import * as d3 from 'd3';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, ActivatedRouteSnapshot, ActivationEnd, NavigationEnd, Router} from '@angular/router';
 import {DataService} from 'src/app/services/DataService';
 import {SharePerYearPerPublisher} from '../../../../models/SharePerYearPerPublisher';
+import {filter, map} from 'rxjs/operators';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {InteractionService} from '../../../services/interaction.service';
 
 //import SalesPerYearGenre from ;
 
@@ -13,7 +16,7 @@ import {SharePerYearPerPublisher} from '../../../../models/SharePerYearPerPublis
   styleUrls: ['./stacked-line-graph.component.css'],
 })
 
-export class StackedLineGraphComponent implements OnInit {
+export class StackedLineGraphComponent implements OnInit, OnDestroy {
   data: any;
   data2: any;
 
@@ -32,6 +35,10 @@ export class StackedLineGraphComponent implements OnInit {
   private groupData: any;
   private mockGenreName:any;
 
+  public inHomeView: boolean;
+  public inGenreView: boolean;
+  public inPublisherView: boolean;
+
   private Tooltip: any;
   public mockedDataSet =  [
     { from: 0, to: 20, data: []},
@@ -39,9 +46,13 @@ export class StackedLineGraphComponent implements OnInit {
     ];
   public mockedCurrentDatasetIndex = 0;
 
+  private routerSubscription: any;
+  private interactionSubscription: any;
+
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private dataService: DataService) {
+              private dataService: DataService,
+              private interactionService: InteractionService) {
     // configure margins and width/height of the graph
     this.margin = {top: 30, right: 30, bottom: 30, left: 50},
     this.width = 1400 - this.margin.left - this.margin.right,
@@ -50,7 +61,51 @@ export class StackedLineGraphComponent implements OnInit {
 
   ngOnInit() {  
     this.svg = null;
-    this.buildGenreGraph()
+    this.buildGenreGraph();
+
+    this.determineRouterState();
+    this.routerSubscription = this.router.events.subscribe(events => {
+      if (events instanceof NavigationEnd) {
+        this.determineRouterState();
+      }
+    })
+
+    this.interactionSubscription = this.interactionService.gameCardHoverSubject$.subscribe(game => {
+      if(game) {
+        // this is an hover event, highlight the genre/publisher depending on view
+        console.log("Hover over card!");
+      } else {
+        // this is a leave event, unhighlight what ever is highligted
+        console.log("Unhover over card!");
+      }
+    })
+  }
+
+  /**
+   * Workaround because route params are empty
+   */
+  determineRouterState(){
+    let routeSnapshot: ActivatedRouteSnapshot = this.route.snapshot;
+    let url: string = routeSnapshot["_routerState"]["url"];
+
+    if(url.includes('home') && !url.includes('genre') && !url.includes('publisher')) {
+      this.inHomeView = true;
+      this.inGenreView = false;
+      this.inPublisherView = false;
+    } else if(url.includes('home') && url.includes('genre') && !url.includes('publisher')) {
+      this.inHomeView = false;
+      this.inGenreView = true;
+      this.inPublisherView = false;
+    } else if(url.includes('home') && url.includes('genre') && url.includes('publisher')) {
+      this.inHomeView = false;
+      this.inGenreView = false;
+      this.inPublisherView = true;
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.routerSubscription.destroy();
+    this.interactionSubscription.destroy();
   }
 
   private buildGenreGraph() {

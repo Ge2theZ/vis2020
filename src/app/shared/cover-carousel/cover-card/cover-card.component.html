@@ -1,5 +1,5 @@
 <a (click)="navigate()" style="cursor: pointer;" [options]="tooltipOptions" [tooltip]="HtmlContent">
-  <div class="card game-card" (mouseenter)="onHover()">
+  <div class="card game-card" (mouseenter)="onHover()" (mouseleave)="onHoverOut()">
     <div class="placeholder">
       <div *ngIf="game.game.imgUrl" class="card-img-top game-card-image" [style]="'background-image: url('+ 'https://www.vgchartz.com/' + game.game.imgUrl  +')'"><img /></div>
       <div *ngIf="!game.game.imgUrl" class="card-img-top game-card-image" [style]="'background-image: url(/assets/no_data.png)'"><img /></div>
