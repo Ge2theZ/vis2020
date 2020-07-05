@@ -76,7 +76,7 @@ export class RadarChartComponent implements OnInit, AfterViewInit, OnChanges {
     let labelColorArr = [];
     this.rawData.forEach(game => {
       if(game === this.highlight){
-        labelColorArr.push("red")
+        labelColorArr.push("black")
       }else{
         labelColorArr.push("gray")
       }

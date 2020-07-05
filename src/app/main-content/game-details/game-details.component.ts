@@ -14,7 +14,9 @@ import {PieUseCase} from '../../shared/pie-chart/pie-chart.component';
 export class GameDetailsComponent implements OnInit {
   public PieUseCase = PieUseCase;
   public game: Game;
-  public gamesOfThisPublisher: Game[];
+  public mostGamesOfThisPublisher: Game[];
+  public leastGamesOfThisPublisher: Game[];
+  public mostGenreGamesInThisYear: Game[];
   public radarUseCase: RadarUseCase;
   public gamesInThisYear: Game[];
 
@@ -35,6 +37,7 @@ export class GameDetailsComponent implements OnInit {
       this.loadDetailGame();
       this.loadGamesOfThisPublisher();
       this.loadGamesOfThisYear();
+      this.loadMostGenreGamesInThisYear();
     });
 
     this.router.events.subscribe((value) => {
@@ -42,11 +45,29 @@ export class GameDetailsComponent implements OnInit {
       this.loadDetailGame();
       this.loadGamesOfThisPublisher();
       this.loadGamesOfThisYear();
+      this.loadMostGenreGamesInThisYear();
     });
   }
 
+  loadMostGenreGamesInThisYear(){
+    if(!this.mostGenreGamesInThisYear){
+      let arr = this.dataService.gameDataSet.filter(item => item.genre === this.game.genre && 
+        item.name !== this.game.name && 
+        this.game.year === item.year);
+      arr.sort((a,b) => {
+        return b.globalSales - a.globalSales
+      });
+      arr = arr.slice(0,9);
+      arr.push(this.game);
+      arr.sort((a,b) => {
+        return b.globalSales - a.globalSales
+      });
+      this.mostGenreGamesInThisYear = arr;
+    }
+  }
+
   loadGamesOfThisPublisher(){
-      if(!this.gamesOfThisPublisher){
+      if(!this.mostGamesOfThisPublisher){
         let arr = this.dataService.gameDataSet.filter(item => item.genre === this.game.genre && item.name !== this.game.name);
         arr.sort((a,b) => {
           return b.globalSales - a.globalSales
@@ -56,7 +77,19 @@ export class GameDetailsComponent implements OnInit {
         arr.sort((a,b) => {
           return b.globalSales - a.globalSales
         });
-        this.gamesOfThisPublisher = arr;
+        this.mostGamesOfThisPublisher = arr;
+      }
+      if(!this.leastGamesOfThisPublisher){
+        let arr = this.dataService.gameDataSet.filter(item => item.genre === this.game.genre && item.name !== this.game.name && (item.userScore || item.criticScore));
+        arr.sort((a,b) => {
+          return a.globalSales - b.globalSales
+        });
+        arr = arr.slice(0,9);
+        arr.push(this.game);
+        arr.sort((a,b) => {
+          return a.globalSales - b.globalSales
+        });
+        this.leastGamesOfThisPublisher = arr;
       }
   }
 
@@ -75,6 +108,7 @@ export class GameDetailsComponent implements OnInit {
   loadDetailGame(){
       const gameName = this.navigationService.decodeEncodedUrl(this.route.snapshot.params['gameName']);
       this.game = this.dataService.gameDataSet.filter(item => item.name === gameName)[0];
+      console.log(this.game)
   }
 }
   
