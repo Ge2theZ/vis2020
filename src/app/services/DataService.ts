@@ -196,6 +196,48 @@ export class DataService {
     }
   }
 
+  getClusteredMarketShareForGenrePerYear(genre, chunkSize = 20){
+    let arr = this.getMarketShareForGenrePerYear(genre)
+    let uniquePublisher = [...new Set(arr.map(elem => elem.publisher))];
+    
+    let publisherClusteredData = [];
+    for (const publisher of uniquePublisher) {
+      publisherClusteredData.push({
+        publisher: publisher, 
+        data: arr.filter((element) => element.publisher === publisher)
+      });
+    }
+
+    let totalPublisherShare = [];
+    for (const cluster of publisherClusteredData) {
+      let sum = cluster.data.reduce((a,b) => a + b.share ,0)
+      totalPublisherShare.push({publisher:cluster.publisher, totalShare:sum});
+    }
+
+    //NOTE: This could also be interesting to visualize?
+    totalPublisherShare.sort((a, b) => {
+      return (b.totalShare - a.totalShare);
+    })
+
+    console.log(totalPublisherShare.length)
+        
+    let res = []
+    let dynChunkSize = chunkSize;
+    for (let i = 0; i < totalPublisherShare.length; i+=chunkSize) {
+      if(i+chunkSize > totalPublisherShare.length){
+        dynChunkSize = totalPublisherShare.length % chunkSize;
+      }
+      let data = [];
+      for (let j = i; j < (i+dynChunkSize); j++) {
+        let publisher = totalPublisherShare[j].publisher;
+        data.push(arr.filter(x => x.publisher === publisher))
+      }
+      res.push({from: i, to: i+dynChunkSize, data: data})
+    }
+
+    return res;   
+  }
+
   getMarketShareForGenrePerYear(genre: string): SharePerYearPerPublisher[] {
     console.time('getMarketShareForGenrePerYear');
     let filtered = this.gameDataSet.filter((game) => game.genre === genre);

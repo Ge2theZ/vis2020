@@ -3,6 +3,7 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import * as d3 from 'd3';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DataService} from 'src/app/services/DataService';
+import {SharePerYearPerPublisher} from '../../../../models/SharePerYearPerPublisher';
 
 //import SalesPerYearGenre from ;
 
@@ -31,6 +32,11 @@ export class StackedLineGraphComponent implements OnInit {
   private groupData: any;
 
   private Tooltip: any;
+  public mockedDataSet =  [
+    { from: 0, to: 20, data: []},
+    { from: 20, to: 40, data: []}
+    ];
+  public mockedCurrentDatasetIndex = 0;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -375,5 +381,17 @@ export class StackedLineGraphComponent implements OnInit {
         .style("padding", "5px")
   }
 
+  nextDataSet(){
+    if(!(this.mockedCurrentDatasetIndex+1 === this.mockedDataSet.length)) {
+      this.mockedCurrentDatasetIndex++
+    }
+    console.log("Next Dataset Clicked");
+  }
 
+  previousDataset(){
+    if(!(this.mockedCurrentDatasetIndex === 0)) {
+      this.mockedCurrentDatasetIndex--
+    }
+    console.log("Previous Dataset Clicked")
+  }
 }
