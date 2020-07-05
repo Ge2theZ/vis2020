@@ -23,10 +23,7 @@ export class GameDetailsComponent implements OnInit {
   constructor(private dataService:DataService, 
               private route: ActivatedRoute, 
               private navigationService: NavigationService,
-              private router: Router) { 
-    this.router.routeReuseStrategy.shouldReuseRoute = function(){
-      return false;
-    }
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -41,6 +38,7 @@ export class GameDetailsComponent implements OnInit {
     });
 
     this.router.events.subscribe((value) => {
+      this.game = undefined;
       this.loadDetailGame();
       this.loadGamesOfThisPublisher();
       this.loadGamesOfThisYear();
@@ -49,59 +47,53 @@ export class GameDetailsComponent implements OnInit {
   }
 
   loadMostGenreGamesInThisYear(){
-    if(!this.mostGenreGamesInThisYear){
-      let arr = this.dataService.gameDataSet.filter(item => item.genre === this.game.genre && 
-        item.name !== this.game.name && 
-        this.game.year === item.year);
-      arr.sort((a,b) => {
-        return b.globalSales - a.globalSales
-      });
-      arr = arr.slice(0,9);
-      arr.push(this.game);
-      arr.sort((a,b) => {
-        return b.globalSales - a.globalSales
-      });
-      this.mostGenreGamesInThisYear = arr;
-    }
+    let arr = this.dataService.gameDataSet.filter(item => item.genre === this.game.genre &&
+      item.name !== this.game.name &&
+      this.game.year === item.year);
+    arr.sort((a,b) => {
+      return b.globalSales - a.globalSales
+    });
+    arr = arr.slice(0,9);
+    arr.push(this.game);
+    arr.sort((a,b) => {
+      return b.globalSales - a.globalSales
+    });
+    this.mostGenreGamesInThisYear = arr;
   }
 
-  loadGamesOfThisPublisher(){
-      if(!this.mostGamesOfThisPublisher){
-        let arr = this.dataService.gameDataSet.filter(item => item.genre === this.game.genre && item.name !== this.game.name);
-        arr.sort((a,b) => {
-          return b.globalSales - a.globalSales
-        });
-        arr = arr.slice(0,9);
-        arr.push(this.game);
-        arr.sort((a,b) => {
-          return b.globalSales - a.globalSales
-        });
-        this.mostGamesOfThisPublisher = arr;
-      }
-      if(!this.leastGamesOfThisPublisher){
-        let arr = this.dataService.gameDataSet.filter(item => item.genre === this.game.genre && item.name !== this.game.name && (item.userScore || item.criticScore));
-        arr.sort((a,b) => {
-          return a.globalSales - b.globalSales
-        });
-        arr = arr.slice(0,9);
-        arr.push(this.game);
-        arr.sort((a,b) => {
-          return a.globalSales - b.globalSales
-        });
-        this.leastGamesOfThisPublisher = arr;
-      }
+  loadGamesOfThisPublisher() {
+    let mostArr = this.dataService.gameDataSet.filter(item => item.genre === this.game.genre && item.name !== this.game.name);
+    mostArr.sort((a, b) => {
+      return b.globalSales - a.globalSales;
+    });
+    mostArr = mostArr.slice(0, 9);
+    mostArr.push(this.game);
+    mostArr.sort((a, b) => {
+      return b.globalSales - a.globalSales;
+    });
+    this.mostGamesOfThisPublisher = mostArr;
+
+    let leastArr = this.dataService.gameDataSet.filter(item => item.genre === this.game.genre && item.name !== this.game.name && (item.userScore || item.criticScore));
+    leastArr.sort((a, b) => {
+      return a.globalSales - b.globalSales;
+    });
+    leastArr = leastArr.slice(0, 9);
+    leastArr.push(this.game);
+    leastArr.sort((a, b) => {
+      return a.globalSales - b.globalSales;
+    });
+    this.leastGamesOfThisPublisher = leastArr;
+
   }
 
   loadGamesOfThisYear(){
-    if(!this.gamesInThisYear){
-      let arr = this.dataService.gameDataSet.filter(item => item.year === this.game.year);
-      arr.sort((a,b) => { return (b.globalSales - a.globalSales) });
-      arr = arr.slice(0,10);
-      if(!arr.includes(this.game))
-        arr[9] = this.game;
-      arr.sort((a,b) => { return (b.globalSales - a.globalSales) });
-      this.gamesInThisYear = arr;
-    }   
+    let arr = this.dataService.gameDataSet.filter(item => item.year === this.game.year);
+    arr.sort((a,b) => { return (b.globalSales - a.globalSales) });
+    arr = arr.slice(0,10);
+    if(!arr.includes(this.game))
+      arr[9] = this.game;
+    arr.sort((a,b) => { return (b.globalSales - a.globalSales) });
+    this.gamesInThisYear = arr;
   }
 
   loadDetailGame(){

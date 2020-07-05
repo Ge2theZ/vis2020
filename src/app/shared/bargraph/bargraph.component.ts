@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges,  Input, ViewChild, ElementRef } from '@angular/core';
+import {Component, OnInit, OnChanges, Input, ViewChild, ElementRef, SimpleChanges} from '@angular/core';
 import { Game } from 'src/models/Game';
 import { Router } from '@angular/router';
 import { NavigationService } from 'src/app/services/navigate.service';
@@ -54,10 +54,12 @@ export class BarGraphComponent implements OnInit, OnChanges {
   public barChartLabels;
 
   ngOnInit() {
+    console.log(this.data);
    this.initBarGraph();
   }
 
-  ngOnChanges(){
+  ngOnChanges(changes: SimpleChanges){
+    console.log(this.data);
     this.initBarGraph();
   }
 
