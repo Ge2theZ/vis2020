@@ -1,6 +1,7 @@
 export class Game {
   constructor(obj?:any){
     if(!obj) return
+    this.index = obj.index;
     this.name = obj.Name;
     this.plattform = obj.Platform;
     this.publisher = obj.Publisher;
@@ -18,6 +19,7 @@ export class Game {
     this.euSales = obj.EU_Sales;
   }
 
+  index?: number;
   name?: string;
   genre?: string;
   esrbRating?: string;
@@ -35,8 +37,6 @@ export class Game {
   marketShare?: number;
 
   equals(game:Game){
-    return (game.name == this.name && game.plattform == this.plattform)
+    return (game.index === this.index)
   }
 }
-
-// Name,Genre,ESRB_Rating,Platform,Publisher,Developer,VGChartz_Score,Critic_Score,User_Score,Global_Sales,Year,img_url,Market_Share

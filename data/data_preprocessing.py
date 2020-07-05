@@ -1,4 +1,5 @@
 import pandas
+from pandas import *
 import numpy as np
 
 #only read in those columns
@@ -84,6 +85,9 @@ merged["Critic_Score"] = merged["Critic_Score"].astype(float)
 merged["User_Score"] = merged.apply(lambda row: row.User_Score if row.User_Score <= 10.0 else (row.User_Score/10.0), axis=1)
 merged["Critic_Score"]= merged.apply(lambda row: row.Critic_Score if row.Critic_Score <= 10.0 else (row.Critic_Score/10.0), axis=1)
 
+#insert index
+merged["index"] = merged.index;
+
 print("after preprocessing: " + str(len(merged.index)) + " rows")
 print("writing to csv")
-merged.to_json("preprocessed_dataset.json", orient='records')
+merged.to_json("preprocessed_dataset.json", orient="records")
