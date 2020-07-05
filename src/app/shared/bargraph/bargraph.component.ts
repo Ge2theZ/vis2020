@@ -117,7 +117,7 @@ export class BarGraphComponent implements OnInit, OnChanges {
       let idx = event.active[0]._index;
       let game = this.data[idx];
       this.navigationService.updateGame(game);
-      this.router.navigate([`/home/details`, this.navigationService.encodeURLElement(game.name)]);
+      this.router.navigate([`/home/details`, game.index]);
 
     }
   }

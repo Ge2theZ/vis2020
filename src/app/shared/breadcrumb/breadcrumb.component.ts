@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, NavigationEnd, NavigationStart, PRIMARY_OUTLET, Router} from '@angular/router';
 import {filter, map} from 'rxjs/operators';
 import {NavigationService} from '../../services/navigate.service';
+import {DataService} from '../../services/DataService';
 
 interface Breadcrumb {
   name: string;
@@ -18,11 +19,11 @@ export class BreadcrumbComponent implements OnInit {
   genreBreadCrumb: Breadcrumb = {name: "Genre", url: "home/genre/"};
   publisherBreadCrumb: Breadcrumb = {name: "Publisher", url: "home/genre/"};
   breadcrumbs: Breadcrumb[] = [];
-  game: any;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private navigationService: NavigationService) { }
+              private navigationService: NavigationService,
+              private dataService: DataService) { }
 
   ngOnInit(): void {
     this.router.events.subscribe((navigationStart) => {
@@ -37,8 +38,10 @@ export class BreadcrumbComponent implements OnInit {
         }
 
         if(slicedRoute[1] == "details") {
+          let gameIndex = slicedRoute[2];
+          let gameName = this.dataService.gameDataSet.filter(item => item.index === Number(gameIndex))[0].name;
           this.navigationService.game$.subscribe(value => {
-            this.breadcrumbs[1] = {name: value.name, url: route};
+            this.breadcrumbs[1] = {name: gameName, url: route};
           });
         }
 

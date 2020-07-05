@@ -38,6 +38,6 @@ export class NavbarComponent implements OnInit {
     let searchParams = this.searchquery.split(" | ");
     let game: Game = this.dataService.gameDataSet.filter(item => item.name === searchParams[0] && item.plattform === searchParams[1])[0];
     this.navigationService.updateGame(game);
-    this.router.navigate(['/home/details', this.navigationService.encodeURLElement(game.name)]);
+    this.router.navigate(['/home/details', game.index]);
   }
 }

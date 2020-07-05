@@ -41,7 +41,6 @@ export class GameDetailsComponent implements OnInit {
     });
 
     this.router.events.subscribe((value) => {
-      console.log("test ", value)
       this.loadDetailGame();
       this.loadGamesOfThisPublisher();
       this.loadGamesOfThisYear();
@@ -106,9 +105,8 @@ export class GameDetailsComponent implements OnInit {
   }
 
   loadDetailGame(){
-      const gameName = this.navigationService.decodeEncodedUrl(this.route.snapshot.params['gameName']);
-      this.game = this.dataService.gameDataSet.filter(item => item.name === gameName)[0];
-      console.log(this.game)
+    let gameId = this.route.snapshot.params["gameId"];
+    this.game = this.dataService.gameDataSet.filter(item => item.index === Number(gameId))[0];
   }
 }
   

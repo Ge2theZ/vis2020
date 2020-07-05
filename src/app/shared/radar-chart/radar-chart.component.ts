@@ -64,7 +64,7 @@ export class RadarChartComponent implements OnInit, AfterViewInit, OnChanges {
       let idx = point[0]._index;
       let game = this.rawData[idx];
       this.navigationService.updateGame(game);
-      this.router.navigate([`/home/details`, this.navigationService.encodeURLElement(game.name)]);
+      this.router.navigate([`/home/details`, game.index]);
     }
   }
 

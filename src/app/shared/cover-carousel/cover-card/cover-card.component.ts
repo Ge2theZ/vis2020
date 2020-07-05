@@ -29,7 +29,7 @@ export class CoverCardComponent implements OnInit {
 
   navigate(){
     if(!this.isGameCardEmpty()) {
-      this.router.navigate([`/home/details`, this.navigationService.encodeURLElement(this.game.game.name)]);
+      this.router.navigate([`/home/details`, this.game.game.index]);
       this.navigationService.updateGame(this.game.game);
     }
   }
