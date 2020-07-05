@@ -73,14 +73,33 @@ export class RadarChartComponent implements OnInit, AfterViewInit, OnChanges {
     let userScoreArr = this.rawData.map(x => x.userScore);
     let criticScoreArr = this.rawData.map(x => x.criticScore);
 
-    let colorArr = [];
+    let labelColorArr = [];
     this.rawData.forEach(game => {
       if(game === this.highlight){
-        colorArr.push("red")
+        labelColorArr.push("red")
       }else{
-        colorArr.push("black")
+        labelColorArr.push("gray")
       }
     });
+
+    let criticColorArr = [];
+    this.rawData.forEach(game => {
+      if(game === this.highlight){
+        criticColorArr.push("red")
+      }else{
+        criticColorArr.push("rgba(17,255,0,1)")
+      }
+    });
+
+    let userColorArr = [];
+    this.rawData.forEach(game => {
+      if(game === this.highlight){
+        userColorArr.push("red")
+      }else{
+        userColorArr.push("rgba(0,164,255,1)")
+      }
+    });
+
 
     let radarData = {
       labels: labelArr,
@@ -89,13 +108,15 @@ export class RadarChartComponent implements OnInit, AfterViewInit, OnChanges {
           label: 'Critic Score',
           data: criticScoreArr,
           backgroundColor: "rgba(17,255,0,0.1)",
-          borderColor: "rgba(17,255,0,0.5)"
+          borderColor: "rgba(17,255,0,0.5)",
+          pointBackgroundColor: criticColorArr
         },
         {
           label: 'User Score',
           data: userScoreArr,
           backgroundColor: "rgba(0,164,255,0.1)",
-          borderColor: "rgba(0,164,255,0.5)"
+          borderColor: "rgba(0,164,255,0.5)",
+          pointBackgroundColor: userColorArr,
         }
       ]
     }
@@ -104,10 +125,35 @@ export class RadarChartComponent implements OnInit, AfterViewInit, OnChanges {
       type: 'radar',
       data: radarData,
       options: {
+        tooltips:{
+          custom: (tooltip) => {
+            if (!tooltip) return;
+            // disable displaying the color box;
+            tooltip.displayColors = false;
+          },
+          callbacks: {
+            title: (item) => { 
+              if(item[0].datasetIndex == 0){
+                return "Critic Score: " + this.rawData[item[0].index].criticScore;
+              }else{
+                return "User Score: " + this.rawData[item[0].index].userScore;
+              }
+            },
+            label: (item) => {
+              let multiLineArray = []
+              multiLineArray.push("Platform: " + this.rawData[item.index].plattform)
+              multiLineArray.push("Publisher: " + this.rawData[item.index].publisher)
+              multiLineArray.push("Release Year: " + this.rawData[item.index].year)
+              multiLineArray.push("Genre: " + this.rawData[item.index].genre)
+              multiLineArray.push("Sales: " + this.rawData[item.index].globalSales + " Mio")
+              return multiLineArray;
+            }
+          }
+        },
         spanGaps: true,
         scale: {
           pointLabels:{
-            fontColor: colorArr
+            fontColor: labelColorArr
           },
         }
       }

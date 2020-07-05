@@ -33,6 +33,10 @@ export class Game {
   year?: number;
   imgUrl?: string;
   marketShare?: number;
+
+  equals(game:Game){
+    return (game.name == this.name && game.plattform == this.plattform)
+  }
 }
 
 // Name,Genre,ESRB_Rating,Platform,Publisher,Developer,VGChartz_Score,Critic_Score,User_Score,Global_Sales,Year,img_url,Market_Share

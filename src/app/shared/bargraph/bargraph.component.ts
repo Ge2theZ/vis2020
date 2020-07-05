@@ -16,6 +16,24 @@ export class BarGraphComponent implements OnInit, OnChanges {
   @Input() private prop: string; 
 
   public barChartOptions = {
+    tooltips:{
+      custom: (tooltip) => {
+        if (!tooltip) return;
+        // disable displaying the color box;
+        tooltip.displayColors = false;
+      },
+      callbacks: {
+        label: (item) => {
+          let multiLineArray = []
+          multiLineArray.push("Platform: " + this.data[item.index].plattform)
+          multiLineArray.push("Publisher: " + this.data[item.index].publisher)
+          multiLineArray.push("Release Year: " + this.data[item.index].year)
+          multiLineArray.push("Genre: " + this.data[item.index].genre)
+          multiLineArray.push("Sales: " + this.data[item.index].globalSales + " Mio")
+          return multiLineArray;
+        }
+      }
+    },
     maintainAspectRatio: true,
     scaleShowVerticalLines: true,
     legend: {
@@ -48,16 +66,31 @@ export class BarGraphComponent implements OnInit, OnChanges {
     let colorArr = [];
 
     switch(this.prop){
+      case 'thisYear':
+        this.data.forEach(game => {
+          if(game.equals(this.game)){
+            colorArr.push("rgba(247,70,74,0.5)")
+          }else{
+            colorArr.push("rgba(0,164,255,0.5)")
+          }
+        });
+        this.barChartLabels = this.data.map(x => x.name);
+
+        this.barChartData.push({
+          data: this.data.map(x => x.globalSales),
+          backgroundColor: colorArr,
+          maxBarThickness: 40
+        })
+      break;
       case 'sales':
-        this.barChartLabels = this.data.map(x => (x.name + ' | ' + x.plattform))
+        this.barChartLabels = this.data.map(x => x.name)
         let globalSalesArr = this.data.map(x => x.globalSales)
-        let colorArr = [];
 
         this.data.forEach(game => {
-          if(game === this.game){
-            colorArr.push("rgba(247,70,74,0.2)")
+          if(game.equals(this.game)){
+            colorArr.push("rgba(247,70,74,0.5)")
           }else{
-            colorArr.push("rgba(0,164,255,0.2)")
+            colorArr.push("rgba(0,164,255,0.5)")
           }
         });
 
@@ -69,7 +102,7 @@ export class BarGraphComponent implements OnInit, OnChanges {
         })
       break;
       case 'PublisherGenre-Sales':
-        this.barChartLabels = this.data.map(x => (x.name + ' | ' + x.plattform)).slice(0,50)
+        this.barChartLabels = this.data.map(x => x.name).slice(0,50)
         var arr = this.data.map(x => x.globalSales);
         arr = arr.slice(0,50)
         this.barChartData.push({
@@ -85,6 +118,7 @@ export class BarGraphComponent implements OnInit, OnChanges {
       let game = this.data[idx];
       this.navigationService.updateGame(game);
       this.router.navigate([`/home/details`, this.navigationService.encodeURLElement(game.name)]);
+
     }
   }
 }
