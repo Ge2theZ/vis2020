@@ -30,6 +30,8 @@ export class StackedLineGraphComponent implements OnInit {
   private publisherList: any;
   private groupData: any;
 
+  private Tooltip: any;
+
   constructor(private router: Router,
               private route: ActivatedRoute,
               private dataService: DataService) {
@@ -176,6 +178,8 @@ export class StackedLineGraphComponent implements OnInit {
       .attr("text-anchor", "middle")  
       .style("font-size", "16px") 
       .text("Genre Market Share Per Year");
+
+
   }
 
   private addAxisPublisher() {
@@ -317,10 +321,20 @@ export class StackedLineGraphComponent implements OnInit {
       .on("mouseover.a", (d,i) => {
         d3.selectAll(".myArea").style("opacity", (d:any, g:any) => {if (g==i) {return 1.0} else return 0.2})
         d3.selectAll(".areas").style("opacity", (d:any, g:any) =>   {if (this.genreList.length-1-g==i) {return 1.0} else return 0.2})
-
+        this.Tooltip
+        .style("opacity", 1)
+        //d3.select(this)
+        //  .style("stroke", "black")
+        //  .style("opacity", 1)
       })
       .on("mouseover.b", (d,i) => {
         this.dataService.updateCoverCarousel(this.genreList[i], null, 1970, 2019, 7)
+      })
+      .on("mousemove", (d,i) => {
+        d3.select(".tooltip")
+          .html(this.genreList[i])
+          .style("left", (d3.mouse(document.body)[0]-20) + "px")
+          .style("top", (d3.mouse(document.body)[1]-70) + "px")
       })
       .on("mouseleave", this.mouseleave)
       .on("click", (d:any, i:any) => this.mouseclick(d,i));
@@ -349,5 +363,17 @@ export class StackedLineGraphComponent implements OnInit {
       .text((d:any, i:any) =>  this.genreList[this.genreList.length-1-i]) // reverse legend to adjust for area order 
       .attr("text-anchor", "left")
       .style("alignment-baseline", "middle")
+
+        // create a tooltip
+    this.Tooltip = d3.select("#my_chart").append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-width", "2px")
+        .style("border-radius", "5px")
+        .style("padding", "5px")
   }
+
+
 }
