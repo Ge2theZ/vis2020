@@ -54,9 +54,13 @@ export class StackedLineGraphComponent implements OnInit {
   }
 
   private buildGenreGraph() {
-    this.dataService.readInGenreSalesPerYears().subscribe(data => {
-      this.data = data;
-      this.prepareGenrePerYearData();
+
+
+    this.dataService.onReady$.subscribe(ready => {
+      if (ready) {
+
+        this.data = this.dataService.genreSalesPerYears;
+        this.prepareGenrePerYearData();
 
       if (this.svg == null) {
         this.buildSvg()
@@ -66,8 +70,9 @@ export class StackedLineGraphComponent implements OnInit {
 
       this.addAxis();
       this.drawData();
-
+      }
     });
+
   }
 
   private prepareGenrePerYearData() {
