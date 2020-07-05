@@ -539,6 +539,15 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
         .text((d:any, i:any) =>  this.labelList[this.labelList.length-1-i]) // reverse legend to adjust for area order 
         .attr("text-anchor", "left")
         .style("alignment-baseline", "middle")
+        .on("mouseover", (d,i) => {
+          d3.selectAll(".myArea").style("opacity", (d:any, g:any) => {if (this.labelList.length-1-g==i) {return 1.0} else return 0.2})
+          d3.selectAll(".areas").style("opacity", (d:any, g:any) =>   {if (g==i) {return 1.0} else return 0.2})
+        })
+        .on("mouseleave", (d) => {
+          d3.selectAll(".myArea").style("opacity", 1).style("stroke", "none");
+          d3.selectAll(".areas").style("opacity",1.0);
+        })
+        .on("click", (d:any, i:any) => this.mouseClick(d,this.labelList.length-1-i));
   }
 
   private updateToolTip() {
