@@ -8,11 +8,11 @@
       </svg>
     </div>
     <div class="selection">
-      <span *ngIf="mockedDataSet[mockedCurrentDatasetIndex].from === 0" class="badge badge-light">
-        <strong>Top {{mockedDataSet[mockedCurrentDatasetIndex].to}} Publishers</strong>
+      <span *ngIf="clusteredDataSet[currentClusterIndex].from === 0" class="badge badge-light">
+        <strong>Top {{clusteredDataSet[currentClusterIndex].to}} Publishers</strong>
       </span>
-      <span *ngIf="mockedDataSet[mockedCurrentDatasetIndex].from !== 0" class="badge badge-light">
-        <strong>Top {{mockedDataSet[mockedCurrentDatasetIndex].from}} - {{mockedDataSet[mockedCurrentDatasetIndex].to}} publishers</strong>
+      <span *ngIf="clusteredDataSet[currentClusterIndex].from !== 0" class="badge badge-light">
+        <strong>Top {{clusteredDataSet[currentClusterIndex].from}} - {{clusteredDataSet[currentClusterIndex].to}} publishers</strong>
       </span>
     </div>
     <div class="chevron-right" (click)="nextDataSet()">

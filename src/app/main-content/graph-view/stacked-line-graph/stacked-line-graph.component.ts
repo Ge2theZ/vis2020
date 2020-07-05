@@ -33,18 +33,18 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
   private genreList: any;
   private publisherList: any;
   private groupData: any;
-  private mockGenreName:any;
 
   public inHomeView: boolean;
   public inGenreView: boolean;
   public inPublisherView: boolean;
 
   private Tooltip: any;
-  public mockedDataSet =  [
-    { from: 0, to: 20, data: []},
-    { from: 20, to: 40, data: []}
-    ];
-  public mockedCurrentDatasetIndex = 0;
+
+  public currentClusterIndex = 0;
+  public clusteredDataSet: any;
+
+  private genreName: any;
+  private publisherName: any;
 
   private routerSubscription: any;
   private interactionSubscription: any;
@@ -61,12 +61,26 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
 
   ngOnInit() {  
     this.svg = null;
-    this.buildGenreGraph();
+    
+    this.dataService.onReady$.subscribe(ready => {
+      if (ready) {
+        this.data = this.dataService.genreSalesPerYears;
+        this.prepareHomeData();
 
-    this.determineRouterState();
+      if (this.svg == null) {
+        this.buildSvg()
+      } else {
+        this.svg.selectAll("*").remove();
+      }
+      }
+    });
+    
+    this.handleTransitions()
+    this.updateToolTip();
+
     this.routerSubscription = this.router.events.subscribe(events => {
       if (events instanceof NavigationEnd) {
-        this.determineRouterState();
+        this.handleTransitions()       
       }
     })
 
@@ -74,11 +88,56 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
       if(game) {
         // this is an hover event, highlight the genre/publisher depending on view
         console.log("Hover over card!");
+        if (this.inHomeView) {
+          console.log(game.genre)
+          d3.selectAll(".areas").style("opacity", (d:any, g:any) => {if (this.genreList[this.genreList.length-1-g]==game.genre) {return 1.0}else return 0.2})
+          d3.selectAll(".myArea").style("opacity", (d:any, g:any) => {if (this.genreList[g]==game.genre) {return 1.0} else return 0.2})
+
+        } else if (this.inGenreView) {
+          d3.selectAll(".areas").style("opacity", (d:any, g:any) => {if (this.genreList[this.genreList.length-1-g]==game.publisher) {return 1.0}else return 0.2})
+          d3.selectAll(".myArea").style("opacity", (d:any, g:any) => {if (this.genreList[g]==game.publisher) {return 1.0} else return 0.2})
+        }
+
       } else {
+        d3.selectAll(".areas").style("opacity", 1.0);
+        d3.selectAll(".myArea").style("opacity", 1.0);
         // this is a leave event, unhighlight what ever is highligted
         console.log("Unhover over card!");
       }
     })
+  }
+
+  handleTransitions() {
+    this.determineRouterState();
+    this.getParameterFromUrl();
+
+    if (this.inHomeView) {
+      console.log("TRANSITION to home")
+      this.transitionToHome();
+    } else if (this.inGenreView) {
+      console.log("TRANSITION to genre " + this.genreName)
+      this.transitionToGenre(this.genreName);
+    } else if (this.inPublisherView) {
+      console.log("Publisher not implemented");
+    }
+  }
+
+  getParameterFromUrl() {
+    let routeSnapshot: ActivatedRouteSnapshot = this.route.snapshot;
+    let url: string = routeSnapshot["_routerState"]["url"];
+
+    console.log("Route has changed")
+    let splitted = url.split('/');
+    this.genreName = ''
+    this.publisherName = ''
+    if (this.inGenreView)
+    {
+      this.genreName = splitted[splitted.map(function(e) { return e; }).indexOf('genre')+1];
+    } else if (this.inPublisherView) {
+      this.genreName = splitted[splitted.map(function(e) { return e; }).indexOf('genre')+1];
+      this.publisherName = splitted[splitted.map(function(e) { return e; }).indexOf('publisher')+1];
+    }
+
   }
 
   /**
@@ -108,14 +167,11 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
     this.interactionSubscription.destroy();
   }
 
-  private buildGenreGraph() {
-
-
+  private transitionToHome() {
     this.dataService.onReady$.subscribe(ready => {
       if (ready) {
-
         this.data = this.dataService.genreSalesPerYears;
-        this.prepareGenrePerYearData();
+        this.prepareHomeData();
 
       if (this.svg == null) {
         this.buildSvg()
@@ -123,14 +179,45 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
         this.svg.selectAll("*").remove();
       }
 
-      this.addAxis();
-      this.drawData();
+      this.addAxisHome();
+      this.updatePath();
+      this.updateLegend();
       }
     });
-
   }
 
-  private prepareGenrePerYearData() {
+  private transitionToGenre(genreID:any) {
+
+    let maxFactor = 0;
+    // calculate genre percentage per year
+    let factors = {}
+    for(var i = 1970; i <= 2020; i++) factors[i.toString()] = 0
+    for(var i = 0; i < this.groupData.length; i++) {
+      for(var j = 0; j < this.groupData[i].values.length; j++) {
+        if (this.groupData[i].values[j].Genre == genreID) {
+          factors[this.groupData[i].key] = this.groupData[i].values[j].Percentage_per_year
+          maxFactor = Math.max(maxFactor, this.groupData[i].values[j].Percentage_per_year);
+        }
+      }
+    }
+    //this.data = this.dataService.getMarketShareForGenrePerYear(this.genreList[genreID]);
+    console.log("TEST " + genreID)
+    this.clusteredDataSet = this.dataService.getClusteredMarketShareForGenrePerYear(genreID);
+  
+    let temp = []
+    for (let i = 0; i < this.clusteredDataSet[this.currentClusterIndex].data.length; i++) {
+      temp = temp.concat(this.clusteredDataSet[this.currentClusterIndex].data[i])
+    }
+    this.data = temp
+  
+    this.prepareGenreData(factors, maxFactor);
+    this.svg.selectAll("*").remove(); 
+    this.addAxisGenre();
+    this.updatePath();
+    this.updateLegend();
+   }
+
+  private prepareHomeData() {
     // group the data: one array for each value of the X axis.
     this.groupData = d3.nest()
       .key(function(d) { return d.Year;})
@@ -169,7 +256,7 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
       (this.groupData)
   }
 
-  private preparePublisherPerYearData(factors:any, maxFactor:any) {
+  private prepareGenreData(factors:any, maxFactor:any) {
       
     this.data.sort(function(a, b) {
       return a.year - b.year;
@@ -191,7 +278,7 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
 
     for(var i = 0; i < groupData.length; i++) {
       for(var j = 0; j < groupData[i].values.length; j++) {
-        groupData[i].values[j].share *= (factors[groupData[i].key]*0.01)*(100/maxFactor)
+        groupData[i].values[j].share *= (factors[groupData[i].key]*0.01)//*(100/maxFactor)
       }
     }
 
@@ -245,18 +332,16 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
       .attr("text-anchor", "middle")  
       .style("font-size", "16px") 
       .text("Genre Market Share Per Year");
-
-
   }
 
-  private addAxisPublisher() {
+  private addAxisGenre() {
     // Add X axis
     this.x = d3.scaleLinear()
       .domain([1970, 2020])
       //.domain(d3.extent(this.data, function(d) { return d.year; }))
       .range([ 0, this.width ]);
       
-      this.svg.append("g")
+    this.svg.append("g")
       .attr("transform", "translate(0," + this.height + ")")
       .call(d3.axisBottom(this.x).ticks(5).tickFormat(d3.format("d")));
 
@@ -267,13 +352,18 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
       .style("text-anchor", "middle")
       .text("Year");
     
+    let domain = this.getStackedDomain(this.stackedData);
     // Add Y axis
     this.y = d3.scaleLinear()
-      .domain([-50, 50]) //stream chart
+      .domain(domain)
+      //.domain([-50, 50]) //stream chart
       //.domain([0, d3.max(this.data, function(d) { return + d.Percentage_per_year; })])
       .range([ this.height, 0 ]);
-    //this.svg.append("g") // stream chart
-    //  .call(d3.axisLeft(this.y));
+    console.log("domain: " + domain)
+    this.svg.append("g") // stream chart
+      //.call(d3.axisLeft(this.y))//.ticks(3).tickFormat((d,i) => tickLabels[i]));
+      //.call(d3.axisLeft(this.y).ticks(3).tickFormat((d,i) => tickLabels[i]));
+      .call(d3.axisLeft(this.y).ticks(5).tickFormat((d,i) => {console.log(d); return (d+domain[1]).toFixed(1)}));
     // text label for the y axis
     this.svg.append("text")
       .attr("transform", "rotate(-90)")
@@ -284,12 +374,12 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
       .text("Market Share");  
   }
   
-  
-  private addAxis() {
+  private addAxisHome() {
     // Add X axis
     this.x = d3.scaleLinear()
       .domain(d3.extent(this.data, function(d) { return d.Year; }))
       .range([ 0, this.width ]);
+      
       
       this.svg.append("g")
       .attr("transform", "translate(0," + this.height + ")")
@@ -304,11 +394,12 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
     
     // Add Y axis
     this.y = d3.scaleLinear()
-      .domain([-50, 50]) //stream chart
-      //.domain([0, d3.max(this.data, function(d) { return + d.Percentage_per_year; })])
+      .domain(this.getStackedDomain(this.stackedData))
       .range([ this.height, 0 ]);
-    //this.svg.append("g") // stream chart
-    //  .call(d3.axisLeft(this.y));
+
+    let tickLabels = [0, 50, 100];
+    this.svg.append("g") // stream chart
+      .call(d3.axisLeft(this.y).ticks(3).tickFormat((d,i) => tickLabels[i]));
     // text label for the y axis
     this.svg.append("text")
       .attr("transform", "rotate(-90)")
@@ -319,149 +410,127 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
       .text("Market Share");  
   }
 
-
-
-  private mouseclick(d,i) { 
-    console.log("Genre Id: " + i);
-    console.log("Genre Name: " + this.genreList[i]);
-    
-   // Check if data is already calculated
-   if (this.dataService.isMarketShareForGenrePerYearCached(this.genreList[i])) {
-     let yourData = this.dataService.getCachedMarketShareForGenrePerYear(this.genreList[i])// here is your data
-   } else { // calculate data
-     this.dataService.getMarketShareForGenrePerYear(this.genreList[i]);
-   }
-
-   this.router.navigate(['home/genre', this.genreList[i]]);
-   this.mockGenreName=this.genreList[i];
-   this.transitionToStreamChart(this.mockGenreName);
+  private getStackedDomain(stackedData:any) {
+    let tempMax = 0;
+    let tempMin = 0;
+    this.stackedData.forEach(element => {
+      element.forEach(element => {
+        element.forEach(element => {
+          tempMax = Math.max(tempMax, element);
+          tempMin = Math.min(tempMin, element);
+        });
+      });
+    });
+    return [tempMin, tempMax]
   }
 
- private transitionToStreamChart(genreID:any) {
+  private mouseClick(d,i) {    
+    // Check if data is already calculated
+    //if (this.dataService.isMarketShareForGenrePerYearCached(this.genreList[i])) {
+    //  let yourData = this.dataService.getCachedMarketShareForGenrePerYear(this.genreList[i])// here is your data
+    //} else { // calculate data
+    //  this.dataService.getMarketShareForGenrePerYear(this.genreList[i]);
+    //}
+    if (this.inHomeView) {
+      this.router.navigate(['home/genre', this.genreList[i]]);
+    } else if (this.inGenreView) {
 
-  let maxFactor = 0;
-  // calculate genre percentage per year
-  let factors = {}
-  for(var i = 1970; i <= 2020; i++) factors[i.toString()] = 0
-  for(var i = 0; i < this.groupData.length; i++) {
-    for(var j = 0; j < this.groupData[i].values.length; j++) {
-      if (this.groupData[i].values[j].Genre == genreID) {
-        factors[this.groupData[i].key] = this.groupData[i].values[j].Percentage_per_year
-        maxFactor = Math.max(maxFactor, this.groupData[i].values[j].Percentage_per_year);
-      }
     }
+   
   }
-  //this.data = this.dataService.getMarketShareForGenrePerYear(this.genreList[genreID]);
-  console.log(genreID)
-  let clusters = this.dataService.getClusteredMarketShareForGenrePerYear(genreID);
-  console.log(clusters)
-  let temp = []
-  for (let i = 0; i < clusters[this.mockedCurrentDatasetIndex].data.length; i++) {
-    temp = temp.concat(clusters[this.mockedCurrentDatasetIndex].data[i])
+
+  private updatePath() {
+    // Add the areas
+    this.svg
+      .selectAll("mylayers")
+      .data(this.stackedData)
+      .enter()
+      .append("path")
+        .attr("class", "myArea")
+        .style("fill", (d: any) => { 
+          return this.color(d.key)
+        })
+          
+        .attr("d", d3.area()
+          .curve(d3.curveBasis)
+          .x( (d: any, i) => this.x(d.data.key) )
+          .y0( (d: any) => this.y(d[1]) ) 
+          .y1( (d: any) => this.y(d[0]) ) 
+        )
+        .on("mouseover.a", (d,i) => {
+          d3.selectAll(".myArea").style("opacity", (d:any, g:any) => {if (g==i) {return 1.0} else return 0.2})
+          d3.selectAll(".areas").style("opacity", (d:any, g:any) =>   {if (this.genreList.length-1-g==i) {return 1.0} else return 0.2})
+          this.Tooltip
+            .style("opacity", 1)
+        })
+        .on("mouseover.b", (d,i) => {
+          this.dataService.updateCoverCarousel(this.genreList[i], null, 1970, 2019, 7)
+        })
+        .on("mousemove", (d,i) => {
+          d3.select(".tooltip")
+            .html(this.genreList[i])
+            .style("left", (d3.mouse(document.body)[0]-20) + "px")
+            .style("top", (d3.mouse(document.body)[1]-70) + "px")
+        })
+        .on("mouseleave", (d) => {
+          d3.selectAll(".myArea").style("opacity", 1).style("stroke", "none");
+          d3.selectAll(".areas").style("opacity",1.0);
+          this.Tooltip
+              .style("opacity", 0)
+        })
+        .on("click", (d:any, i:any) => this.mouseClick(d,i));
   }
-  this.data = temp
 
-  this.preparePublisherPerYearData(factors, maxFactor);
-  this.svg.selectAll("*").remove(); 
-  this.addAxisPublisher();
-  this.drawData();
- }
+  private updateLegend() {
+    // Add one dot in the legend for each name.
+    let size = 12;
+    this.svg.selectAll("myrect")
+      .data(this.stackedData)
+      .enter()
+      .append("rect")
+        .attr("x", this.width+10)
+        .attr("y", function(d,i){ return 10 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
+        .attr("width", size)
+        .attr("height", size)
+        .style("fill", (d: any) =>  this.color(this.genreList.length-1-d.key) ) // reverse legend to adjust for area order 
 
+    // Add one dot in the legend for each name.
+    this.svg.selectAll("mylabels")
+      .data(this.stackedData)
+      .enter()
+      .append("text")
+        .attr("class", "areas")
+        .attr("x", this.width + size*1.2 +10)
+        .attr("y", function(d,i){ return 10 + i*(size+5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
+        .style("fill", (d: any) =>  this.color(this.genreList.length-1-d.key) ) // reverse legend to adjust for area order 
+        .text((d:any, i:any) =>  this.genreList[this.genreList.length-1-i]) // reverse legend to adjust for area order 
+        .attr("text-anchor", "left")
+        .style("alignment-baseline", "middle")
+  }
 
- private drawData() {
-
-  // Add the areas
-  this.svg
-    .selectAll("mylayers")
-    .data(this.stackedData)
-    .enter()
-    .append("path")
-      .attr("class", "myArea")
-      .style("fill", (d: any) => { 
-        return this.color(d.key)
-      })
-        
-      .attr("d", d3.area()
-        .curve(d3.curveBasis)
-        .x( (d: any, i) => this.x(d.data.key) )
-        .y0( (d: any) => this.y(d[1]) ) 
-        .y1( (d: any) => this.y(d[0]) ) 
-      )
-      .on("mouseover.a", (d,i) => {
-        d3.selectAll(".myArea").style("opacity", (d:any, g:any) => {if (g==i) {return 1.0} else return 0.2})
-        d3.selectAll(".areas").style("opacity", (d:any, g:any) =>   {if (this.genreList.length-1-g==i) {return 1.0} else return 0.2})
-        this.Tooltip
-        .style("opacity", 1)
-        //d3.select(this)
-        //  .style("stroke", "black")
-        //  .style("opacity", 1)
-      })
-      .on("mouseover.b", (d,i) => {
-        this.dataService.updateCoverCarousel(this.genreList[i], null, 1970, 2019, 7)
-      })
-      .on("mousemove", (d,i) => {
-        d3.select(".tooltip")
-          .html(this.genreList[i])
-          .style("left", (d3.mouse(document.body)[0]-20) + "px")
-          .style("top", (d3.mouse(document.body)[1]-70) + "px")
-      })
-      .on("mouseleave", (d) => {
-        d3.selectAll(".myArea").style("opacity", 1).style("stroke", "none");
-        d3.selectAll(".areas").style("opacity",1.0);
-        this.Tooltip
-            .style("opacity", 0)
-      })
-      .on("click", (d:any, i:any) => this.mouseclick(d,i));
-
-  // Add one dot in the legend for each name.
-  let size = 12;
-  this.svg.selectAll("myrect")
-    .data(this.stackedData)
-    .enter()
-    .append("rect")
-      .attr("x", this.width+10)
-      .attr("y", function(d,i){ return 10 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
-      .attr("width", size)
-      .attr("height", size)
-      .style("fill", (d: any) =>  this.color(this.genreList.length-1-d.key) ) // reverse legend to adjust for area order 
-
-  // Add one dot in the legend for each name.
-  this.svg.selectAll("mylabels")
-    .data(this.stackedData)
-    .enter()
-    .append("text")
-      .attr("class", "areas")
-      .attr("x", this.width + size*1.2 +10)
-      .attr("y", function(d,i){ return 10 + i*(size+5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
-      .style("fill", (d: any) =>  this.color(this.genreList.length-1-d.key) ) // reverse legend to adjust for area order 
-      .text((d:any, i:any) =>  this.genreList[this.genreList.length-1-i]) // reverse legend to adjust for area order 
-      .attr("text-anchor", "left")
-      .style("alignment-baseline", "middle")
-
-        // create a tooltip
+  private updateToolTip() {
+    // create a tooltip
     this.Tooltip = d3.select("#my_chart").append("div")
-        .style("opacity", 0)
-        .attr("class", "tooltip")
-        .style("background-color", "white")
-        .style("border", "solid")
-        .style("border-width", "2px")
-        .style("border-radius", "5px")
-        .style("padding", "5px")
+      .style("opacity", 0)
+      .attr("class", "tooltip")
+      .style("background-color", "white")
+      .style("border", "solid")
+      .style("border-width", "2px")
+      .style("border-radius", "5px")
+      .style("padding", "5px")
   }
 
   nextDataSet(){
-    if(!(this.mockedCurrentDatasetIndex+1 === this.mockedDataSet.length)) {
-      this.mockedCurrentDatasetIndex++
+    if(!(this.currentClusterIndex+1 === this.clusteredDataSet.length)) {
+      this.currentClusterIndex++
     }
-    this.transitionToStreamChart(this.mockGenreName);
-    console.log("Next Dataset Clicked");
+    this.transitionToGenre(this.genreName);
   }
 
   previousDataset(){
-    if(!(this.mockedCurrentDatasetIndex === 0)) {
-      this.mockedCurrentDatasetIndex--
+    if(!(this.currentClusterIndex === 0)) {
+      this.currentClusterIndex--
     }
-    this.transitionToStreamChart(this.mockGenreName);
-    console.log("Previous Dataset Clicked")
+    this.transitionToGenre(this.genreName);
   }
 }
