@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="col-sm-12 col-md-6 pb-5">
-    <h4 class="w-100">Top 10 Critic and User scores of <strong>least successful</strong> games</h4>
+  <div class="col-sm-12 col-md-6 mb-5">
+    <h4 class="w-100">Top 10 Critic and User scores of <strong>least successful</strong> {{this.publisher}} games</h4>
 
     <hr>
     <app-radar-chart *ngIf="this.games" [rawData]="this.games"
@@ -9,8 +9,8 @@
       <span class="sr-only">Loading...</span>
     </div>
   </div>
-  <div class="col-sm-12 col-md-6 pb-5">
-    <h4 class="w-100">Top 10 Critic and User scores of <strong>most successful</strong> games</h4>
+  <div class="col-sm-12 col-md-6 mb-5">
+    <h4 class="w-100">Top 10 Critic and User scores of <strong>most successful</strong> {{this.publisher}} games</h4>
     <hr>
     <app-radar-chart *ngIf="this.games" [rawData]="this.games"
                      [useCase]="RadarUseCase.crit_user_score_highest"></app-radar-chart>
@@ -18,12 +18,12 @@
       <span class="sr-only">Loading...</span>
     </div>
   </div>
-  <div class="col-sm-12 col-md-6 pb-5">
+  <div class="col-sm-12 col-md-6 mb-5">
     <h4 class="w-100">Global Sales of <strong>Top 50</strong> {{genre}} Games from {{publisher}}</h4>
     <hr>
     <bar-graph *ngIf="this.games" [data]="this.games" [prop]="'PublisherGenre-Sales'"></bar-graph>
   </div>
-  <div class="col-sm-12 col-md-6 pb-5">
+  <div class="col-sm-12 col-md-6 mb-5">
     <h4 class="w-100">Publisher count in <strong>top 100</strong> games of genre {{genre}}</h4>
     <hr>
     <app-pie-chart *ngIf="this.games" [useCase]="PieUseCase.top100_genre_publisher" [games]="this.games"></app-pie-chart>

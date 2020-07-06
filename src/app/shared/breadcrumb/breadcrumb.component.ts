@@ -25,8 +25,8 @@ export class BreadcrumbComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe((navigationStart) => {
       if(navigationStart instanceof NavigationStart ) {
-        let route = navigationStart.url;
-        let slicedRoute = route.slice(1).split("/");
+        let navigationRoute = navigationStart.url.split('%20').join(' ');
+        let slicedRoute = navigationRoute.slice(1).split("/");
         console.log(slicedRoute);
 
         this.breadcrumbs = [];
@@ -37,11 +37,11 @@ export class BreadcrumbComponent implements OnInit {
         if(slicedRoute[1] == "details") {
           let gameIndex = slicedRoute[2];
           let gameName = this.dataService.gameDataSet.filter(item => item.index === Number(gameIndex))[0].name;
-          this.breadcrumbs[1] = {name: gameName, url: route};
+          this.breadcrumbs[1] = {name: gameName, url: navigationRoute};
         }
 
         if(slicedRoute[1] == "faq") {
-          this.breadcrumbs[1] = {name: "FAQ", url: route};
+          this.breadcrumbs[1] = {name: "FAQ", url: navigationRoute};
         }
 
         if (slicedRoute[1] === "genre") {
@@ -50,12 +50,11 @@ export class BreadcrumbComponent implements OnInit {
 
         if (slicedRoute[3] === "publisher") {
           this.publisherBreadCrumb.name = '';
-          this.publisherBreadCrumb.url = route; // since it is the last url
+          this.publisherBreadCrumb.url = navigationRoute;
           slicedRoute[4].split('%20').forEach(word => {
             this.publisherBreadCrumb.name += word + ' ';
           });
-          console.log(route);
-          this.breadcrumbs[2] = {name: this.publisherBreadCrumb.name, url: this.publisherBreadCrumb.url.replace('%20', ' ')};
+          this.breadcrumbs[2] = {name: this.publisherBreadCrumb.name, url: navigationRoute};
         }
       }
     });
