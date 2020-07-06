@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CoverCarousel} from '../../../../models/CoverCarousel';
-import { Router, NavigationExtras } from '@angular/router';
-import {NavigationService} from '../../../services/navigate.service';
+import { Router } from '@angular/router';
 import {InteractionService} from '../../../services/interaction.service';
 
 @Component({
@@ -21,7 +20,6 @@ export class CoverCardComponent implements OnInit {
   };
 
   constructor(private router: Router,
-              private navigationService: NavigationService,
               private interactionService: InteractionService) { }
 
   ngOnInit(): void {
@@ -30,7 +28,6 @@ export class CoverCardComponent implements OnInit {
   navigate(){
     if(!this.isGameCardEmpty()) {
       this.router.navigate([`/home/details`, this.game.game.index]);
-      this.navigationService.updateGame(this.game.game);
     }
   }
 

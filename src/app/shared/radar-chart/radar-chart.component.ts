@@ -1,7 +1,6 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild, OnChanges} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, OnChanges} from '@angular/core';
 import {Chart} from 'chart.js';
 import {Game} from '../../../models/Game';
-import { NavigationService } from 'src/app/services/navigate.service';
 import { Router } from '@angular/router';
 
 export enum RadarUseCase {
@@ -28,7 +27,7 @@ export class RadarChartComponent implements OnInit, AfterViewInit, OnChanges {
   radarChart: Chart;
   randomId: string;
 
-  constructor(private navigationService: NavigationService, private router: Router) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.randomId = Math.abs(Math.random()).toString();
@@ -63,7 +62,6 @@ export class RadarChartComponent implements OnInit, AfterViewInit, OnChanges {
     if(point.length > 0 && this.useCase === RadarUseCase.crit_user_score_details){
       let idx = point[0]._index;
       let game = this.rawData[idx];
-      this.navigationService.updateGame(game);
       this.router.navigate([`/home/details`, game.index]);
     }
   }

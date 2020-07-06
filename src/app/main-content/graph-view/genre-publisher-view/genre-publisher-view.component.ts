@@ -1,7 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataService} from '../../../services/DataService';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NavigationService} from '../../../services/navigate.service';
 import {Game} from '../../../../models/Game';
 import {RadarUseCase} from '../../../shared/radar-chart/radar-chart.component';
 import {PieUseCase} from '../../../shared/pie-chart/pie-chart.component';
@@ -20,8 +19,7 @@ export class GenrePublisherViewComponent implements OnInit {
 
   constructor(public dataService: DataService,
               public router: Router,
-              public route: ActivatedRoute,
-              public navigationService: NavigationService) {
+              public route: ActivatedRoute) {
   }
 
   ngOnInit(): void {

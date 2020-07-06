@@ -1,8 +1,7 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Game } from 'src/models/Game';
 import { DataService } from 'src/app/services/DataService';
-import {NavigationService} from '../../services/navigate.service';
 import {RadarUseCase} from 'src/app/shared/radar-chart/radar-chart.component';
 import {PieUseCase} from '../../shared/pie-chart/pie-chart.component';
 
@@ -21,8 +20,7 @@ export class GameDetailsComponent implements OnInit {
   public gamesInThisYear: Game[];
 
   constructor(private dataService:DataService, 
-              private route: ActivatedRoute, 
-              private navigationService: NavigationService,
+              private route: ActivatedRoute,
               private router: Router) {
   }
 

@@ -1,7 +1,6 @@
-import {Component, OnInit, OnChanges, Input, ViewChild, ElementRef, SimpleChanges} from '@angular/core';
+import {Component, OnInit, OnChanges, Input, SimpleChanges} from '@angular/core';
 import { Game } from 'src/models/Game';
 import { Router } from '@angular/router';
-import { NavigationService } from 'src/app/services/navigate.service';
 
 @Component({
     selector: 'bar-graph',
@@ -9,7 +8,7 @@ import { NavigationService } from 'src/app/services/navigate.service';
     styleUrls: ['./bargraph.component.css']
 })
 export class BarGraphComponent implements OnInit, OnChanges {
-  constructor(private router:Router, private navigationService: NavigationService) { }
+  constructor(private router:Router) { }
   
   @Input() public data: Game[];
   @Input() private game: Game;
@@ -118,7 +117,6 @@ export class BarGraphComponent implements OnInit, OnChanges {
     if(event.active.length > 0){
       let idx = event.active[0]._index;
       let game = this.data[idx];
-      this.navigationService.updateGame(game);
       this.router.navigate([`/home/details`, game.index]);
 
     }

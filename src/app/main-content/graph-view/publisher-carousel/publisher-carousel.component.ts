@@ -1,9 +1,8 @@
-import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnInit} from '@angular/core';
+import {AfterViewInit, Component, HostListener, OnInit} from '@angular/core';
 import {CoverCarousel} from '../../../../models/CoverCarousel';
 import {DataService} from '../../../services/DataService';
 import {StaticCarousel} from '../genre-carousel/genre-carousel.component';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NavigationService} from '../../../services/navigate.service';
 
 @Component({
   selector: 'app-publisher-carousel',
@@ -22,13 +21,11 @@ export class PublisherCarouselComponent implements OnInit, AfterViewInit {
 
   constructor(public dataService: DataService,
               public router: Router,
-              public route: ActivatedRoute,
-              public navigationService: NavigationService) {
+              public route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     this.genre = this.route.snapshot.params.genreId;
-    this.navigationService.updateGenre(this.genre);
 
     this.dataService.liveCarousel$.subscribe(data => {
       this.data = data;

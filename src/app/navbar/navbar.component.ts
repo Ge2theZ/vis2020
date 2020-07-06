@@ -1,10 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/DataService';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
 import {Observable} from 'rxjs';
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 import { Game } from 'src/models/Game'
-import {NavigationService} from '../services/navigate.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,8 +15,7 @@ export class NavbarComponent implements OnInit {
   public gameNameList: string[];
 
   constructor(private dataService: DataService,
-              private router: Router,
-              private navigationService: NavigationService) { }
+              private router: Router) { }
 
   ngOnInit(): void {
     this.dataService.onReady$.subscribe(() => {
@@ -37,7 +35,6 @@ export class NavbarComponent implements OnInit {
   execSearch() {
     let searchParams = this.searchquery.split(" | ");
     let game: Game = this.dataService.gameDataSet.filter(item => item.name === searchParams[0] && item.plattform === searchParams[1])[0];
-    this.navigationService.updateGame(game);
     this.router.navigate(['/home/details', game.index]);
   }
 }

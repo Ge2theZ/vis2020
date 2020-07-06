@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, NavigationEnd, NavigationStart, PRIMARY_OUTLET, Router} from '@angular/router';
-import {filter, map} from 'rxjs/operators';
-import {NavigationService} from '../../services/navigate.service';
+import {ActivatedRoute, NavigationStart, Router} from '@angular/router';
 import {DataService} from '../../services/DataService';
 
 interface Breadcrumb {
@@ -22,7 +20,6 @@ export class BreadcrumbComponent implements OnInit {
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private navigationService: NavigationService,
               private dataService: DataService) { }
 
   ngOnInit(): void {
@@ -40,9 +37,7 @@ export class BreadcrumbComponent implements OnInit {
         if(slicedRoute[1] == "details") {
           let gameIndex = slicedRoute[2];
           let gameName = this.dataService.gameDataSet.filter(item => item.index === Number(gameIndex))[0].name;
-          this.navigationService.game$.subscribe(value => {
-            this.breadcrumbs[1] = {name: gameName, url: route};
-          });
+          this.breadcrumbs[1] = {name: gameName, url: route};
         }
 
         if(slicedRoute[1] == "faq") {

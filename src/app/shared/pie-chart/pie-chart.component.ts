@@ -1,7 +1,5 @@
-import { Component, OnInit, OnChanges,  Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit,  Input } from '@angular/core';
 import { Game } from 'src/models/Game';
-import { Router } from '@angular/router';
-import { NavigationService } from 'src/app/services/navigate.service';
 import { ChartOptions } from 'chart.js';
 import {DataService} from '../../services/DataService';
 
