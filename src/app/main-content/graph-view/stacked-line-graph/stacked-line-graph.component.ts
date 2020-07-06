@@ -137,10 +137,10 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
     this.publisherName = ''
     if (this.inGenreView)
     {
-      this.genreName = splitted[splitted.map(function(e) { return e; }).indexOf('genre')+1].replace('%20', ' ');
+      this.genreName = splitted[splitted.map(function(e) { return e; }).indexOf('genre')+1].split('%20').join(' ');
     } else if (this.inPublisherView) {
-      this.genreName = splitted[splitted.map(function(e) { return e; }).indexOf('genre')+1].replace('%20', ' ');
-      this.publisherName = splitted[splitted.map(function(e) { return e; }).indexOf('publisher')+1].replace('%20', ' ');
+      this.genreName = splitted[splitted.map(function(e) { return e; }).indexOf('genre')+1].split('%20').join(' ');
+      this.publisherName = splitted[splitted.map(function(e) { return e; }).indexOf('publisher')+1].split('%20').join(' ');
     }
 
   }
