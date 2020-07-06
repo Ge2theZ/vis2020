@@ -117,11 +117,11 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
       this.transitionToHome();
     } else if (this.inGenreView) {
       console.log("TRANSITION to genre " + this.genreName)
-      this.title = this.genreName + " genre publisher"
+      this.title =  "Evolution of " + this.genreName + " by publisher"
       this.transitionToGenre(this.genreName);
     } else if (this.inPublisherView) {
       console.log("TRANSITION to publisher " + this.publisherName);
-      this.title = this.publisherName
+      this.title = "Evolution of " + this.publisherName + " games in " + this.genreName + " genre"
       this.transitionToPublisher(this.genreName, this.publisherName);
     }
   }
@@ -393,7 +393,7 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
     this.svg.append("g") // stream chart
       //.call(d3.axisLeft(this.y))//.ticks(3).tickFormat((d,i) => tickLabels[i]));
       //.call(d3.axisLeft(this.y).ticks(3).tickFormat((d,i) => tickLabels[i]));
-      .call(d3.axisLeft(this.y).ticks(5).tickFormat((d,i) => {return (d+domain[1]).toFixed(1)}));
+      .call(d3.axisLeft(this.y).ticks(5).tickFormat((d,i) => {return (d+domain[1]).toFixed(2)}));
     // text label for the y axis
     this.svg.append("text")
       .attr("transform", "rotate(-90)")
@@ -462,7 +462,6 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
     //  this.dataService.getMarketShareForGenrePerYear(this.genreList[i]);
     //}
     if (this.inHomeView) {
-      console.log("TEST ", this.labelList[i])
       this.router.navigate(['home/genre', this.labelList[i]]);
     } else if (this.inGenreView) {
       this.router.navigate(['home/genre', this.genreName,'publisher',this.labelList[i]]);
