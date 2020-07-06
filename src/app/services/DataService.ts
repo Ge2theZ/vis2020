@@ -43,7 +43,6 @@ export class DataService {
       }
       this.readInGenreSalesPerYears().subscribe(data => {
         this.genreSalesPerYears = data;
-        //console.log("GenreSales per Year: ", this.genreSalesPerYears)
         this.onReady$.next(true);
       });
     });
@@ -58,10 +57,8 @@ export class DataService {
   }
 
   updateCoverCarousel(genre: string, publisher: string, fromYear: number, toYear: number, cardAmount: number) {
-    console.time('updateCoverCarousel');
     this.getCoverCarousel(genre, publisher, fromYear, toYear, cardAmount).then(carouselList => {
       this.liveCarousel$.next(carouselList);
-      console.timeEnd('updateCoverCarousel');
     });
   }
 
@@ -218,8 +215,6 @@ export class DataService {
     totalPublisherShare.sort((a, b) => {
       return (b.totalShare - a.totalShare);
     })
-
-    console.log(totalPublisherShare.length)
         
     let res = []
     let dynChunkSize = chunkSize;
@@ -239,7 +234,6 @@ export class DataService {
   }
 
   getMarketShareForGenrePerYear(genre: string): SharePerYearPerPublisher[] {
-    console.time('getMarketShareForGenrePerYear');
     let filtered = this.gameDataSet.filter((game) => game.genre === genre);
     var res = [];
     var totalSalesPerYear = {};
@@ -268,8 +262,6 @@ export class DataService {
     if (this.marketShareForGenrePerYearStore.filter(data => data.genre === genre).length === 0) {
       this.marketShareForGenrePerYearStore.push({genre: genre, data: res});
     }
-
-    console.timeEnd('getMarketShareForGenrePerYear');
     return res;
   }
 

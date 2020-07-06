@@ -53,12 +53,10 @@ export class BarGraphComponent implements OnInit, OnChanges {
   public barChartLabels;
 
   ngOnInit() {
-    console.log(this.data);
    this.initBarGraph();
   }
 
   ngOnChanges(changes: SimpleChanges){
-    console.log(this.data);
     this.initBarGraph();
   }
 

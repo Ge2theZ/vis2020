@@ -42,11 +42,9 @@ export class RadarChartComponent implements OnInit, AfterViewInit, OnChanges {
   ngAfterViewInit(): void {
     switch (this.useCase) {
       case RadarUseCase.crit_user_score_highest:
-        console.log('crit_user_Score use case selected for radar chart');
         this.createUserCriticScoreRadar(SortOrder.highest, 10);
         break;
       case RadarUseCase.crit_user_score_lowest:
-        console.log('crit_user_Score use case selected for radar chart');
         this.createUserCriticScoreRadar(SortOrder.lowest, 10);
         break;
       case RadarUseCase.crit_user_score_details:
@@ -248,7 +246,6 @@ export class RadarChartComponent implements OnInit, AfterViewInit, OnChanges {
       }
     };
 
-    console.log("random id", this.randomId);
     this.radarChart = new Chart(this.randomId, {
       type: 'radar',
       data: radarData,

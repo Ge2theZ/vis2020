@@ -82,7 +82,6 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
     
 
     this.routerSubscription = this.router.events.subscribe(events => {
-      console.log(events);
       if (events instanceof NavigationEnd) {
         this.handleTransitions()       
       }
@@ -116,15 +115,12 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
     this.getParameterFromUrl();
     this.currentClusterIndex = 0;
     if (this.inHomeView) {
-      console.log("TRANSITION to home")
       this.title = "Evolution of Genre Popularity in Video Games"
       this.transitionToHome();
     } else if (this.inGenreView) {
-      console.log("TRANSITION to genre " + this.genreName)
       this.title =  "Evolution of " + this.genreName + " genre by publisher"
       this.transitionToGenre(this.genreName);
     } else if (this.inPublisherView) {
-      console.log("TRANSITION to publisher " + this.publisherName);
       this.title = "Evolution of " + this.publisherName + " games in " + this.genreName + " genre"
       this.transitionToPublisher(this.genreName, this.publisherName);
     }
@@ -167,10 +163,6 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
       this.inGenreView = false;
       this.inPublisherView = true;
     }
-
-    console.log("inHomeView: ", this.inHomeView);
-    console.log("inGenreView: ", this.inGenreView);
-    console.log("inPublisherView: ", this.inPublisherView);
   }
 
   ngOnDestroy(): void {

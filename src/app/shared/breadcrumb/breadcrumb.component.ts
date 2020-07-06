@@ -27,7 +27,6 @@ export class BreadcrumbComponent implements OnInit {
       if(navigationStart instanceof NavigationStart ) {
         let navigationRoute = navigationStart.url.split('%20').join(' ');
         let slicedRoute = navigationRoute.slice(1).split("/");
-        console.log(slicedRoute);
 
         this.breadcrumbs = [];
         if(slicedRoute[0] === "home") {

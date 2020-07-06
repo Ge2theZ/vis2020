@@ -36,7 +36,6 @@ export class PublisherCarouselComponent implements OnInit, AfterViewInit {
       if (ready) {
         this.dataService.updateCoverCarousel(this.genre, null, 1970, 2019, 7);
         this.publisherList = this.dataService.getPublishersForGenre(this.genre);
-        console.log(this.publisherList);
         this.publisherIndex = 8;
         this.calculateStaticCarouselData(this.publisherList.slice(0, 8));
       }
@@ -56,14 +55,11 @@ export class PublisherCarouselComponent implements OnInit, AfterViewInit {
   }
 
   calculateStaticCarouselData(publishers: string[]) {
-    console.log('Publishers to be loaded: ', publishers);
-    console.time('Start calculateStaticCarouselData');
     publishers.forEach(publisher => {
       this.dataService.getCoverCarousel(this.genre, publisher, 1980, 2019, 7).then(data => {
         this.staticCarousels.push({title: publisher, data: data});
       });
     });
-    console.timeEnd('Start calculateStaticCarouselData');
   }
 
 
