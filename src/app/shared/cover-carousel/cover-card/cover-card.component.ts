@@ -40,6 +40,12 @@ export class CoverCardComponent implements OnInit {
     }
   }
 
+  onHoverOut() {
+    if(!this.isGameCardEmpty()) {
+      this.interactionService.onGameCardHover(null);
+    }
+  }
+
   isGameCardEmpty() {
     return this.game.game.name === "No Game"
   }

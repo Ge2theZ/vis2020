@@ -4,6 +4,27 @@
     background-color: aquamarine;
 }
 
+.flex-container{
+  display:flex;
+  justify-content: flex-end;
+}
+
+.graph-data-selection-frame {
+  display: flex;
+}
+
+.selection {
+  width: 200px;
+  text-align: center;
+  font-size: 22px;
+}
+
+
+.chevron-left, .chevron-right {
+  cursor: pointer;
+  font-size: 22px;
+}
+
 #my_chart {
   text-align: center;
 }

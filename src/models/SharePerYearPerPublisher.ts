@@ -5,7 +5,7 @@ export class SharePerYearPerPublisher{
         this.publisher = publisher;
     }
 
-    year: Number;
-    share: Number;
+    year: number;
+    share: number;
     publisher: String;
 }

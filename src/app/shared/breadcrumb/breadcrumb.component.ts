@@ -54,9 +54,13 @@ export class BreadcrumbComponent implements OnInit {
         }
 
         if (slicedRoute[3] === "publisher") {
+          this.publisherBreadCrumb.name = '';
           this.publisherBreadCrumb.url = route; // since it is the last url
-          this.publisherBreadCrumb.name = slicedRoute[4];
-          this.breadcrumbs[2] = {name: slicedRoute[4].replace('%20', ' '), url: route};
+          slicedRoute[4].split('%20').forEach(word => {
+            this.publisherBreadCrumb.name += word + ' ';
+          });
+          console.log(route);
+          this.breadcrumbs[2] = {name: this.publisherBreadCrumb.name, url: this.publisherBreadCrumb.url.replace('%20', ' ')};
         }
       }
     });

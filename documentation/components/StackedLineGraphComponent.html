@@ -1,0 +1,2810 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>vis2020 documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">vis2020 documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>StackedLineGraphComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-stacked-line-graph</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./stacked-line-graph.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./stacked-line-graph.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#clusteredDataSet">clusteredDataSet</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#color">color</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#currentClusterIndex">currentClusterIndex</a>
+                            </li>
+                            <li>
+                                <a href="#data">data</a>
+                            </li>
+                            <li>
+                                <a href="#data2">data2</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#genreName">genreName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#genreYearGroupData">genreYearGroupData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#height">height</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#inGenreView">inGenreView</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#inHomeView">inHomeView</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#inPublisherView">inPublisherView</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#interactionSubscription">interactionSubscription</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#labelList">labelList</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#margin">margin</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#publisherName">publisherName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#routerSubscription">routerSubscription</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#stackedGraphData">stackedGraphData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#svg">svg</a>
+                            </li>
+                            <li>
+                                <a href="#title">title</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#Tooltip">Tooltip</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#width">width</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#x">x</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#y">y</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#addAxisGenre">addAxisGenre</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#addAxisHome">addAxisHome</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#buildSvg">buildSvg</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#determineRouterState">determineRouterState</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getParameterFromUrl">getParameterFromUrl</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getStackedDomain">getStackedDomain</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#handleTransitions">handleTransitions</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#mouseClick">mouseClick</a>
+                            </li>
+                            <li>
+                                <a href="#nextDataSet">nextDataSet</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy">ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#prepareGenreData">prepareGenreData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#prepareHomeData">prepareHomeData</a>
+                            </li>
+                            <li>
+                                <a href="#previousDataset">previousDataset</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#transitionToGenre">transitionToGenre</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#transitionToHome">transitionToHome</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#transitionToPublisher">transitionToPublisher</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#updateLegend">updateLegend</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#updatePath">updatePath</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#updateToolTip">updateToolTip</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, dataService: <a href="../injectables/DataService.html">DataService</a>, interactionService: <a href="../injectables/InteractionService.html">InteractionService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:52</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>dataService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/DataService.html" target="_self" >DataService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>interactionService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/InteractionService.html" target="_self" >InteractionService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addAxisGenre"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            addAxisGenre
+                        </b>
+                        <a href="#addAxisGenre"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>addAxisGenre()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="368"
+                            class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:368</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addAxisHome"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            addAxisHome
+                        </b>
+                        <a href="#addAxisHome"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>addAxisHome()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="407"
+                            class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:407</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="buildSvg"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            buildSvg
+                        </b>
+                        <a href="#buildSvg"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>buildSvg()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="350"
+                            class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:350</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="determineRouterState"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            determineRouterState
+                        </b>
+                        <a href="#determineRouterState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>determineRouterState()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="149"
+                            class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:149</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Workaround because route params are empty</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getParameterFromUrl"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            getParameterFromUrl
+                        </b>
+                        <a href="#getParameterFromUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getParameterFromUrl()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="129"
+                            class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:129</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStackedDomain"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            getStackedDomain
+                        </b>
+                        <a href="#getStackedDomain"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getStackedDomain(stackedData: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="443"
+                            class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:443</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>stackedData</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>{}</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleTransitions"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            handleTransitions
+                        </b>
+                        <a href="#handleTransitions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleTransitions()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="110"
+                            class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:110</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mouseClick"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            mouseClick
+                        </b>
+                        <a href="#mouseClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>mouseClick(d, i)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="457"
+                            class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:457</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>d</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>i</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="nextDataSet"></a>
+                    <span class="name">
+                        <b>
+                            nextDataSet
+                        </b>
+                        <a href="#nextDataSet"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>nextDataSet()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="567"
+                            class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:567</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <b>
+                            ngOnDestroy
+                        </b>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="168"
+                            class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:168</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="64"
+                            class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:64</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="prepareGenreData"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            prepareGenreData
+                        </b>
+                        <a href="#prepareGenreData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>prepareGenreData(factors: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="290"
+                            class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:290</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>factors</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="prepareHomeData"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            prepareHomeData
+                        </b>
+                        <a href="#prepareHomeData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>prepareHomeData()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="251"
+                            class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:251</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="previousDataset"></a>
+                    <span class="name">
+                        <b>
+                            previousDataset
+                        </b>
+                        <a href="#previousDataset"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>previousDataset()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="574"
+                            class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:574</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="transitionToGenre"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            transitionToGenre
+                        </b>
+                        <a href="#transitionToGenre"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>transitionToGenre(genreName: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="192"
+                            class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:192</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>genreName</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="transitionToHome"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            transitionToHome
+                        </b>
+                        <a href="#transitionToHome"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>transitionToHome()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="173"
+                            class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:173</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="transitionToPublisher"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            transitionToPublisher
+                        </b>
+                        <a href="#transitionToPublisher"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>transitionToPublisher(genreName: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, publisherName: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="221"
+                            class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:221</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>genreName</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>publisherName</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateLegend"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            updateLegend
+                        </b>
+                        <a href="#updateLegend"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateLegend()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="519"
+                            class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:519</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updatePath"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            updatePath
+                        </b>
+                        <a href="#updatePath"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updatePath()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="473"
+                            class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:473</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateToolTip"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            updateToolTip
+                        </b>
+                        <a href="#updateToolTip"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateToolTip()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="555"
+                            class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:555</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="clusteredDataSet"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            clusteredDataSet</b>
+                            <a href="#clusteredDataSet"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:46</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="color"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            color</b>
+                            <a href="#color"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:33</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentClusterIndex"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            currentClusterIndex</b>
+                            <a href="#currentClusterIndex"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>0</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:45</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="data"></a>
+                        <span class="name">
+                            <b>
+                            data</b>
+                            <a href="#data"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:21</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="data2"></a>
+                        <span class="name">
+                            <b>
+                            data2</b>
+                            <a href="#data2"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:22</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="genreName"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            genreName</b>
+                            <a href="#genreName"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:48</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="genreYearGroupData"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            genreYearGroupData</b>
+                            <a href="#genreYearGroupData"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:37</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="height"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            height</b>
+                            <a href="#height"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:28</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="inGenreView"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            inGenreView</b>
+                            <a href="#inGenreView"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:40</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="inHomeView"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            inHomeView</b>
+                            <a href="#inHomeView"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:39</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="inPublisherView"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            inPublisherView</b>
+                            <a href="#inPublisherView"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:41</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="interactionSubscription"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            interactionSubscription</b>
+                            <a href="#interactionSubscription"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:52</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="labelList"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            labelList</b>
+                            <a href="#labelList"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:36</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="margin"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            margin</b>
+                            <a href="#margin"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="publisherName"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            publisherName</b>
+                            <a href="#publisherName"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:49</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="routerSubscription"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            routerSubscription</b>
+                            <a href="#routerSubscription"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:51</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="stackedGraphData"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            stackedGraphData</b>
+                            <a href="#stackedGraphData"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:34</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="svg"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            svg</b>
+                            <a href="#svg"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:31</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="title"></a>
+                        <span class="name">
+                            <b>
+                            title</b>
+                            <a href="#title"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&quot;Evolution of Genre Popularity in Video Games&quot;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:24</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="Tooltip"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            Tooltip</b>
+                            <a href="#Tooltip"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:43</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="width"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            width</b>
+                            <a href="#width"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:27</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="x"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            x</b>
+                            <a href="#x"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="y"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            y</b>
+                            <a href="#y"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/main-content/graph-view/stacked-line-graph/stacked-line-graph.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from &#x27;@angular/core&#x27;;
+
+import * as d3 from &#x27;d3&#x27;;
+import {ActivatedRoute, ActivatedRouteSnapshot, ActivationEnd, NavigationEnd, Router} from &#x27;@angular/router&#x27;;
+import {DataService} from &#x27;src/app/services/DataService&#x27;;
+import {SharePerYearPerPublisher} from &#x27;../../../../models/SharePerYearPerPublisher&#x27;;
+import {filter, map} from &#x27;rxjs/operators&#x27;;
+import {BehaviorSubject, Observable, Subscription} from &#x27;rxjs&#x27;;
+import {InteractionService} from &#x27;../../../services/interaction.service&#x27;;
+import { timeStamp } from &#x27;console&#x27;;
+
+//import SalesPerYearGenre from ;
+
+@Component({
+  selector: &#x27;app-stacked-line-graph&#x27;,
+  templateUrl: &#x27;./stacked-line-graph.component.html&#x27;,
+  styleUrls: [&#x27;./stacked-line-graph.component.css&#x27;],
+})
+
+export class StackedLineGraphComponent implements OnInit, OnDestroy {
+  data: any;
+  data2: any;
+
+  title: any &#x3D; &quot;Evolution of Genre Popularity in Video Games&quot;;
+
+  private margin: any;
+  private width: number;
+  private height: number;
+  private x: any;
+  private y: any;
+  private svg: any;
+
+  private color: any;
+  private stackedGraphData: any;
+
+  private labelList: any;
+  private genreYearGroupData: any;
+
+  public inHomeView: boolean;
+  public inGenreView: boolean;
+  public inPublisherView: boolean;
+
+  private Tooltip: any;
+
+  public currentClusterIndex &#x3D; 0;
+  public clusteredDataSet: any;
+
+  private genreName: any;
+  private publisherName: any;
+
+  private routerSubscription: any;
+  private interactionSubscription: any;
+
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private dataService: DataService,
+              private interactionService: InteractionService) {
+    // configure margins and width/height of the graph
+    this.margin &#x3D; {top: 30, right: 30, bottom: 30, left: 50},
+    this.width &#x3D; 1400 - this.margin.left - this.margin.right,
+    this.height &#x3D; 400 - this.margin.top - this.margin.bottom;
+  }
+
+  ngOnInit() {  
+    this.svg &#x3D; null;
+    
+    this.dataService.onReady$.subscribe(ready &#x3D;&gt; {
+      if (ready) {
+        this.data &#x3D; this.dataService.genreSalesPerYears;
+        this.prepareHomeData();
+
+        if (this.svg &#x3D;&#x3D; null) {
+          this.buildSvg()
+        } else {
+          this.svg.selectAll(&quot;*&quot;).remove();
+        }
+        this.handleTransitions()
+        this.updateToolTip();
+      }
+    });
+    
+    
+
+    this.routerSubscription &#x3D; this.router.events.subscribe(events &#x3D;&gt; {
+      if (events instanceof NavigationEnd) {
+        this.handleTransitions()       
+      }
+    });
+
+    this.interactionSubscription &#x3D; this.interactionService.gameCardHoverSubject$.subscribe(game &#x3D;&gt; {
+      if(game) {
+        // this is an hover event, highlight the genre/publisher depending on view
+        if (this.inHomeView) {
+          d3.selectAll(&quot;.areas&quot;).style(&quot;opacity&quot;, (d:any, g:any) &#x3D;&gt; {if (this.labelList[this.labelList.length-1-g]&#x3D;&#x3D;game.genre) {return 1.0}else return 0.2})
+          d3.selectAll(&quot;.myArea&quot;).style(&quot;opacity&quot;, (d:any, g:any) &#x3D;&gt; {if (this.labelList[g]&#x3D;&#x3D;game.genre) {return 1.0} else return 0.2})
+
+        } else if (this.inGenreView) {
+          d3.selectAll(&quot;.areas&quot;).style(&quot;opacity&quot;, (d:any, g:any) &#x3D;&gt; {if (this.labelList[this.labelList.length-1-g]&#x3D;&#x3D;game.publisher) {return 1.0}else return 0.2})
+          d3.selectAll(&quot;.myArea&quot;).style(&quot;opacity&quot;, (d:any, g:any) &#x3D;&gt; {if (this.labelList[g]&#x3D;&#x3D;game.publisher) {return 1.0} else return 0.2})
+        }
+
+      } else {
+        // this is a leave event, unhighlight what ever is highligted
+        d3.selectAll(&quot;.areas&quot;).style(&quot;opacity&quot;, 1.0);
+        d3.selectAll(&quot;.myArea&quot;).style(&quot;opacity&quot;, 1.0);
+      }
+    })
+  }
+
+  private handleTransitions() {
+    this.determineRouterState();
+    this.getParameterFromUrl();
+
+    if (this.inHomeView) {
+      console.log(&quot;TRANSITION to home&quot;)
+      this.title &#x3D; &quot;Evolution of Genre Popularity in Video Games&quot;
+      this.transitionToHome();
+    } else if (this.inGenreView) {
+      console.log(&quot;TRANSITION to genre &quot; + this.genreName)
+      this.title &#x3D; this.genreName + &quot; genre publisher&quot;
+      this.transitionToGenre(this.genreName);
+    } else if (this.inPublisherView) {
+      console.log(&quot;TRANSITION to publisher &quot; + this.publisherName);
+      this.title &#x3D; this.publisherName
+      this.transitionToPublisher(this.genreName, this.publisherName);
+    }
+  }
+
+  private getParameterFromUrl() {
+    let routeSnapshot: ActivatedRouteSnapshot &#x3D; this.route.snapshot;
+    let url: string &#x3D; routeSnapshot[&quot;_routerState&quot;][&quot;url&quot;];
+
+    let splitted &#x3D; url.split(&#x27;/&#x27;);
+    this.genreName &#x3D; &#x27;&#x27;
+    this.publisherName &#x3D; &#x27;&#x27;
+    if (this.inGenreView)
+    {
+      this.genreName &#x3D; splitted[splitted.map(function(e) { return e; }).indexOf(&#x27;genre&#x27;)+1].split(&#x27;%20&#x27;).join(&#x27; &#x27;);
+    } else if (this.inPublisherView) {
+      this.genreName &#x3D; splitted[splitted.map(function(e) { return e; }).indexOf(&#x27;genre&#x27;)+1].split(&#x27;%20&#x27;).join(&#x27; &#x27;);
+      this.publisherName &#x3D; splitted[splitted.map(function(e) { return e; }).indexOf(&#x27;publisher&#x27;)+1].split(&#x27;%20&#x27;).join(&#x27; &#x27;);
+    }
+
+  }
+
+  /**
+   * Workaround because route params are empty
+   */
+  private determineRouterState(){
+    let routeSnapshot: ActivatedRouteSnapshot &#x3D; this.route.snapshot;
+    let url: string &#x3D; routeSnapshot[&quot;_routerState&quot;][&quot;url&quot;];
+
+    if(url.includes(&#x27;home&#x27;) &amp;&amp; !url.includes(&#x27;genre&#x27;) &amp;&amp; !url.includes(&#x27;publisher&#x27;)) {
+      this.inHomeView &#x3D; true;
+      this.inGenreView &#x3D; false;
+      this.inPublisherView &#x3D; false;
+    } else if(url.includes(&#x27;home&#x27;) &amp;&amp; url.includes(&#x27;genre&#x27;) &amp;&amp; !url.includes(&#x27;publisher&#x27;)) {
+      this.inHomeView &#x3D; false;
+      this.inGenreView &#x3D; true;
+      this.inPublisherView &#x3D; false;
+    } else if(url.includes(&#x27;home&#x27;) &amp;&amp; url.includes(&#x27;genre&#x27;) &amp;&amp; url.includes(&#x27;publisher&#x27;)) {
+      this.inHomeView &#x3D; false;
+      this.inGenreView &#x3D; false;
+      this.inPublisherView &#x3D; true;
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.routerSubscription.unsubscribe();
+    this.interactionSubscription.unsubscribe();
+  }
+
+  private transitionToHome() {
+    this.dataService.onReady$.subscribe(ready &#x3D;&gt; {
+      if (ready) {
+        this.data &#x3D; this.dataService.genreSalesPerYears;
+        this.prepareHomeData();
+
+      if (this.svg &#x3D;&#x3D; null) {
+        this.buildSvg()
+      } else {
+        this.svg.selectAll(&quot;*&quot;).remove();
+      }
+
+      this.addAxisHome();
+      this.updatePath();
+      this.updateLegend();
+      }
+    });
+  }
+
+  private transitionToGenre(genreName:any) {
+
+    // calculate genre percentage per year
+    let factors &#x3D; {}
+    for(var i &#x3D; 1970; i &lt;&#x3D; 2020; i++) factors[i.toString()] &#x3D; 0
+    for(var i &#x3D; 0; i &lt; this.genreYearGroupData.length; i++) {
+      for(var j &#x3D; 0; j &lt; this.genreYearGroupData[i].values.length; j++) {
+        if (this.genreYearGroupData[i].values[j].Genre &#x3D;&#x3D; genreName) {
+          factors[this.genreYearGroupData[i].key] &#x3D; this.genreYearGroupData[i].values[j].Percentage_per_year
+        }
+      }
+    }
+    //this.data &#x3D; this.dataService.getMarketShareForGenrePerYear(this.genreList[genreID]);
+
+    this.clusteredDataSet &#x3D; this.dataService.getClusteredMarketShareForGenrePerYear(genreName);
+  
+    let temp &#x3D; []
+    for (let i &#x3D; 0; i &lt; this.clusteredDataSet[this.currentClusterIndex].data.length; i++) {
+      temp &#x3D; temp.concat(this.clusteredDataSet[this.currentClusterIndex].data[i])
+    }
+    this.data &#x3D; temp
+  
+    this.prepareGenreData(factors);
+    this.svg.selectAll(&quot;*&quot;).remove(); 
+    this.addAxisGenre();
+    this.updatePath();
+    this.updateLegend();
+  }
+
+  private transitionToPublisher(genreName:any, publisherName:any) {
+    // calculate genre percentage per year
+    let factors &#x3D; {}
+    for(var i &#x3D; 1970; i &lt;&#x3D; 2020; i++) factors[i.toString()] &#x3D; 0
+    for(var i &#x3D; 0; i &lt; this.genreYearGroupData.length; i++) {
+      for(var j &#x3D; 0; j &lt; this.genreYearGroupData[i].values.length; j++) {
+        if (this.genreYearGroupData[i].values[j].Genre &#x3D;&#x3D; genreName) {
+          factors[this.genreYearGroupData[i].key] &#x3D; this.genreYearGroupData[i].values[j].Percentage_per_year
+        }
+      }
+    }
+
+    let unfiltered &#x3D; this.dataService.getMarketShareForGenrePerYear(genreName);
+    let filtered &#x3D; [];
+    unfiltered.forEach(element &#x3D;&gt; {
+      if (element.publisher &#x3D;&#x3D; publisherName) {
+        filtered.push(element)
+      }
+    });
+    this.data &#x3D; filtered
+
+    //this.clusteredDataSet &#x3D; this.dataService.getClusteredMarketShareForGenrePerYear(genreName);
+  
+    this.prepareGenreData(factors);
+    this.svg.selectAll(&quot;*&quot;).remove(); 
+    this.addAxisGenre();
+    this.updatePath();
+    this.updateLegend();
+  }
+
+  private prepareHomeData() {
+    // group the data: one array for each value of the X axis.
+    this.genreYearGroupData &#x3D; d3.nest()
+      .key(function(d) { return d.Year;})
+      .entries(this.data);
+
+    // create set of all genres
+    let set &#x3D; new Set();
+    this.data.forEach(data &#x3D;&gt; {
+      set.add(data.Genre);
+    });
+    this.labelList &#x3D; Array.from(set);
+
+    if (this.labelList.length &gt; 1)
+    // create color pallet
+    this.color &#x3D; d3.scaleOrdinal()
+      .domain(this.labelList)
+      .range([&#x27;#51574a&#x27;, &#x27;#447c69&#x27;, &#x27;#74c493&#x27;, &#x27;#8e8c6d&#x27;, &#x27;#e4bf80&#x27;, &#x27;#e9d78e&#x27;, &#x27;#e2975d&#x27;, &#x27;#f19670&#x27;, &#x27;#e16552&#x27;, &#x27;#c94a53&#x27;, &#x27;#be5168&#x27;, &#x27;#a34974&#x27;, &#x27;#993767&#x27;, &#x27;#65387d&#x27;, &#x27;#4e2472&#x27;, &#x27;#9163b6&#x27;, &#x27;#e279a3&#x27;, &#x27;#e0598b&#x27;, &#x27;#7c9fb0&#x27;, &#x27;#5698c4&#x27;, &#x27;#9abf88&#x27;
+    ])
+
+    // create key list with entry for every genre
+    let genreKeys &#x3D; new Array(this.labelList.length); // create an empty array with length 45
+    
+    for(var i &#x3D; 0; i &lt; genreKeys.length; i++)
+    genreKeys[i] &#x3D; i
+    
+    // Stack the data: each group will be represented on top of each other
+    this.stackedGraphData &#x3D; d3.stack()
+      .offset(d3.stackOffsetSilhouette) // stream chart
+      .keys(genreKeys)
+      .value(function(d, key){
+        if ((typeof d.values[key] !&#x3D; &quot;undefined&quot;)) {
+          return d.values[key].Percentage_per_year }
+        else
+          return 0
+      })
+      (this.genreYearGroupData)
+  }
+
+  private prepareGenreData(factors:any) {
+      
+    this.data.sort(function(a, b) {
+      return a.year - b.year;
+    });
+    // group the data: one array for each value of the X axis.
+    let groupData &#x3D; d3.nest()
+      .key(function(d) { return d.year;})
+      .entries(this.data);
+    let min &#x3D; groupData[0].key
+    let max &#x3D; parseInt(groupData[groupData.length-1].key)+1
+
+    let minArr &#x3D; []
+    for(var i &#x3D; 1970; i &lt; min; i++) minArr.push({key:i.toString(), values:[]})
+
+    let maxArr &#x3D; []
+    for(var i &#x3D; max; i &lt;&#x3D; 2020; i++) maxArr.push({key:i.toString(), values:[]})
+
+    groupData &#x3D; minArr.concat(groupData).concat(maxArr)
+
+    for(var i &#x3D; 0; i &lt; groupData.length; i++) {
+      for(var j &#x3D; 0; j &lt; groupData[i].values.length; j++) {
+        groupData[i].values[j].share *&#x3D; (factors[groupData[i].key]*0.01)
+      }
+    }
+
+
+    // create set of all genres
+    let set &#x3D; new Set();
+    this.data.forEach(data &#x3D;&gt; {
+      set.add(data.publisher);
+    });
+    this.labelList &#x3D; Array.from(set);
+
+    if (this.labelList.length &gt; 1)
+    // create color pallet
+    this.color &#x3D; d3.scaleOrdinal()
+      .domain(this.labelList)
+      .range([&#x27;#51574a&#x27;, &#x27;#447c69&#x27;, &#x27;#74c493&#x27;, &#x27;#8e8c6d&#x27;, &#x27;#e4bf80&#x27;, &#x27;#e9d78e&#x27;, &#x27;#e2975d&#x27;, &#x27;#f19670&#x27;, &#x27;#e16552&#x27;, &#x27;#c94a53&#x27;, &#x27;#be5168&#x27;, &#x27;#a34974&#x27;, &#x27;#993767&#x27;, &#x27;#65387d&#x27;, &#x27;#4e2472&#x27;, &#x27;#9163b6&#x27;, &#x27;#e279a3&#x27;, &#x27;#e0598b&#x27;, &#x27;#7c9fb0&#x27;, &#x27;#5698c4&#x27;, &#x27;#9abf88&#x27;
+    ])
+
+    // create key list with entry for every genre
+    let publisherKeys &#x3D; new Array(this.labelList.length); // create an empty array with length 45
+    
+    for(var i &#x3D; 0; i &lt; publisherKeys.length; i++)
+    publisherKeys[i] &#x3D; i
+    
+    // Stack the data: each group will be represented on top of each other
+    this.stackedGraphData &#x3D; d3.stack()
+      .offset(d3.stackOffsetSilhouette) // stream chart
+      .keys(publisherKeys)
+      .value(function(d, key){
+        if ((typeof d.values[key] !&#x3D; &quot;undefined&quot;)) {
+          return d.values[key].share }
+        else
+          return 0
+      })
+      (groupData)
+  }
+
+  private buildSvg() {
+    // append the svg object to the body of the page
+    this.svg &#x3D; d3.select(&quot;#my_chart&quot;)
+      .append(&quot;svg&quot;)
+      .attr(&quot;width&quot;, this.width + this.margin.left + this.margin.right + 150)
+      .attr(&quot;height&quot;, this.height + this.margin.top + this.margin.bottom + 20)
+      .append(&quot;g&quot;)
+      .attr(&quot;transform&quot;,
+            &quot;translate(&quot; + this.margin.left + &quot;,&quot; + this.margin.top + &quot;)&quot;);
+
+    this.svg.append(&quot;text&quot;)
+      .attr(&quot;x&quot;, (this.width / 2))             
+      .attr(&quot;y&quot;, 0 - (this.margin.top / 2))
+      .attr(&quot;text-anchor&quot;, &quot;middle&quot;)  
+      .style(&quot;font-size&quot;, &quot;16px&quot;) 
+      .text(&quot;Genre Market Share Per Year&quot;);
+  }
+
+  private addAxisGenre() {
+    // Add X axis
+    this.x &#x3D; d3.scaleLinear()
+      .domain([1970, 2020])
+      //.domain(d3.extent(this.data, function(d) { return d.year; }))
+      .range([ 0, this.width ]);
+      
+    this.svg.append(&quot;g&quot;)
+      .attr(&quot;transform&quot;, &quot;translate(0,&quot; + this.height + &quot;)&quot;)
+      .call(d3.axisBottom(this.x).ticks(5).tickFormat(d3.format(&quot;d&quot;)));
+
+    this.svg.append(&quot;text&quot;)             
+      .attr(&quot;transform&quot;,
+            &quot;translate(&quot; + (this.width/2) + &quot; ,&quot; + 
+                           (this.height + this.margin.top + 20) + &quot;)&quot;)
+      .style(&quot;text-anchor&quot;, &quot;middle&quot;)
+      .text(&quot;Year&quot;);
+    
+    let domain &#x3D; this.getStackedDomain(this.stackedGraphData);
+    // Add Y axis
+    this.y &#x3D; d3.scaleLinear()
+      .domain(domain)
+      //.domain([-50, 50]) //stream chart
+      //.domain([0, d3.max(this.data, function(d) { return + d.Percentage_per_year; })])
+      .range([ this.height, 0 ]);
+    this.svg.append(&quot;g&quot;) // stream chart
+      //.call(d3.axisLeft(this.y))//.ticks(3).tickFormat((d,i) &#x3D;&gt; tickLabels[i]));
+      //.call(d3.axisLeft(this.y).ticks(3).tickFormat((d,i) &#x3D;&gt; tickLabels[i]));
+      .call(d3.axisLeft(this.y).ticks(5).tickFormat((d,i) &#x3D;&gt; {return (d+domain[1]).toFixed(1)}));
+    // text label for the y axis
+    this.svg.append(&quot;text&quot;)
+      .attr(&quot;transform&quot;, &quot;rotate(-90)&quot;)
+      .attr(&quot;y&quot;, 0 - this.margin.left)
+      .attr(&quot;x&quot;,0 - (this.height / 2))
+      .attr(&quot;dy&quot;, &quot;1em&quot;)
+      .style(&quot;text-anchor&quot;, &quot;middle&quot;)
+      .text(&quot;Market Share&quot;);  
+  }
+  
+  private addAxisHome() {
+    // Add X axis
+    this.x &#x3D; d3.scaleLinear()
+      .domain(d3.extent(this.data, function(d) { return d.Year; }))
+      .range([ 0, this.width ]);
+      
+      
+      this.svg.append(&quot;g&quot;)
+      .attr(&quot;transform&quot;, &quot;translate(0,&quot; + this.height + &quot;)&quot;)
+      .call(d3.axisBottom(this.x).ticks(5).tickFormat(d3.format(&quot;d&quot;)));
+
+    this.svg.append(&quot;text&quot;)             
+      .attr(&quot;transform&quot;,
+            &quot;translate(&quot; + (this.width/2) + &quot; ,&quot; + 
+                           (this.height + this.margin.top + 20) + &quot;)&quot;)
+      .style(&quot;text-anchor&quot;, &quot;middle&quot;)
+      .text(&quot;Year&quot;);
+    
+    // Add Y axis
+    this.y &#x3D; d3.scaleLinear()
+      .domain(this.getStackedDomain(this.stackedGraphData))
+      .range([ this.height, 0 ]);
+
+    let tickLabels &#x3D; [0, 50, 100];
+    this.svg.append(&quot;g&quot;) // stream chart
+      .call(d3.axisLeft(this.y).ticks(3).tickFormat((d,i) &#x3D;&gt; tickLabels[i]));
+    // text label for the y axis
+    this.svg.append(&quot;text&quot;)
+      .attr(&quot;transform&quot;, &quot;rotate(-90)&quot;)
+      .attr(&quot;y&quot;, 0 - this.margin.left)
+      .attr(&quot;x&quot;,0 - (this.height / 2))
+      .attr(&quot;dy&quot;, &quot;1em&quot;)
+      .style(&quot;text-anchor&quot;, &quot;middle&quot;)
+      .text(&quot;Market Share&quot;);  
+  }
+
+  private getStackedDomain(stackedData:any) {
+    let tempMax &#x3D; 0;
+    let tempMin &#x3D; 0;
+    this.stackedGraphData.forEach(element &#x3D;&gt; {
+      element.forEach(element &#x3D;&gt; {
+        element.forEach(element &#x3D;&gt; {
+          tempMax &#x3D; Math.max(tempMax, element);
+          tempMin &#x3D; Math.min(tempMin, element);
+        });
+      });
+    });
+    return [tempMin, tempMax]
+  }
+
+  private mouseClick(d,i) {    
+    // Check if data is already calculated
+    //if (this.dataService.isMarketShareForGenrePerYearCached(this.genreList[i])) {
+    //  let yourData &#x3D; this.dataService.getCachedMarketShareForGenrePerYear(this.genreList[i])// here is your data
+    //} else { // calculate data
+    //  this.dataService.getMarketShareForGenrePerYear(this.genreList[i]);
+    //}
+    if (this.inHomeView) {
+      console.log(&quot;TEST &quot;, this.labelList[i])
+      this.router.navigate([&#x27;home/genre&#x27;, this.labelList[i]]);
+    } else if (this.inGenreView) {
+      this.router.navigate([&#x27;home/genre&#x27;, this.genreName,&#x27;publisher&#x27;,this.labelList[i]]);
+    }
+   
+  }
+
+  private updatePath() {
+    // Add the areas
+    this.svg
+      .selectAll(&quot;mylayers&quot;)
+      .data(this.stackedGraphData)
+      .enter()
+      .append(&quot;path&quot;)
+        .attr(&quot;class&quot;, &quot;myArea&quot;)
+        .style(&quot;fill&quot;, (d: any) &#x3D;&gt; { 
+          return this.color(d.key)
+        })
+          
+        .attr(&quot;d&quot;, d3.area()
+          .curve(d3.curveBasis)
+          .x( (d: any, i) &#x3D;&gt; this.x(d.data.key) )
+          .y0( (d: any) &#x3D;&gt; this.y(d[1]) ) 
+          .y1( (d: any) &#x3D;&gt; this.y(d[0]) ) 
+        )
+        .on(&quot;mouseover.a&quot;, (d,i) &#x3D;&gt; {
+          d3.selectAll(&quot;.myArea&quot;).style(&quot;opacity&quot;, (d:any, g:any) &#x3D;&gt; {if (g&#x3D;&#x3D;i) {return 1.0} else return 0.2})
+          d3.selectAll(&quot;.areas&quot;).style(&quot;opacity&quot;, (d:any, g:any) &#x3D;&gt;   {if (this.labelList.length-1-g&#x3D;&#x3D;i) {return 1.0} else return 0.2})
+          this.Tooltip
+            .style(&quot;opacity&quot;, 1)
+        })
+        .on(&quot;mouseover.b&quot;, (d,i) &#x3D;&gt; {
+          if(this.inGenreView){
+            this.dataService.updateCoverCarousel(this.genreName, this.labelList[i], 1970, 2019, 7)
+          } else {
+            this.dataService.updateCoverCarousel(this.labelList[i], null, 1970, 2019, 7)
+          }
+        })
+        .on(&quot;mousemove&quot;, (d,i) &#x3D;&gt; {
+          d3.select(&quot;.tooltip&quot;)
+            .html(this.labelList[i])
+            .style(&quot;left&quot;, (d3.mouse(document.body)[0]-20) + &quot;px&quot;)
+            .style(&quot;top&quot;, (d3.mouse(document.body)[1]-70) + &quot;px&quot;)
+        })
+        .on(&quot;mouseleave&quot;, (d) &#x3D;&gt; {
+          d3.selectAll(&quot;.myArea&quot;).style(&quot;opacity&quot;, 1).style(&quot;stroke&quot;, &quot;none&quot;);
+          d3.selectAll(&quot;.areas&quot;).style(&quot;opacity&quot;,1.0);
+          this.Tooltip
+              .style(&quot;opacity&quot;, 0)
+        })
+        .on(&quot;click&quot;, (d:any, i:any) &#x3D;&gt; this.mouseClick(d,i));
+  }
+
+  private updateLegend() {
+    // Add one dot in the legend for each name.
+    let size &#x3D; 12;
+    this.svg.selectAll(&quot;myrect&quot;)
+      .data(this.stackedGraphData)
+      .enter()
+      .append(&quot;rect&quot;)
+        .attr(&quot;x&quot;, this.width+10)
+        .attr(&quot;y&quot;, function(d,i){ return 10 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
+        .attr(&quot;width&quot;, size)
+        .attr(&quot;height&quot;, size)
+        .style(&quot;fill&quot;, (d: any) &#x3D;&gt;  this.color(this.labelList.length-1-d.key) ) // reverse legend to adjust for area order 
+
+    // Add one dot in the legend for each name.
+    this.svg.selectAll(&quot;mylabels&quot;)
+      .data(this.stackedGraphData)
+      .enter()
+      .append(&quot;text&quot;)
+        .attr(&quot;class&quot;, &quot;areas&quot;)
+        .attr(&quot;x&quot;, this.width + size*1.2 +10)
+        .attr(&quot;y&quot;, function(d,i){ return 10 + i*(size+5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
+        .style(&quot;fill&quot;, (d: any) &#x3D;&gt;  this.color(this.labelList.length-1-d.key) ) // reverse legend to adjust for area order 
+        .text((d:any, i:any) &#x3D;&gt;  this.labelList[this.labelList.length-1-i]) // reverse legend to adjust for area order 
+        .attr(&quot;text-anchor&quot;, &quot;left&quot;)
+        .style(&quot;alignment-baseline&quot;, &quot;middle&quot;)
+        .on(&quot;mouseover&quot;, (d,i) &#x3D;&gt; {
+          d3.selectAll(&quot;.myArea&quot;).style(&quot;opacity&quot;, (d:any, g:any) &#x3D;&gt; {if (this.labelList.length-1-g&#x3D;&#x3D;i) {return 1.0} else return 0.2})
+          d3.selectAll(&quot;.areas&quot;).style(&quot;opacity&quot;, (d:any, g:any) &#x3D;&gt;   {if (g&#x3D;&#x3D;i) {return 1.0} else return 0.2})
+        })
+        .on(&quot;mouseleave&quot;, (d) &#x3D;&gt; {
+          d3.selectAll(&quot;.myArea&quot;).style(&quot;opacity&quot;, 1).style(&quot;stroke&quot;, &quot;none&quot;);
+          d3.selectAll(&quot;.areas&quot;).style(&quot;opacity&quot;,1.0);
+        })
+        .on(&quot;click&quot;, (d:any, i:any) &#x3D;&gt; this.mouseClick(d,this.labelList.length-1-i));
+  }
+
+  private updateToolTip() {
+    // create a tooltip
+    this.Tooltip &#x3D; d3.select(&quot;#my_chart&quot;).append(&quot;div&quot;)
+      .style(&quot;opacity&quot;, 0)
+      .attr(&quot;class&quot;, &quot;tooltip&quot;)
+      .style(&quot;background-color&quot;, &quot;white&quot;)
+      .style(&quot;border&quot;, &quot;solid&quot;)
+      .style(&quot;border-width&quot;, &quot;2px&quot;)
+      .style(&quot;border-radius&quot;, &quot;5px&quot;)
+      .style(&quot;padding&quot;, &quot;5px&quot;)
+  }
+
+  nextDataSet(){
+    if(!(this.currentClusterIndex+1 &#x3D;&#x3D;&#x3D; this.clusteredDataSet.length)) {
+      this.currentClusterIndex++
+    }
+    this.transitionToGenre(this.genreName);
+  }
+
+  previousDataset(){
+    if(!(this.currentClusterIndex &#x3D;&#x3D;&#x3D; 0)) {
+      this.currentClusterIndex--
+    }
+    this.transitionToGenre(this.genreName);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;h2 class&#x3D;&quot;site-heading&quot;&gt;{{title}}&lt;/h2&gt;
+&lt;div class&#x3D;&quot;flex-container&quot;&gt;
+  &lt;div *ngIf&#x3D;&quot;inGenreView&quot; class&#x3D;&quot;flex-item graph-data-selection-frame&quot;&gt;
+    &lt;div class&#x3D;&quot;chevron-left&quot; (click)&#x3D;&quot;previousDataset()&quot;&gt;
+      &lt;svg width&#x3D;&quot;1em&quot; height&#x3D;&quot;1em&quot; viewBox&#x3D;&quot;0 0 16 16&quot; class&#x3D;&quot;bi bi-chevron-double-left&quot; fill&#x3D;&quot;currentColor&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;&gt;
+        &lt;path fill-rule&#x3D;&quot;evenodd&quot; d&#x3D;&quot;M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z&quot;/&gt;
+        &lt;path fill-rule&#x3D;&quot;evenodd&quot; d&#x3D;&quot;M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z&quot;/&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;selection&quot;&gt;
+      &lt;span *ngIf&#x3D;&quot;clusteredDataSet[currentClusterIndex].from &#x3D;&#x3D;&#x3D; 0&quot; class&#x3D;&quot;badge badge-light&quot;&gt;
+        &lt;strong&gt;Top {{clusteredDataSet[currentClusterIndex].to}} Publishers&lt;/strong&gt;
+      &lt;/span&gt;
+      &lt;span *ngIf&#x3D;&quot;clusteredDataSet[currentClusterIndex].from !&#x3D;&#x3D; 0&quot; class&#x3D;&quot;badge badge-light&quot;&gt;
+        &lt;strong&gt;Top {{clusteredDataSet[currentClusterIndex].from}} - {{clusteredDataSet[currentClusterIndex].to}} publishers&lt;/strong&gt;
+      &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;chevron-right&quot; (click)&#x3D;&quot;nextDataSet()&quot;&gt;
+      &lt;svg width&#x3D;&quot;1em&quot; height&#x3D;&quot;1em&quot; viewBox&#x3D;&quot;0 0 16 16&quot; class&#x3D;&quot;bi bi-chevron-double-right&quot; fill&#x3D;&quot;currentColor&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;&gt;
+        &lt;path fill-rule&#x3D;&quot;evenodd&quot; d&#x3D;&quot;M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z&quot;/&gt;
+        &lt;path fill-rule&#x3D;&quot;evenodd&quot; d&#x3D;&quot;M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z&quot;/&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div id&#x3D;&quot;my_chart&quot;&gt;&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./stacked-line-graph.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.example-graph-space {
+    width: 100%;
+    height: 400px;
+    background-color: aquamarine;
+}
+
+.flex-container{
+  display:flex;
+  justify-content: flex-end;
+}
+
+.graph-data-selection-frame {
+  display: flex;
+}
+
+.selection {
+  width: 200px;
+  text-align: center;
+  font-size: 22px;
+}
+
+
+.chevron-left, .chevron-right {
+  cursor: pointer;
+  font-size: 22px;
+}
+
+#my_chart {
+  text-align: center;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><h2 class="site-heading">{{title}}</h2><div class="flex-container">  <div *ngIf="inGenreView" class="flex-item graph-data-selection-frame">    <div class="chevron-left" (click)="previousDataset()">      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">        <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>        <path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>      </svg>    </div>    <div class="selection">      <span *ngIf="clusteredDataSet[currentClusterIndex].from === 0" class="badge badge-light">        <strong>Top {{clusteredDataSet[currentClusterIndex].to}} Publishers</strong>      </span>      <span *ngIf="clusteredDataSet[currentClusterIndex].from !== 0" class="badge badge-light">        <strong>Top {{clusteredDataSet[currentClusterIndex].from}} - {{clusteredDataSet[currentClusterIndex].to}} publishers</strong>      </span>    </div>    <div class="chevron-right" (click)="nextDataSet()">      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-double-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">        <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>        <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>      </svg>    </div>  </div></div><div id="my_chart"></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BarGraphComponent', 'selector': 'bar-graph'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'CoverCardComponent', 'selector': 'app-cover-card'},{'name': 'CoverCarouselComponent', 'selector': 'app-cover-carousel'},{'name': 'FaqViewComponent', 'selector': 'app-faq-view'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GameDetailsComponent', 'selector': 'app-game-details'},{'name': 'GenreCarouselComponent', 'selector': 'app-genre-carousel'},{'name': 'GenrePublisherViewComponent', 'selector': 'app-genre-publisher-view'},{'name': 'GraphViewComponent', 'selector': 'app-main-view'},{'name': 'MainContentComponent', 'selector': 'app-main-content'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PieChartComponent', 'selector': 'app-pie-chart'},{'name': 'PublisherCarouselComponent', 'selector': 'app-publisher-carousel'},{'name': 'RadarChartComponent', 'selector': 'app-radar-chart'},{'name': 'StackedLineGraphComponent', 'selector': 'app-stacked-line-graph'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'StackedLineGraphComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'StackedLineGraphComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
