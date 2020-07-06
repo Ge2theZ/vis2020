@@ -6,7 +6,7 @@
 
 .flex-container{
   display:flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .graph-data-selection-frame {
