@@ -91,17 +91,20 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
       if(game) {
         // this is an hover event, highlight the genre/publisher depending on view
         if (this.inHomeView) {
-          d3.selectAll(".areas").style("opacity", (d:any, g:any) => {if (this.labelList[this.labelList.length-1-g]==game.genre) {return 1.0}else return 0.2})
+          d3.selectAll(".areaLabel").style("opacity", (d:any, g:any) => {if (this.labelList[this.labelList.length-1-g]==game.genre) {return 1.0}else return 0.2})
+          d3.selectAll(".areaRect").style("opacity", (d:any, g:any) => {if (this.labelList[this.labelList.length-1-g]==game.genre) {return 1.0}else return 0.2})
           d3.selectAll(".myArea").style("opacity", (d:any, g:any) => {if (this.labelList[g]==game.genre) {return 1.0} else return 0.2})
 
         } else if (this.inGenreView) {
-          d3.selectAll(".areas").style("opacity", (d:any, g:any) => {if (this.labelList[this.labelList.length-1-g]==game.publisher) {return 1.0}else return 0.2})
+          d3.selectAll(".areaLabel").style("opacity", (d:any, g:any) => {if (this.labelList[this.labelList.length-1-g]==game.publisher) {return 1.0}else return 0.2})
+          d3.selectAll(".areaRect").style("opacity", (d:any, g:any) => {if (this.labelList[this.labelList.length-1-g]==game.publisher) {return 1.0}else return 0.2})
           d3.selectAll(".myArea").style("opacity", (d:any, g:any) => {if (this.labelList[g]==game.publisher) {return 1.0} else return 0.2})
         }
 
       } else {
         // this is a leave event, unhighlight what ever is highligted
-        d3.selectAll(".areas").style("opacity", 1.0);
+        d3.selectAll(".areaLabel").style("opacity", 1.0);
+        d3.selectAll(".areaRect").style("opacity", 1.0);
         d3.selectAll(".myArea").style("opacity", 1.0);
       }
     })
@@ -117,11 +120,11 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
       this.transitionToHome();
     } else if (this.inGenreView) {
       console.log("TRANSITION to genre " + this.genreName)
-      this.title = this.genreName + " genre publisher"
+      this.title =  "Evolution of " + this.genreName + " genre by publisher"
       this.transitionToGenre(this.genreName);
     } else if (this.inPublisherView) {
       console.log("TRANSITION to publisher " + this.publisherName);
-      this.title = this.publisherName
+      this.title = "Evolution of " + this.publisherName + " games in " + this.genreName + " genre"
       this.transitionToPublisher(this.genreName, this.publisherName);
     }
   }
@@ -393,7 +396,7 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
     this.svg.append("g") // stream chart
       //.call(d3.axisLeft(this.y))//.ticks(3).tickFormat((d,i) => tickLabels[i]));
       //.call(d3.axisLeft(this.y).ticks(3).tickFormat((d,i) => tickLabels[i]));
-      .call(d3.axisLeft(this.y).ticks(5).tickFormat((d,i) => {return (d+domain[1]).toFixed(1)}));
+      .call(d3.axisLeft(this.y).ticks(5).tickFormat((d,i) => {return (d+domain[1]).toFixed(2)}));
     // text label for the y axis
     this.svg.append("text")
       .attr("transform", "rotate(-90)")
@@ -462,7 +465,6 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
     //  this.dataService.getMarketShareForGenrePerYear(this.genreList[i]);
     //}
     if (this.inHomeView) {
-      console.log("TEST ", this.labelList[i])
       this.router.navigate(['home/genre', this.labelList[i]]);
     } else if (this.inGenreView) {
       this.router.navigate(['home/genre', this.genreName,'publisher',this.labelList[i]]);
@@ -481,6 +483,8 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
         .style("fill", (d: any) => { 
           return this.color(d.key)
         })
+
+        .style("cursor", "pointer")
           
         .attr("d", d3.area()
           .curve(d3.curveBasis)
@@ -490,7 +494,8 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
         )
         .on("mouseover.a", (d,i) => {
           d3.selectAll(".myArea").style("opacity", (d:any, g:any) => {if (g==i) {return 1.0} else return 0.2})
-          d3.selectAll(".areas").style("opacity", (d:any, g:any) =>   {if (this.labelList.length-1-g==i) {return 1.0} else return 0.2})
+          d3.selectAll(".areaLabel").style("opacity", (d:any, g:any) =>   {if (this.labelList.length-1-g==i) {return 1.0} else return 0.2})
+          d3.selectAll(".areaRect").style("opacity", (d:any, g:any) =>   {if (this.labelList.length-1-g==i) {return 1.0} else return 0.2})
           this.Tooltip
             .style("opacity", 1)
         })
@@ -509,7 +514,8 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
         })
         .on("mouseleave", (d) => {
           d3.selectAll(".myArea").style("opacity", 1).style("stroke", "none");
-          d3.selectAll(".areas").style("opacity",1.0);
+          d3.selectAll(".areaLabel").style("opacity",1.0);
+          d3.selectAll(".areaRect").style("opacity",1.0);
           this.Tooltip
               .style("opacity", 0)
         })
@@ -519,35 +525,45 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
   private updateLegend() {
     // Add one dot in the legend for each name.
     let size = 12;
-    this.svg.selectAll("myrect")
+    this.svg.selectAll("areaRect")
       .data(this.stackedGraphData)
       .enter()
       .append("rect")
+        .attr("class", "areaRect")
         .attr("x", this.width+10)
-        .attr("y", function(d,i){ return 10 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
+        .attr("y", function(d,i){ return 10 + i*(size+5)}) 
         .attr("width", size)
         .attr("height", size)
-        .style("fill", (d: any) =>  this.color(this.labelList.length-1-d.key) ) // reverse legend to adjust for area order 
+        .style("fill", (d: any) =>  this.color(this.labelList.length-1-d.key) ) 
 
     // Add one dot in the legend for each name.
     this.svg.selectAll("mylabels")
       .data(this.stackedGraphData)
       .enter()
       .append("text")
-        .attr("class", "areas")
+        .attr("class", "areaLabel")
         .attr("x", this.width + size*1.2 +10)
-        .attr("y", function(d,i){ return 10 + i*(size+5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
-        .style("fill", (d: any) =>  this.color(this.labelList.length-1-d.key) ) // reverse legend to adjust for area order 
-        .text((d:any, i:any) =>  this.labelList[this.labelList.length-1-i]) // reverse legend to adjust for area order 
+        .attr("y", function(d,i){ return 10 + i*(size+5) + (size/2)}) 
+        .style("fill", (d: any) =>  this.color(this.labelList.length-1-d.key) ) 
+        .text((d:any, i:any) =>  this.labelList[this.labelList.length-1-i]) 
         .attr("text-anchor", "left")
         .style("alignment-baseline", "middle")
+        .style("cursor", "pointer")
         .on("mouseover", (d,i) => {
           d3.selectAll(".myArea").style("opacity", (d:any, g:any) => {if (this.labelList.length-1-g==i) {return 1.0} else return 0.2})
-          d3.selectAll(".areas").style("opacity", (d:any, g:any) =>   {if (g==i) {return 1.0} else return 0.2})
+          d3.selectAll(".areaLabel").style("opacity", (d:any, g:any) =>   {if (g==i) {return 1.0} else return 0.2})
+          d3.selectAll(".areaRect").style("opacity", (d:any, g:any) =>   {if (g==i) {return 1.0} else return 0.2})
+
+          if(this.inGenreView){
+            this.dataService.updateCoverCarousel(this.genreName, this.labelList[i], 1970, 2019, 7)
+          } else {
+            this.dataService.updateCoverCarousel(this.labelList[i], null, 1970, 2019, 7)
+          }
         })
         .on("mouseleave", (d) => {
           d3.selectAll(".myArea").style("opacity", 1).style("stroke", "none");
-          d3.selectAll(".areas").style("opacity",1.0);
+          d3.selectAll(".areaLabel").style("opacity",1.0);
+          d3.selectAll(".areaRect").style("opacity",1.0);
         })
         .on("click", (d:any, i:any) => this.mouseClick(d,this.labelList.length-1-i));
   }
