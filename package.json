@@ -8,7 +8,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy-gh": "ng deploy --base-href /vis2020/"
+    "deploy-gh": "ng deploy --base-href /vis2020/",
+    "compodoc": "npx compodoc -p tsconfig.json -s"
+
   },
   "private": true,
   "dependencies": {
