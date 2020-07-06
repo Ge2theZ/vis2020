@@ -83,7 +83,6 @@ export class GameDetailsComponent implements OnInit {
       return a.globalSales - b.globalSales;
     });
     this.leastGamesOfThisPublisher = leastArr;
-
   }
 
   loadGamesOfThisYear(){
