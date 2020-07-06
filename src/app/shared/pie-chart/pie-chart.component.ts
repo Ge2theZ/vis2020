@@ -76,7 +76,7 @@ export class PieChartComponent implements OnInit {
             let labels: string[] = [];
             let data: number[] = [];
             for(let i = 0; i < sortedTop100PublisherOccurrenceArr.length; i++){
-              if(sortedTop100PublisherOccurrenceArr[i][1] < 3) {
+              if(sortedTop100PublisherOccurrenceArr[i][1] < 3 && sortedTop100PublisherOccurrenceArr[i][0] !== this.games[0].publisher) {
                 otherCount+= sortedTop100PublisherOccurrenceArr[i][1];
               } else {
                 labels.push(sortedTop100PublisherOccurrenceArr[i][0]);
@@ -85,7 +85,6 @@ export class PieChartComponent implements OnInit {
             }
             labels.push('Other');
             data.push(otherCount);
-
 
             this.pieChartLabels = labels;
             this.pieChartData = data;

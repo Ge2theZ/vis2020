@@ -41,32 +41,34 @@ export class DataService {
       for (const game of data) {
         this.gameDataSet.push(new Game(game));
       }
+      console.timeEnd("readInGameDataSet()")
       this.readInGenreSalesPerYears().subscribe(data => {
         this.genreSalesPerYears = data;
-        //console.log("GenreSales per Year: ", this.genreSalesPerYears)
+        console.timeEnd("readInGenreSalesPerYears()")
         this.onReady$.next(true);
       });
     });
   }
 
   readInGameDataSet(): Rx.Observable<any> {
+    console.time("readInGameDataSet()")
     return this.http.get('./assets/preprocessed_dataset.json');
   }
 
   readInGenreSalesPerYears(): Rx.Observable<any> {
+    console.time("readInGenreSalesPerYears()")
     return this.http.get('./assets/SalesPerYearGenre.json');
   }
 
   updateCoverCarousel(genre: string, publisher: string, fromYear: number, toYear: number, cardAmount: number) {
-    console.time('updateCoverCarousel');
     this.getCoverCarousel(genre, publisher, fromYear, toYear, cardAmount).then(carouselList => {
       this.liveCarousel$.next(carouselList);
-      console.timeEnd('updateCoverCarousel');
     });
   }
 
   getCoverCarousel(genre: string, publisher: string, fromYear: number, toYear: number, cardAmount: number): Promise<CoverCarousel[]> {
     return new Promise<CoverCarousel[]>((resolve, reject) => {
+      console.time(`getCoverCarousel(${genre})`)
       try {
         // Check if result was already cached
         const cachedResult: CoverCarouselStore = this.coverCarouselStore.filter((cachedResult: CoverCarouselStore) =>
@@ -124,6 +126,7 @@ export class DataService {
               }
             );
           }
+          console.timeEnd(`getCoverCarousel(${genre})`)
           resolve(carouselList);
         }
       } catch (e) {
@@ -197,6 +200,7 @@ export class DataService {
   }
 
   getClusteredMarketShareForGenrePerYear(genre, chunkSize = 20){
+    console.time("getClusteredMarketShareForGenrePerYear()")
     let arr = this.getMarketShareForGenrePerYear(genre)
     let uniquePublisher = [...new Set(arr.map(elem => elem.publisher))];
     
@@ -219,8 +223,6 @@ export class DataService {
       return (b.totalShare - a.totalShare);
     })
 
-    console.log(totalPublisherShare.length)
-        
     let res = []
     let dynChunkSize = chunkSize;
     for (let i = 0; i < totalPublisherShare.length; i+=chunkSize) {
@@ -234,12 +236,12 @@ export class DataService {
       }
       res.push({from: i, to: i+dynChunkSize, data: data})
     }
-
+    console.timeEnd("getClusteredMarketShareForGenrePerYear()")
     return res;   
   }
 
   getMarketShareForGenrePerYear(genre: string): SharePerYearPerPublisher[] {
-    console.time('getMarketShareForGenrePerYear');
+    console.time('getMarketShareForGenrePerYear()');
     let filtered = this.gameDataSet.filter((game) => game.genre === genre);
     var res = [];
     var totalSalesPerYear = {};
@@ -269,7 +271,7 @@ export class DataService {
       this.marketShareForGenrePerYearStore.push({genre: genre, data: res});
     }
 
-    console.timeEnd('getMarketShareForGenrePerYear');
+    console.timeEnd('getMarketShareForGenrePerYear()');
     return res;
   }
 
