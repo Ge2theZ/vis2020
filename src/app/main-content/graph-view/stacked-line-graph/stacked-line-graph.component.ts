@@ -85,12 +85,11 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
       if (events instanceof NavigationEnd) {
         this.handleTransitions()       
       }
-    })
+    });
 
     this.interactionSubscription = this.interactionService.gameCardHoverSubject$.subscribe(game => {
       if(game) {
         // this is an hover event, highlight the genre/publisher depending on view
-        console.log("Hover over card!");
         if (this.inHomeView) {
           d3.selectAll(".areas").style("opacity", (d:any, g:any) => {if (this.labelList[this.labelList.length-1-g]==game.genre) {return 1.0}else return 0.2})
           d3.selectAll(".myArea").style("opacity", (d:any, g:any) => {if (this.labelList[g]==game.genre) {return 1.0} else return 0.2})
@@ -101,10 +100,9 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
         }
 
       } else {
+        // this is a leave event, unhighlight what ever is highligted
         d3.selectAll(".areas").style("opacity", 1.0);
         d3.selectAll(".myArea").style("opacity", 1.0);
-        // this is a leave event, unhighlight what ever is highligted
-        console.log("Unhover over card!");
       }
     })
   }
@@ -168,8 +166,8 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.routerSubscription.destroy();
-    this.interactionSubscription.destroy();
+    this.routerSubscription.unsubscribe();
+    this.interactionSubscription.unsubscribe();
   }
 
   private transitionToHome() {
@@ -497,7 +495,11 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
             .style("opacity", 1)
         })
         .on("mouseover.b", (d,i) => {
-          this.dataService.updateCoverCarousel(this.labelList[i], null, 1970, 2019, 7)
+          if(this.inGenreView){
+            this.dataService.updateCoverCarousel(this.genreName, this.labelList[i], 1970, 2019, 7)
+          } else {
+            this.dataService.updateCoverCarousel(this.labelList[i], null, 1970, 2019, 7)
+          }
         })
         .on("mousemove", (d,i) => {
           d3.select(".tooltip")
