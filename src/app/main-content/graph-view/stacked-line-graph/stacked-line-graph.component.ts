@@ -82,6 +82,7 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
     
 
     this.routerSubscription = this.router.events.subscribe(events => {
+      console.log(events);
       if (events instanceof NavigationEnd) {
         this.handleTransitions()       
       }
@@ -113,7 +114,7 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
   private handleTransitions() {
     this.determineRouterState();
     this.getParameterFromUrl();
-
+    this.currentClusterIndex = 0;
     if (this.inHomeView) {
       console.log("TRANSITION to home")
       this.title = "Evolution of Genre Popularity in Video Games"
@@ -166,10 +167,14 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
       this.inGenreView = false;
       this.inPublisherView = true;
     }
+
+    console.log("inHomeView: ", this.inHomeView);
+    console.log("inGenreView: ", this.inGenreView);
+    console.log("inPublisherView: ", this.inPublisherView);
   }
 
   ngOnDestroy(): void {
-    this.routerSubscription.unsubscribe();
+    //this.routerSubscription.unsubscribe();
     this.interactionSubscription.unsubscribe();
   }
 
