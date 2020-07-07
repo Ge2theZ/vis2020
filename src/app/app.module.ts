@@ -24,6 +24,7 @@ import { FaqViewComponent } from './main-content/faq-view/faq-view.component';
 import { RadarChartComponent } from './shared/radar-chart/radar-chart.component';
 import { PieChartComponent } from './shared/pie-chart/pie-chart.component';
 import { TooltipModule } from 'ng2-tooltip-directive';
+import { InfoBadgeComponent } from './shared/info-badge/info-badge.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { TooltipModule } from 'ng2-tooltip-directive';
     BarGraphComponent,
     FaqViewComponent,
     RadarChartComponent,
-    PieChartComponent
+    PieChartComponent,
+    InfoBadgeComponent
   ],
   imports: [
     BrowserModule,

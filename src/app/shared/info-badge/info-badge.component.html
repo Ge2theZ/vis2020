@@ -1,0 +1,8 @@
+<span class="badge badge-light" [options]="tooltipOptions" [tooltip]="HtmlContent">{{badgeLabel? badgeLabel: "?"}}</span>
+
+<!-- !-->
+<ng-template #HtmlContent>
+  <div class="tooltip-container">
+    {{tooltipText}}
+  </div>
+</ng-template>

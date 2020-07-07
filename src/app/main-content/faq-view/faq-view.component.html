@@ -3,12 +3,13 @@
   <hr>
 </div>
 
+<br>
 <div class="card">
   <div class="card-header">
-    <h5><strong>Which data set was used?</strong></h5>
+    <h4><strong>Which data set was used?</strong></h4>
   </div>
   <div class="card-body">
-    <p class="card-text" align="justify">For the vizualizations shown on this website, the
+    <p class="card-text">For the vizualizations shown on this website, the
       <a href="https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings">Video Game Sales with Ratings</a>
       dataset was enriched with the
       <a href="https://www.kaggle.com/ashaheedq/video-games-sales-2019">Video Game Sales</a> dataset.</p>
@@ -18,11 +19,11 @@
 <br>
 <div class="card">
   <div class="card-header">
-    <h5><strong>What does the dataset contain?</strong></h5>
+    <h4><strong>What does the dataset contain?</strong></h4>
   </div>
   <div class="card-body">
-    <h5 class="card-title">Problem</h5>
-    <p class="card-text" align="justify">The dataset <a
+    <h4 class="card-title"><strong>Problem</strong></h4>
+    <p class="card-text">The dataset <a
       href="https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings">Video
       Game Sales with Ratings</a> was selected for the analysis. While analyzing the CSV file, it was noticed that the
       dataset in the <em>Publisher</em> and <em>Year</em> columns are incomplete. Therefore, the
@@ -31,20 +32,20 @@
   </div>
 
   <div class="card-body">
-    <h5 class="card-title">Data collection</h5>
-    <p class="card-text" align="justify">The data was collected through a script from the GameDB database of
+    <h4 class="card-title"><strong>Data collection</strong></h4>
+    <p class="card-text">The data was collected through a script from the GameDB database of
       vgchartz.com.
       They were collected in the period from 1980 to 2020 and contain ~60000 entries.</p>
   </div>
 
   <div class="card-body">
-    <h5 class="card-title">Data processing and transformations</h5>
-    <p class="card-text" align="justify">The main preprocessing of the data set is done with Python and the Pandas
+    <h4 class="card-title"><strong>Data processing and transformations</strong></h4>
+    <p class="card-text">The main preprocessing of the data set is done with Python and the Pandas
       library,
       which allows the efficient and fast import of a CSV file and the further processing of the imported
       data. In this way, it can be ensured that the visualizations and interactions take place in "real time".</p>
 
-    <p class="card-text" align="justify">After the implementation of the data processing functions, the interactive
+    <p class="card-text">After the implementation of the data processing functions, the interactive
       generation of the carousel view
       was tested. The only delay that was noticed was when selecting a genre and calculating all publishers in
       the second depth view. This delay is still less than 1-2 seconds and occurs only when rendering the new
@@ -53,8 +54,8 @@
   </div>
 
   <div class="card-body">
-    <h5 class="card-title">Target group</h5>
-    <p class="card-text" align="justify">Our target group includes market researchers, companies and players
+    <h4 class="card-title"><strong>Target group</strong></h4>
+    <p class="card-text">Our target group includes market researchers, companies and players
       who can view and compare the development of a genre or publisherover a period of time. Furthermore,
       the visualization can be used for marketing purposes and players can inform themselves about popular games or the
       best rated games.</p>
@@ -64,10 +65,10 @@
 <br>
 <div class="card">
   <div class="card-header">
-    <h5><strong>Why do some games appear more than once?</strong></h5>
+    <h4><strong>Why do some games appear more than once?</strong></h4>
   </div>
   <div class="card-body">
-    <p class="card-text" align="justify">Many games are published for different platforms. Therefore,
+    <p class="card-text">Many games are published for different platforms. Therefore,
       it is possible that games appear several times.</p>
   </div>
 </div>
@@ -75,20 +76,20 @@
 <br>
 <div class="card">
   <div class="card-header">
-    <h5><strong>Some albums are missing cover art!</strong></h5>
+    <h4><strong>Some albums are missing cover art!</strong></h4>
   </div>
   <div class="card-body">
-    <p class="card-text" align="justify">That's true, not for all games there is a cover to show.</p>
+    <p class="card-text">That's true, not for all games there is a cover to show.</p>
   </div>
 </div>
 
 <br>
 <div class="card">
   <div class="card-header">
-    <h5><strong>What did you use to build this?</strong></h5>
+    <h4><strong>What did you use to build this?</strong></h4>
   </div>
   <div class="card-body">
-    <p class="card-text" align="justify">
+    <p class="card-text">
       The main languages used to implement this site and the visualisations are Pyhton and Typescript(JavaScript).
       Python was used for the pre processing of our dataset. Since the site is build with Angular, we used TypeScript
       for the creation of the website. The visualisations are created with the frameworks d3.js and chart.js.

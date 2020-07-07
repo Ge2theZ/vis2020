@@ -1,4 +1,23 @@
-<h2 class="site-heading">{{title}}</h2>
+<h2 class="site-heading">{{title}}
+  <app-info-badge *ngIf="inHomeView"
+    [tooltipText]="
+      'The stacked area diagram shows the market share per genre over time. To show the market share per genre, ' +
+      'the data in the Global Sales column (if this value is not available, Total Shipped is used) was calculated ' +
+      'for each genre in one year and distributed 100%.'">
+  </app-info-badge>
+  <app-info-badge *ngIf="inGenreView"
+    [tooltipText]="
+      'The streamgraphen shows the market share per publisher over time for the selected genre. Since our data set' +
+       ' contains many publishers, we have clustered them into individual visualizations. '">
+  </app-info-badge>
+  <app-info-badge *ngIf="inPublisherView"
+    [tooltipText]="
+      'This graph shows the market share for each publisher selected in the main view depth 2. In this graph the' +
+       ' user has made two selections, the genre and the publisher. The information displayed shows the popularity' +
+        ' (compared to the total value in the previous view) of a publisher in a specific one. This is the final' +
+         ' depth of the main view.'">
+  </app-info-badge>
+</h2>
 <div class="flex-container">
   <div *ngIf="inGenreView" class="flex-item graph-data-selection-frame">
     <div class="chevron-left" (click)="previousDataset()">
