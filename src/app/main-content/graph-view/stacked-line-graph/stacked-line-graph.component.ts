@@ -552,9 +552,9 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
           d3.selectAll(".areaRect").style("opacity", (d:any, g:any) =>   {if (g==i) {return 1.0} else return 0.2})
 
           if(this.inGenreView){
-            this.dataService.updateCoverCarousel(this.genreName, this.labelList[i], 1970, 2019, 7)
+            this.dataService.updateCoverCarousel(this.genreName, this.labelList[this.labelList.length-1-i], 1970, 2019, 7)
           } else {
-            this.dataService.updateCoverCarousel(this.labelList[i], null, 1970, 2019, 7)
+            this.dataService.updateCoverCarousel(this.labelList[this.labelList.length-1-i], null, 1970, 2019, 7)
           }
         })
         .on("mouseleave", (d) => {
