@@ -1,7 +1,7 @@
 # Video Game Dataset Visualization Website
 
 This project was developed in the context of the visualisation lecture in the summer semester 2020 of the Human Centered Computing course at Reutlingen University.
-The final product is hosted on Github under [ge2thez.github.io/vis2020/](ge2thez.github.io/vis2020/).
+The final product is hosted on Github under [ge2thez.github.io/vis2020/](https://ge2thez.github.io/vis2020/).
 
 
 # Data
