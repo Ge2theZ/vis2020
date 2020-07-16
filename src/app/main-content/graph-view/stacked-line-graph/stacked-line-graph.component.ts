@@ -276,7 +276,7 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
     
     // Stack the data: each group will be represented on top of each other
     this.stackedGraphData = d3.stack()
-      .offset(d3.stackOffsetSilhouette) // stream chart
+      //.offset(d3.stackOffsetSilhouette) // stream chart
       .keys(genreKeys)
       .value(function(d, key){
         if ((typeof d.values[key] != "undefined")) {
@@ -336,7 +336,7 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
     
     // Stack the data: each group will be represented on top of each other
     this.stackedGraphData = d3.stack()
-      .offset(d3.stackOffsetSilhouette) // stream chart
+      //.offset(d3.stackOffsetSilhouette) // stream chart
       .keys(publisherKeys)
       .value(function(d, key){
         if ((typeof d.values[key] != "undefined")) {
@@ -393,7 +393,7 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
     this.svg.append("g") // stream chart
       //.call(d3.axisLeft(this.y))//.ticks(3).tickFormat((d,i) => tickLabels[i]));
       //.call(d3.axisLeft(this.y).ticks(3).tickFormat((d,i) => tickLabels[i]));
-      .call(d3.axisLeft(this.y).ticks(5).tickFormat((d,i) => {return (d+domain[1]).toFixed(2)}));
+      .call(d3.axisLeft(this.y).ticks(5).tickFormat((d,i) => {return (d).toFixed(2)}));
     // text label for the y axis
     this.svg.append("text")
       .attr("transform", "rotate(-90)")
