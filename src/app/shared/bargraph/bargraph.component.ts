@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
 })
 export class BarGraphComponent implements OnInit, OnChanges {
   constructor(private router:Router) { }
-  
+
   @Input() public data: Game[];
   @Input() private game: Game;
-  @Input() private prop: string; 
+  @Input() private prop: string;
 
   public barChartOptions = {
     tooltips:{
@@ -73,7 +73,7 @@ export class BarGraphComponent implements OnInit, OnChanges {
             colorArr.push("rgba(0,164,255,0.5)")
           }
         });
-        this.barChartLabels = this.data.map(x => x.name);
+        this.barChartLabels = this.data.map(x => x.name.length > 40 ? x.name.slice(0, 40)+'...': x.name);
 
         this.barChartData.push({
           data: this.data.map(x => x.globalSales),
@@ -82,7 +82,7 @@ export class BarGraphComponent implements OnInit, OnChanges {
         })
       break;
       case 'sales':
-        this.barChartLabels = this.data.map(x => x.name)
+        this.barChartLabels = this.data.map(x => x.name.length > 40 ? x.name.slice(0, 40)+'...': x.name);
         let globalSalesArr = this.data.map(x => x.globalSales)
 
         this.data.forEach(game => {
@@ -101,7 +101,7 @@ export class BarGraphComponent implements OnInit, OnChanges {
         })
       break;
       case 'PublisherGenre-Sales':
-        this.barChartLabels = this.data.map(x => x.name).slice(0,50)
+        this.barChartLabels = this.data.map(x => x.name.length > 30 ? x.name.slice(0, 30)+'...': x.name).slice(0,50);
         var arr = this.data.map(x => x.globalSales);
         arr = arr.slice(0,50)
         this.barChartData.push({

@@ -276,7 +276,7 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
     
     // Stack the data: each group will be represented on top of each other
     this.stackedGraphData = d3.stack()
-      .offset(d3.stackOffsetSilhouette) // stream chart
+      //.offset(d3.stackOffsetSilhouette) // stream chart
       .keys(genreKeys)
       .value(function(d, key){
         if ((typeof d.values[key] != "undefined")) {
@@ -336,7 +336,7 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
     
     // Stack the data: each group will be represented on top of each other
     this.stackedGraphData = d3.stack()
-      .offset(d3.stackOffsetSilhouette) // stream chart
+      //.offset(d3.stackOffsetSilhouette) // stream chart
       .keys(publisherKeys)
       .value(function(d, key){
         if ((typeof d.values[key] != "undefined")) {
@@ -393,7 +393,7 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
     this.svg.append("g") // stream chart
       //.call(d3.axisLeft(this.y))//.ticks(3).tickFormat((d,i) => tickLabels[i]));
       //.call(d3.axisLeft(this.y).ticks(3).tickFormat((d,i) => tickLabels[i]));
-      .call(d3.axisLeft(this.y).ticks(5).tickFormat((d,i) => {return (d+domain[1]).toFixed(2)}));
+      .call(d3.axisLeft(this.y).ticks(5).tickFormat((d,i) => {return (d).toFixed(2)}));
     // text label for the y axis
     this.svg.append("text")
       .attr("transform", "rotate(-90)")
@@ -552,9 +552,9 @@ export class StackedLineGraphComponent implements OnInit, OnDestroy {
           d3.selectAll(".areaRect").style("opacity", (d:any, g:any) =>   {if (g==i) {return 1.0} else return 0.2})
 
           if(this.inGenreView){
-            this.dataService.updateCoverCarousel(this.genreName, this.labelList[i], 1970, 2019, 7)
+            this.dataService.updateCoverCarousel(this.genreName, this.labelList[this.labelList.length-1-i], 1970, 2019, 7)
           } else {
-            this.dataService.updateCoverCarousel(this.labelList[i], null, 1970, 2019, 7)
+            this.dataService.updateCoverCarousel(this.labelList[this.labelList.length-1-i], null, 1970, 2019, 7)
           }
         })
         .on("mouseleave", (d) => {

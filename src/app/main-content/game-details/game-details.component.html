@@ -129,32 +129,66 @@
   <div style="margin-top: 50px; width: 100%">
     <div class="row">
       <div class="col-md-6 col-sm-12 pb-5">
-        <h4 class="w-100"><b>Top 10</b> sold Games in {{this.game?.year}}</h4>
+        <h4 class="w-100"><b>Top 10</b> sold Games in {{this.game?.year}}
+          <app-info-badge
+            [tooltipText]="'This chart shows the top 10 games sold in the year the selected game was released.'">
+          </app-info-badge>
+        </h4>
         <hr>
         <bar-graph *ngIf="this.gamesInThisYear" [data]="this.gamesInThisYear" [game]="this.game" [prop]="'thisYear'"></bar-graph>
       </div>
       <div class="col-md-6 col-sm-12 pb-5">
-        <h4 class="w-100"><b>Top 10</b> sold {{this.game?.genre}} Games in {{this.game?.year}}</h4>
+        <h4 class="w-100"><b>Top 10</b> sold {{this.game?.genre}} Games in {{this.game?.year}}
+          <app-info-badge
+            [tooltipText]="'This diagram shows the 10 best-selling games of the selected genre, in the year of' +
+             ' release of the selected game.'">
+          </app-info-badge>
+        </h4>
         <hr>
         <bar-graph *ngIf="this.mostGenreGamesInThisYear" [data]="this.mostGenreGamesInThisYear" [game]="this.game" [prop]="'thisYear'"></bar-graph>
       </div>
       <div class="col-md-6 col-sm-12 pb-5">
-        <h4 class="w-100">Critic and User score of <b>most successful</b> {{game?.genre}} games</h4>
+        <h4 class="w-100">Critic and User score of <b>most successful</b> {{game?.genre}} games
+          <app-info-badge
+            [tooltipText]="'This graphic represents the official reviews and user ratings of the most successful' +
+             ' games in a genre. This means that as soon as a user searches for a game, the genre is clustered and' +
+              ' the most successful games in that genre are displayed. Multivariate data (reviews and user ratings)' +
+               ' are used in this graphic. This means that the graphic is not displayed if no user ratings or reviews' +
+                ' are available.'">
+          </app-info-badge>
+        </h4>
         <hr>
         <app-radar-chart *ngIf="this.mostGamesOfThisPublisher" [highlight]="this.game" [rawData]="this.mostGamesOfThisPublisher" [useCase]="this.radarUseCase"></app-radar-chart>
       </div>
       <div class="col-md-6 col-sm-12 pb-5">
-        <h4 class="w-100">Critic and User score of <b>least successful</b> {{game?.genre}} games</h4>
+        <h4 class="w-100">Critic and User score of <b>least successful</b> {{game?.genre}} games
+          <app-info-badge
+            [tooltipText]="'This graphic represents the official reviews and user ratings of the least successful' +
+             ' games in a genre. This means that as soon as a user searches for a game, the genre is clustered and' +
+              ' the most successful games in that genre are displayed. Multivariate data (reviews and user ratings)' +
+               ' are used in this graphic. This means that the graphic is not displayed if no user ratings or reviews' +
+                ' are available.'">
+          </app-info-badge>
+        </h4>
         <hr>
         <app-radar-chart *ngIf="this.leastGamesOfThisPublisher" [highlight]="this.game" [rawData]="this.leastGamesOfThisPublisher" [useCase]="this.radarUseCase"></app-radar-chart>
       </div>
       <div class="col-md-6 col-sm-12 pb-5">
-        <h4 class="w-100">Comparison to <b>most successful</b> {{game?.genre}} games</h4>
+        <h4 class="w-100">Comparison to <b>most successful</b> {{game?.genre}} games
+          <app-info-badge
+            [tooltipText]="'This graph shows the comparison with the most successful games of the selected genre in' +
+             ' the selected game.'">
+          </app-info-badge>
+        </h4>
         <hr>
         <bar-graph *ngIf="this.mostGamesOfThisPublisher" [data]="this.mostGamesOfThisPublisher" [game]="this.game" [prop]="'sales'"></bar-graph>
       </div>
       <div *ngIf="this.game?.jpSales || this.game?.euSales || this.game?.naSales || this.game?.otherSales" class="col-md-6 col-sm-12">
-        <h4 class="w-100">International Sale Distribution in Millions</h4>
+        <h4 class="w-100">International Sale Distribution in Millions
+          <app-info-badge
+            [tooltipText]="'This graph visualizes the international sales distribution for the selected game.'">
+          </app-info-badge>
+        </h4>
         <hr>
         <app-pie-chart *ngIf="this.game" [game]="this.game" [useCase]="PieUseCase.details_view_sale_distribution"></app-pie-chart>
       </div>

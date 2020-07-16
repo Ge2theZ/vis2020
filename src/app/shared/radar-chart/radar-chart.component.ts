@@ -65,7 +65,7 @@ export class RadarChartComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   public initDetailRadarChart(){
-    let labelArr = this.rawData.map(x => x.name);
+    let labelArr = this.rawData.map(x => x.name.length > 40 ? x.name.slice(0, 40)+'...': x.name);
     let userScoreArr = this.rawData.map(x => x.userScore);
     let criticScoreArr = this.rawData.map(x => x.criticScore);
 
@@ -128,7 +128,7 @@ export class RadarChartComponent implements OnInit, AfterViewInit, OnChanges {
             tooltip.displayColors = false;
           },
           callbacks: {
-            title: (item) => { 
+            title: (item) => {
               if(item[0].datasetIndex == 0){
                 return "Critic Score: " + this.rawData[item[0].index].criticScore;
               }else{
@@ -137,6 +137,7 @@ export class RadarChartComponent implements OnInit, AfterViewInit, OnChanges {
             },
             label: (item) => {
               let multiLineArray = []
+              multiLineArray.push("Name: " + this.rawData[item.index].name)
               multiLineArray.push("Platform: " + this.rawData[item.index].plattform)
               multiLineArray.push("Publisher: " + this.rawData[item.index].publisher)
               multiLineArray.push("Release Year: " + this.rawData[item.index].year)

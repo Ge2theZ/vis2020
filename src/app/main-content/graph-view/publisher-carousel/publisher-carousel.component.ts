@@ -56,7 +56,7 @@ export class PublisherCarouselComponent implements OnInit, AfterViewInit {
 
   calculateStaticCarouselData(publishers: string[]) {
     publishers.forEach(publisher => {
-      this.dataService.getCoverCarousel(this.genre, publisher, 1980, 2019, 7).then(data => {
+      this.dataService.getCoverCarousel(this.genre, publisher, 1970, 2019, 7).then(data => {
         this.staticCarousels.push({title: publisher, data: data});
       });
     });
@@ -71,7 +71,7 @@ export class PublisherCarouselComponent implements OnInit, AfterViewInit {
         let calculatedCarousels: StaticCarousel[] = [];
         let nextIndices = this.publisherIndex + this.carouselReloadStepSize > this.publisherList.length ? this.publisherList.length : this.publisherIndex + this.carouselReloadStepSize;
         this.publisherList.slice(this.publisherIndex, nextIndices).forEach(publisher => {
-          this.dataService.getCoverCarousel(this.genre, publisher, 1980, 2019, 7).then(data => {
+          this.dataService.getCoverCarousel(this.genre, publisher, 1970, 2019, 7).then(data => {
             calculatedCarousels.push({title: publisher, data: data});
             if (calculatedCarousels.length === (nextIndices - this.publisherIndex)) {
               this.staticCarousels.push(...calculatedCarousels);
