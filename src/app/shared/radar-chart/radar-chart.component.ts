@@ -225,13 +225,15 @@ export class RadarChartComponent implements OnInit, AfterViewInit, OnChanges {
           label: 'User Scores',
           data: userScoreData,
           backgroundColor: "rgba(0,164,255,0.1)",
-          borderColor: "rgba(0,164,255,0.5)"
+          borderColor: "rgba(0,164,255,0.5)",
+          pointRadius: 5
         },
         {
           label: 'Cirtic Scores',
           data: criticScore,
           backgroundColor: "rgba(17,255,0,0.1)",
-          borderColor: "rgba(17,255,0,0.5)"
+          borderColor: "rgba(17,255,0,0.5)",
+          pointRadius: 5
         },
 
       ]
