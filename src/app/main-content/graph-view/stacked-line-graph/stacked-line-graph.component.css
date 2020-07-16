@@ -14,16 +14,21 @@
 }
 
 .selection {
-  width: 200px;
+  width: 250px;
   text-align: center;
-  font-size: 22px;
+  font-size: 26px;
 }
 
 
 .chevron-left, .chevron-right {
   cursor: pointer;
-  font-size: 22px;
+  font-size: 26px;
 }
+
+.chevron-left:hover, .chevron-right:hover {
+  opacity: 0.5;
+}
+
 
 #my_chart {
   text-align: center;

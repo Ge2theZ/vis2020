@@ -1,39 +1,5 @@
 <div class="row">
-  <div class="col-sm-12 col-md-6 mb-5">
-    <h4 class="w-100">Top 10 Critic and User scores of <strong>least successful</strong> {{this.publisher}} games
-      <app-info-badge
-      [tooltipText]="
-      'This graph represents the top 10 official reviews and user ratings of the least successful games from the' +
-      ' selected publisher. Multivariate data (reviews and user ratings) is used in this graph. This means that if' +
-       ' there are no user ratings available, the graph will not be displayed, and if there are no reviews available,' +
-        ' the graph will not be displayed.'">
-      </app-info-badge>
-    </h4>
 
-    <hr>
-    <app-radar-chart *ngIf="this.games" [rawData]="this.games"
-                     [useCase]="RadarUseCase.crit_user_score_lowest"></app-radar-chart>
-    <div *ngIf="!this.games" class="spinner-border loading-spinner" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-  </div>
-  <div class="col-sm-12 col-md-6 mb-5">
-    <h4 class="w-100">Top 10 Critic and User scores of <strong>most successful</strong> {{this.publisher}} games
-      <app-info-badge
-      [tooltipText]="
-      'This graph represents the top 10 official reviews and user ratings of the most successful games from the' +
-      ' selected publisher. Multivariate data (reviews and user ratings) is used in this graph. This means that if' +
-       ' there are no user ratings available, the graph will not be displayed, and if there are no reviews available,' +
-        ' the graph will not be displayed.'">
-      </app-info-badge>
-    </h4>
-    <hr>
-    <app-radar-chart *ngIf="this.games" [rawData]="this.games"
-                     [useCase]="RadarUseCase.crit_user_score_highest"></app-radar-chart>
-    <div *ngIf="!this.games" class="spinner-border loading-spinner" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-  </div>
   <div class="col-sm-12 col-md-6 mb-5">
     <h4 class="w-100">Global Sales of <strong>Top 50</strong> {{genre}} Games from {{publisher}}
       <app-info-badge
@@ -53,5 +19,40 @@
     </h4>
     <hr>
     <app-pie-chart *ngIf="this.games" [useCase]="PieUseCase.top100_genre_publisher" [games]="this.games"></app-pie-chart>
+  </div>
+  <div class="col-sm-12 col-md-6 mb-5">
+    <h4 class="w-100">Top 10 Critic and User scores of <strong>most successful</strong> {{this.publisher}} games
+      <app-info-badge
+        [tooltipText]="
+      'This graph represents the top 10 official reviews and user ratings of the most successful games from the' +
+      ' selected publisher. Multivariate data (reviews and user ratings) is used in this graph. This means that if' +
+       ' there are no user ratings available, the graph will not be displayed, and if there are no reviews available,' +
+        ' the graph will not be displayed.'">
+      </app-info-badge>
+    </h4>
+    <hr>
+    <app-radar-chart *ngIf="this.games" [rawData]="this.games"
+                     [useCase]="RadarUseCase.crit_user_score_highest"></app-radar-chart>
+    <div *ngIf="!this.games" class="spinner-border loading-spinner" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-6 mb-5">
+    <h4 class="w-100">Top 10 Critic and User scores of <strong>least successful</strong> {{this.publisher}} games
+      <app-info-badge
+        [tooltipText]="
+      'This graph represents the top 10 official reviews and user ratings of the least successful games from the' +
+      ' selected publisher. Multivariate data (reviews and user ratings) is used in this graph. This means that if' +
+       ' there are no user ratings available, the graph will not be displayed, and if there are no reviews available,' +
+        ' the graph will not be displayed.'">
+      </app-info-badge>
+    </h4>
+
+    <hr>
+    <app-radar-chart *ngIf="this.games" [rawData]="this.games"
+                     [useCase]="RadarUseCase.crit_user_score_lowest"></app-radar-chart>
+    <div *ngIf="!this.games" class="spinner-border loading-spinner" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
   </div>
 </div>
