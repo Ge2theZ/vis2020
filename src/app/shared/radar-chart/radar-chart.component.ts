@@ -105,7 +105,8 @@ export class RadarChartComponent implements OnInit, AfterViewInit, OnChanges {
           data: criticScoreArr,
           backgroundColor: "rgba(17,255,0,0.1)",
           borderColor: "rgba(17,255,0,0.5)",
-          pointBackgroundColor: criticColorArr
+          pointBackgroundColor: criticColorArr,
+          pointRadius: 6
         },
         {
           label: 'User Score',
@@ -113,6 +114,7 @@ export class RadarChartComponent implements OnInit, AfterViewInit, OnChanges {
           backgroundColor: "rgba(0,164,255,0.1)",
           borderColor: "rgba(0,164,255,0.5)",
           pointBackgroundColor: userColorArr,
+          pointRadius: 6
         }
       ]
     }
@@ -227,16 +229,17 @@ export class RadarChartComponent implements OnInit, AfterViewInit, OnChanges {
           data: userScoreData,
           backgroundColor: "rgba(0,164,255,0.1)",
           borderColor: "rgba(0,164,255,0.5)",
-          pointRadius: 5
+          pointRadius: 6,
+          pointBackgroundColor: "rgba(0,164,255,0.5)"
         },
         {
-          label: 'Cirtic Scores',
+          label: 'CrItic Scores',
           data: criticScore,
           backgroundColor: "rgba(17,255,0,0.1)",
           borderColor: "rgba(17,255,0,0.5)",
-          pointRadius: 5
-        },
-
+          pointRadius: 6,
+          pointBackgroundColor: "rgba(17,255,0,0.5)"
+        }
       ]
     };
 
