@@ -173,6 +173,28 @@
         <hr>
         <app-radar-chart *ngIf="this.leastGamesOfThisPublisher" [highlight]="this.game" [rawData]="this.leastGamesOfThisPublisher" [useCase]="this.radarUseCase"></app-radar-chart>
       </div>
+
+      <div class="col-md-6 col-sm-12 pb-5">
+        <h4 class="w-100"> Comparison of <b>critics score</b> and global sales in millions for {{game?.genre}} games
+          <app-info-badge
+            [tooltipText]="'ToolTip'">
+          </app-info-badge>
+        </h4>
+        <hr>
+        <app-scatter-plot *ngIf="this.allGamesOfThisPublisher" [rawData]="this.allGamesOfThisPublisher" [game]="this.game" [useCase]="'critics'"></app-scatter-plot>
+      </div>
+
+      <div class="col-md-6 col-sm-12 pb-5">
+        <h4 class="w-100"> Comparison of <b>user score</b> and global sales in millions for {{game?.genre}} games
+          <app-info-badge
+            [tooltipText]="'ToolTip'">
+          </app-info-badge>
+        </h4>
+        <hr>
+        <app-scatter-plot *ngIf="this.allGamesOfThisPublisher" [rawData]="this.allGamesOfThisPublisher" [game]="this.game" [useCase]="'users'"></app-scatter-plot>
+      </div>
+
+
       <div class="col-md-6 col-sm-12 pb-5">
         <h4 class="w-100">Comparison to <b>most successful</b> {{game?.genre}} games
           <app-info-badge

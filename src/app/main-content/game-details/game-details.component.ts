@@ -15,6 +15,7 @@ export class GameDetailsComponent implements OnInit {
   public game: Game;
   public mostGamesOfThisPublisher: Game[];
   public leastGamesOfThisPublisher: Game[];
+  public allGamesOfThisPublisher: Game[];
   public mostGenreGamesInThisYear: Game[];
   public radarUseCase: RadarUseCase;
   public gamesInThisYear: Game[];
@@ -61,6 +62,7 @@ export class GameDetailsComponent implements OnInit {
 
   loadGamesOfThisPublisher() {
     let mostArr = this.dataService.gameDataSet.filter(item => item.genre === this.game.genre && item.name !== this.game.name);
+    this.allGamesOfThisPublisher = this.dataService.gameDataSet.filter(item => item.genre === this.game.genre);
     mostArr.sort((a, b) => {
       return b.globalSales - a.globalSales;
     });

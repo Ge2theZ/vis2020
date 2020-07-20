@@ -25,6 +25,7 @@ import { RadarChartComponent } from './shared/radar-chart/radar-chart.component'
 import { PieChartComponent } from './shared/pie-chart/pie-chart.component';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { InfoBadgeComponent } from './shared/info-badge/info-badge.component';
+import { ScatterPlotComponent } from './shared/scatter-plot/scatter-plot.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { InfoBadgeComponent } from './shared/info-badge/info-badge.component';
     FaqViewComponent,
     RadarChartComponent,
     PieChartComponent,
-    InfoBadgeComponent
+    InfoBadgeComponent,
+    ScatterPlotComponent
   ],
   imports: [
     BrowserModule,

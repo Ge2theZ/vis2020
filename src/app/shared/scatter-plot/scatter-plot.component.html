@@ -1,0 +1,9 @@
+<div>
+    <div>
+        <canvas #scatterplot baseChart (chartClick)="onScatteredClick($event)"
+        [datasets]="scatterData"
+        [options]="scatterOptions"
+        [chartType]="scatterType">
+    </canvas>
+    </div>
+  </div>
